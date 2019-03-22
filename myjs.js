@@ -457,6 +457,7 @@ function Func_AbbreviateNews() {
   NeedToUndo = false; 
   if ( HelpMeText ) Func_RegEx(HelpMeText);
   if (NeedToUndo) Func_CreateUndo();
+  $('#id_news').focus();
 }
 
 function Func_RegEx(HelpMeText) {

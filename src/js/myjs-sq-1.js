@@ -52,6 +52,7 @@ function Func_AbbreviateNews() {
   /* call regex function to replace abbreviations of the variable */
   if ( HelpMeText ) Func_RegEx(HelpMeText);
   if (NeedToUndo) Func_CreateUndo();
+  $('#id_news').focus();
 }
 
 /* Func_RegEx() - receives TEXTAREA as HelpMeText, calls RegexReplace, and returns

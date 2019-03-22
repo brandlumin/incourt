@@ -70,16 +70,8 @@ function Func_RegEx(HelpMeText) {
    Func_TrimAndCrisp(ToBeReplaced[2]) :
     '*** News Detail EMPTY ***');
   /* doing abbreviations and capturing results for title and news */
-  if (NewsTitleToDo  && typeof NewsTitleToDo !== 'undefined') NewsTitleToDo=Func_RegexReplace(NewsTitleToDo);
-  if (NewsTitleToDo  && typeof NewsTitleToDo !== 'undefined') NewsTitleToDo=NewsTitleToDo.replace(/(?:^|\s)\w/g, function(match) {
-                    return match.toUpperCase();
-                });
-  if (NewsDscToDo  && typeof NewsDscToDo !== 'undefined') NewsDscToDo=Func_RegexReplace(NewsDscToDo);
-  if (NewsDscToDo  && typeof NewsDscToDo !== 'undefined') NewsDscToDo=NewsDscToDo.replace(/(?:^|\.\s)\w/g, function(match) {
-    return match.toUpperCase();
-  });
-    /* To add a period at the end of the news if does not exist */
-    if (NewsDscToDo  && typeof NewsDscToDo !== 'undefined') if (!RegExp('\\.$','g').test(NewsDscToDo)) NewsDscToDo+='.';
+  if (NewsTitleToDo  && typeof NewsTitleToDo !== 'undefined') NewsTitleToDo=Func_RegexReplace(NewsTitleToDo, 'vartitle');
+  if (NewsDscToDo  && typeof NewsDscToDo !== 'undefined') NewsDscToDo=Func_RegexReplace(NewsDscToDo, 'vardesc');
   /* add 'http://' protocol if does not exist in the URL */
   NewsURLNotToDo = (NewsURLNotToDo.match('^(https?)(?::\/\/)','gi')) ? NewsURLNotToDo : 'http://'+NewsURLNotToDo;
   /* populating abbreviations in the textarea */
@@ -92,7 +84,7 @@ function Func_RegEx(HelpMeText) {
 
 /* Func_RegexReplace() - Gets DataToRegEx, sets up the RegEx and returns
 =========================================================== */
-function Func_RegexReplace(DataToRegEx) {
+function Func_RegexReplace(DataToRegEx, ReceivedField) {
   for (i = 1; i < GlobalNewsArray.length; i++) { // i=1 to omit header
     ReplaceThis = GlobalNewsArray[i][0]; // long name
     ReplaceWith = GlobalNewsArray[i][1]; // short name
@@ -106,6 +98,18 @@ function Func_RegexReplace(DataToRegEx) {
     Replaced = DataToRegEx.replace(SearchTerm, ReplaceWith).trim();
     DataToRegEx = Replaced;
   }
+  if (ReceivedField == 'vartitle') {
+    DataToRegEx=DataToRegEx.replace(/(?:^|\s)\w/g, function(match) {
+      return match.toUpperCase();
+    });
+  } else if ( ReceivedField == 'vardesc') {
+    /* To Convert a character followed by a period toUpperCase */
+    DataToRegEx=DataToRegEx.replace(/(?:^|\.)\w/g, function(match) {
+      return match.toUpperCase();}
+    );
+    /* To add a period at the end of the news if does not exist */
+    if (!RegExp('\\.$','g').test(DataToRegEx)) DataToRegEx+='.';
+  } else {}
   return DataToRegEx; // sending the value back
 }
 

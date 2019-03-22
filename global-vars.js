@@ -92,6 +92,7 @@ GlobalNewsArray = [
   ["west bengal housing industry regulation act","WBHIRA"],
   ["electronic voting machine","EVM"],
   ["rajiv gandhi national university of law","RGNUL"],
+  ["Central Information Commission","CIC"],
 
 
 

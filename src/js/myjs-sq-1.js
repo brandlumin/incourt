@@ -71,7 +71,15 @@ function Func_RegEx(HelpMeText) {
     '*** News Detail EMPTY ***');
   /* doing abbreviations and capturing results for title and news */
   if (NewsTitleToDo  && typeof NewsTitleToDo !== 'undefined') NewsTitleToDo=Func_RegexReplace(NewsTitleToDo);
+  if (NewsTitleToDo  && typeof NewsTitleToDo !== 'undefined') NewsTitleToDo=NewsTitleToDo.replace(/(?:^|\s)\w/g, function(match) {
+                    return match.toUpperCase();
+                });
   if (NewsDscToDo  && typeof NewsDscToDo !== 'undefined') NewsDscToDo=Func_RegexReplace(NewsDscToDo);
+  if (NewsDscToDo  && typeof NewsDscToDo !== 'undefined') NewsDscToDo=NewsDscToDo.replace(/(?:^|\.\s)\w/g, function(match) {
+    return match.toUpperCase();
+  });
+    /* To add a period at the end of the news if does not exist */
+    if (NewsDscToDo  && typeof NewsDscToDo !== 'undefined') if (!RegExp('\\.$','g').test(NewsDscToDo)) NewsDscToDo+='.';
   /* add 'http://' protocol if does not exist in the URL */
   NewsURLNotToDo = (NewsURLNotToDo.match('^(https?)(?::\/\/)','gi')) ? NewsURLNotToDo : 'http://'+NewsURLNotToDo;
   /* populating abbreviations in the textarea */

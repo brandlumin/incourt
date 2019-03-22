@@ -471,7 +471,14 @@ function Func_RegEx(HelpMeText) {
    Func_TrimAndCrisp(ToBeReplaced[2]) :
     '*** News Detail EMPTY ***');
   if (NewsTitleToDo  && typeof NewsTitleToDo !== 'undefined') NewsTitleToDo=Func_RegexReplace(NewsTitleToDo);
+  if (NewsTitleToDo  && typeof NewsTitleToDo !== 'undefined') NewsTitleToDo=NewsTitleToDo.replace(/(?:^|\s)\w/g, function(match) {
+                    return match.toUpperCase();
+                });
   if (NewsDscToDo  && typeof NewsDscToDo !== 'undefined') NewsDscToDo=Func_RegexReplace(NewsDscToDo);
+  if (NewsDscToDo  && typeof NewsDscToDo !== 'undefined') NewsDscToDo=NewsDscToDo.replace(/(?:^|\.\s)\w/g, function(match) {
+    return match.toUpperCase();
+  });
+    if (NewsDscToDo  && typeof NewsDscToDo !== 'undefined') if (!RegExp('\\.$','g').test(NewsDscToDo)) NewsDscToDo+='.';
   NewsURLNotToDo = (NewsURLNotToDo.match('^(https?)(?::\/\/)','gi')) ? NewsURLNotToDo : 'http://'+NewsURLNotToDo;
   $('#id_news').val(
                     NewsTitleToDo+'\n'+

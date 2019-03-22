@@ -169,14 +169,17 @@ header#header // header
     color: black
     thead
       border: none
+      box-shadow: 0 2px 4px -2px black
       background-color: green
-      border-bottom: 1px solid black
+      // border-bottom: 1px solid black
       tr
         th
           border: none
           border-radius: 0
-          color: white
+          color: yellow
           font-weight: 700
+          font: 500 16px/1.5 'Roboto', sans-serif
+          text-shadow: 0 1px 3px transparentize(black, .3)
         th
           &:nth-of-type(1),
           &:nth-of-type(5),
@@ -184,11 +187,12 @@ header#header // header
             display: none
     tbody
       tr
+        box-shadow: 0 2px 4px -2px transparentize(black, .7)
         td
           border: none
           border-radius: 0
           em
-            font: normal 500 18px/1.5 'Roboto', sans-serif
+            font: 500 16px/1.5 'Roboto', sans-serif
         td
           &:nth-of-type(1),
           &:nth-of-type(5),

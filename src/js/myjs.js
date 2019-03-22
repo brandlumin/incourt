@@ -179,7 +179,7 @@ function func_Populate() {
     // add 'http://' protocol if does not exist in the URL
     NewsDetail[1] = (NewsDetail[1].match('^(https?)(?::\/\/)','gi')) ? NewsDetail[1] : 'http://'+NewsDetail[1];
   $('input#regular1').val(NewsDetail[1]).change(); // POPULATE URL
-  $('textarea#description').val(Func_RegexReplace(NewsDetail[2])).change(); // POPULATE DESCRIPTION
+  $('textarea#description').val(Func_RegexReplace(NewsDetail[2], 'vardesc')).change(); // POPULATE DESCRIPTION
   /*!* RUN PROPRIETORY FUNCTION for META and HINTS ***/
   $('#meta_title').val($('#title').val().replace(/([~!@#$%^&*()_+=`{}\[\]\|\\:;'"<>,.\/? ])+/g, '-').toLowerCase()).change(); // HIDDEN: META TITLE
   $("#title_tag").val($("#title").val()).change(); // HIDDEN: META TITLE_TAG

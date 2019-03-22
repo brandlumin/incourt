@@ -165,7 +165,7 @@ function func_Populate() {
   $('input#title').val(titlestr).change(); 
     NewsDetail[1] = (NewsDetail[1].match('^(https?)(?::\/\/)','gi')) ? NewsDetail[1] : 'http://'+NewsDetail[1];
   $('input#regular1').val(NewsDetail[1]).change(); 
-  $('textarea#description').val(Func_RegexReplace(NewsDetail[2])).change(); 
+  $('textarea#description').val(Func_RegexReplace(NewsDetail[2], 'vardesc')).change(); 
 /*!* RUN PROPRIETORY FUNCTION for META and HINTS ***/
   $('#meta_title').val($('#title').val().replace(/([~!@#$%^&*()_+=`{}\[\]\|\\:;'"<>,.\/? ])+/g, '-').toLowerCase()).change(); 
   $("#title_tag").val($("#title").val()).change(); 
@@ -457,6 +457,7 @@ function Func_AbbreviateNews() {
   NeedToUndo = false; 
   if ( HelpMeText ) Func_RegEx(HelpMeText);
   if (NeedToUndo) Func_CreateUndo();
+  $('#id_news').focus();
 }
 
 function Func_RegEx(HelpMeText) {
@@ -470,8 +471,8 @@ function Func_RegEx(HelpMeText) {
   NewsDscToDo = (Func_TrimAndCrisp(ToBeReplaced[2]) ?
    Func_TrimAndCrisp(ToBeReplaced[2]) :
     '*** News Detail EMPTY ***');
-  if (NewsTitleToDo  && typeof NewsTitleToDo !== 'undefined') NewsTitleToDo=Func_RegexReplace(NewsTitleToDo);
-  if (NewsDscToDo  && typeof NewsDscToDo !== 'undefined') NewsDscToDo=Func_RegexReplace(NewsDscToDo);
+  if (NewsTitleToDo  && typeof NewsTitleToDo !== 'undefined') NewsTitleToDo=Func_RegexReplace(NewsTitleToDo, 'vartitle');
+  if (NewsDscToDo  && typeof NewsDscToDo !== 'undefined') NewsDscToDo=Func_RegexReplace(NewsDscToDo, 'vardesc');
   NewsURLNotToDo = (NewsURLNotToDo.match('^(https?)(?::\/\/)','gi')) ? NewsURLNotToDo : 'http://'+NewsURLNotToDo;
   $('#id_news').val(
                     NewsTitleToDo+'\n'+
@@ -480,7 +481,7 @@ function Func_RegEx(HelpMeText) {
                     );
 }
 
-function Func_RegexReplace(DataToRegEx) {
+function Func_RegexReplace(DataToRegEx, ReceivedField) {
   for (i = 1; i < GlobalNewsArray.length; i++) { 
     ReplaceThis = GlobalNewsArray[i][0]; 
     ReplaceWith = GlobalNewsArray[i][1]; 
@@ -492,6 +493,16 @@ function Func_RegexReplace(DataToRegEx) {
     Replaced = DataToRegEx.replace(SearchTerm, ReplaceWith).trim();
     DataToRegEx = Replaced;
   }
+  if (ReceivedField == 'vartitle') {
+    DataToRegEx=DataToRegEx.replace(/(?:^|\s)\w/g, function(match) {
+      return match.toUpperCase();
+    });
+  } else if ( ReceivedField == 'vardesc') {
+    DataToRegEx=DataToRegEx.replace(/(?:^|\.\s?)\w/g, function(match) {
+      return match.toUpperCase();}
+    );
+    if (!RegExp('\\.$','g').test(DataToRegEx)) DataToRegEx+='.';
+  } else {}
   return DataToRegEx; 
 }
 

@@ -497,7 +497,7 @@ function Func_RegexReplace(DataToRegEx, ReceivedField) {
       return match.toUpperCase();
     });
   } else if ( ReceivedField == 'vardesc') {
-    DataToRegEx=DataToRegEx.replace(/(?:^|\.)\w/g, function(match) {
+    DataToRegEx=DataToRegEx.replace(/(?:^|\.\s?)\w/g, function(match) {
       return match.toUpperCase();}
     );
     if (!RegExp('\\.$','g').test(DataToRegEx)) DataToRegEx+='.';

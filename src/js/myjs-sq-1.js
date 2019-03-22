@@ -104,7 +104,7 @@ function Func_RegexReplace(DataToRegEx, ReceivedField) {
     });
   } else if ( ReceivedField == 'vardesc') {
     /* To Convert a character followed by a period toUpperCase */
-    DataToRegEx=DataToRegEx.replace(/(?:^|\.)\w/g, function(match) {
+    DataToRegEx=DataToRegEx.replace(/(?:^|\.\s?)\w/g, function(match) {
       return match.toUpperCase();}
     );
     /* To add a period at the end of the news if does not exist */

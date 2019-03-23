@@ -186,10 +186,12 @@ header#header // header
             display: none
     tbody
       tr
-        background: whitesmoke
-        box-shadow: 0 2px 4px -2px transparentize(black, .7)
-        &:hover td
+        background: #eee
+        border-bottom: 1px solid #ddd
+        transition: 50ms ease-in-out box-shadow
+        &:hover
           background: white
+          box-shadow: 0 0 1em transparentize(black, .7)
         td
           border: none
           border-radius: 0

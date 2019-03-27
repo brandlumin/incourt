@@ -377,8 +377,11 @@ function Func_RePosition(e) {
 function Func_TagSubmit(e) {
   $('#token-input-topic').keydown(function(e){
       if ((e.keyCode == 10 || e.keyCode == 13) && e.ctrlKey) setTimeout( function () {
-        $('#token-input-topic').closest('form').submit();
-      }, 300); 
+        func_alert('Saving News',1300);
+        setTimeout(function () {
+          $('#token-input-topic').closest('form').submit();
+        }, 1000);
+      }, 0); 
     });
 }
 

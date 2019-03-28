@@ -5,7 +5,6 @@ var GlobalNewsArray = [];
 GlobalNewsArray = [
   ["full form","short"],
   ["\\s{1,}(:|\\.|,|\\))[\\s{0,}]?","$1 "],   
-  ["^(v:)","VIEW:"],
   ["additional chief metrapolitan magistrate","ACMM"],
   ["all india muslim personal law board","AIMPLB"],
   ["amma makkal munnetra kazhagam","AMMK party"],

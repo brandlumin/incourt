@@ -4,6 +4,7 @@
 var GlobalNewsArray = [];
 GlobalNewsArray = [
   ["full form","short"],
+  ["^(:|\\.|,|\\))[\\s{0,}]?",""],         // beginning correction: no/multiple white-spaces before and after colon, comma, period, closing bracket
   ["\\s{1,}(:|\\.|,|\\))[\\s{0,}]?","$1 "],   // no/multiple white-spaces before and after colon, comma, period, closing bracket
   ["additional chief metrapolitan magistrate","ACMM"],
   ["all india muslim personal law board","AIMPLB"],
@@ -100,7 +101,8 @@ GlobalNewsArray = [
   ["(?:[\\s]?)\\(([A-Z|&]*)\\)",""],    // removes in bracket if NOT space | numeric
   ["(?:on)\\s[a-zA-Z]+day,?\\s?",""],   // removing weekdays
   ["\\s[a-zA-Z]+day",""],               // removing today yesterday
-  ["\\s\\[read[a-zA-Z|\\s]+]",""]       // removing [READ ORDER]
+  ["\\s\\[read[a-zA-Z|\\s]+]",""],      // removing [READ ORDER]
+  [",\\sread[a-zA-Z|\\s]+",""]          // removing ', read xyz'
 
 
 ];

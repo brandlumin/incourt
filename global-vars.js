@@ -4,6 +4,7 @@
 var GlobalNewsArray = [];
 GlobalNewsArray = [
   ["full form","short"],
+  ["^(:|\\.|,|\\))[\\s{0,}]?",""],         
   ["\\s{1,}(:|\\.|,|\\))[\\s{0,}]?","$1 "],   
   ["additional chief metrapolitan magistrate","ACMM"],
   ["all india muslim personal law board","AIMPLB"],
@@ -100,7 +101,8 @@ GlobalNewsArray = [
   ["(?:[\\s]?)\\(([A-Z|&]*)\\)",""],    
   ["(?:on)\\s[a-zA-Z]+day,?\\s?",""],   
   ["\\s[a-zA-Z]+day",""],               
-  ["\\s\\[read[a-zA-Z|\\s]+]",""]       
+  ["\\s\\[read[a-zA-Z|\\s]+]",""],      
+  [",\\sread[a-zA-Z|\\s]+",""]          
 
 
 ];

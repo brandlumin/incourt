@@ -179,5 +179,5 @@ function func_BetterGallery() {
   $('.ImageGallery.customModal .img-container .gallery').css('display', '');
   setTimeout(function () {
     func_alert('Gallery ready.');
-  },300);
+  },1);
 }

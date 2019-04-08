@@ -174,189 +174,191 @@ header#header // header
 /* *********************************************************************** */
 /* ********* PAGE ******************************************************** */
 /* *********************************************************************** */
-div.page
-  margin-top: 0
-  form
-    /* ********* LEFT PANEL ************************************************** */
-    div[panel="LEFTPANEL"] // LEFT PANEL
-      .card
-        // background: #f5f5f5
-        border: initial
-        box-shadow: 0 0 8px transparentize(black, .7)
-        border-radius:  8px  8px 0 0
+div#base
+  padding: initial
+  div.page
+    margin-top: 0
+    form
+      /* ********* LEFT PANEL ************************************************** */
+      div[panel="LEFTPANEL"] // LEFT PANEL
+        .card
+          // background: #f5f5f5
+          border: initial
+          box-shadow: 0 0 8px transparentize(black, .7)
+          border-radius:  8px  8px 0 0
 
-        .card-head // Card head
-          min-height: auto !important
-          header // card header text
-            line-height: 1
-            font-weight: 700
-
-        .card-body // card body
-          background: lightgrey
-          padding: 6px 24px
-          border: none
-
-          div.text-right // shifting 'BACK' button upwards
-            position: absolute
-            top: -45px
-            right: 24px
-            box-shadow: 0 0 20px #00000022
-            a.btn.ink-reaction.btn-raised.btn-primary
-              font-size: .9em
-              text-transform: lowercase
-              color: #ffffff
-              background-color: #ff9800
-              border-color: #ff9800
-              line-height: 2.5
-              padding: 1px 1em 0
-              &:hover
-                background-color: darken(#ff9800, 10%)
-                border-color: darken(#ff9800, 10%)
-
-          .form-group
-            select.form-control
-              color: #555 !important
-              option
-                background-color: #fff
-                color: #777
-            label[for="attachmentType"] // TAGS label
-              font: normal 16px/1.5 'Roboto', sans-serif
+          .card-head // Card head
+            min-height: auto !important
+            header // card header text
               line-height: 1
-              opacity: 1
-              color: brown
-            .form-control
-              & ~ label // Label styling
-                display: none
-                font: normal 16px/1.5 'Roboto', sans-serif
-                line-height: 1
-                opacity: 1
-                color: brown
-            #characterLeftTitle, #characterLeftDesc // count hints
-              font: normal .85em/1.1 'Roboto', sans-serif
-              color: #666
+              font-weight: 700
 
-          .row // BOTTOM Panel
-            margin-bottom: 0
-            clear: right
-            h4 // 'Permalink' text
-              display: none
-            h5 // 'http://beta.incourt.in/' url
-              font: normal 400 15px/38.5px 'Roboto', sans-serif
-              color: #333
-              margin: 0
-            .form-group
-              padding-top: 0
-            [class*="col-md"]
-              margin-bottom: 0
-              label[for="meta_title"] // PERMALINK link
-                display: none
-              &:last-of-type
-                padding-right: .75em
-            & + div // 'Edit Meta Details' section
-              margin-bottom: 0
-              label
-                color: black
-          // #characterLeft
-            // font: normal .85em/1.1 'Roboto', sans-serif
-            // color: #777
+          .card-body // card body
+            background: lightgrey
+            padding: 6px 24px
+            border: none
 
-    /* ********* RIGHT PANEL ************************************************* */
-    div[panel="RIGHTPANEL"] // RIGHT PANEL
-      .card
-        border: initial
-        box-shadow: 0 0 8px transparentize(black, .7)
-        border-radius:  8px  8px 0 0
-        .card-body
-          background: grey
-          border-radius: 0
-
-          > [class*="group"]
-            input
-              background: grey
-              font-size: .9em
-              color: #333
-              box-shadow: none
-              border: none
-              border-bottom: 1px dashed darkgrey
-            &:last-of-type
-              margin-bottom: 0
-
-          .pub-btn // top buttons
-            margin-bottom: 1em
-            button
-              font-size: .9em
-              text-transform: capitalize
-              &:first-of-type // // 'PUBLISH' button
-                background-color: lighten(green, 10%)
-                border-color: lighten(green, 10%)
-                &:hover
-                  background-color: green
-                  border-color: green
-              &:last-of-type // // 'PUBLISH' button
+            div.text-right // shifting 'BACK' button upwards
+              position: absolute
+              top: -45px
+              right: 24px
+              box-shadow: 0 0 20px #00000022
+              a.btn.ink-reaction.btn-raised.btn-primary
+                font-size: .9em
+                text-transform: lowercase
+                color: #ffffff
                 background-color: #ff9800
                 border-color: #ff9800
-                color: #fff
+                line-height: 2.5
+                padding: 1px 1em 0
                 &:hover
                   background-color: darken(#ff9800, 10%)
                   border-color: darken(#ff9800, 10%)
 
-          .input-group.date // date picker
-            input
-            .fa-calendar
-              font-size: 2em
-              color: #000
-            label // label styling
-              display: none
+            .form-group
+              select.form-control
+                color: #555 !important
+                option
+                  background-color: #fff
+                  color: #777
+              label[for="attachmentType"] // TAGS label
+                font: normal 16px/1.5 'Roboto', sans-serif
+                line-height: 1
+                opacity: 1
+                color: brown
+              .form-control
+                & ~ label // Label styling
+                  display: none
+                  font: normal 16px/1.5 'Roboto', sans-serif
+                  line-height: 1
+                  opacity: 1
+                  color: brown
+              #characterLeftTitle, #characterLeftDesc // count hints
+                font: normal .85em/1.1 'Roboto', sans-serif
+                color: #666
 
-          .form-group // helps shift time picker upwards
-            padding-top: 0
-            label[for="pub"] // time picker
-              display: none
-
-          .input-field.check-box-inline // Categories
-            &:before
-              display: block
-              content: 'Categories:'
-              font: normal 16px/1.5 'Roboto', sans-serif
-              line-height: 1
-              opacity: 1
-              color: brown
-              margin-bottom: .8em
-            [type="checkbox"]
-              &:checked+label
-                &:before
-                  border-right: 2px solid lighten(green, 10%)
-                  border-bottom: 2px solid lighten(green, 10%)
-            background: lightgrey
-            border-radius: .25em
-            padding: 1em
-            p
+            .row // BOTTOM Panel
               margin-bottom: 0
-              &:hover
-                background-color: lighten(grey, 20%)
-              label // Category labels
-                color: #000
-                font-size: .9em
-                margin: .09em 0
-                // margin: .35em 0
-                top: 0
-            br
-              display: none
+              clear: right
+              h4 // 'Permalink' text
+                display: none
+              h5 // 'http://beta.incourt.in/' url
+                font: normal 400 15px/38.5px 'Roboto', sans-serif
+                color: #333
+                margin: 0
+              .form-group
+                padding-top: 0
+              [class*="col-md"]
+                margin-bottom: 0
+                label[for="meta_title"] // PERMALINK link
+                  display: none
+                &:last-of-type
+                  padding-right: .75em
+              & + div // 'Edit Meta Details' section
+                margin-bottom: 0
+                label
+                  color: black
+            // #characterLeft
+              // font: normal .85em/1.1 'Roboto', sans-serif
+              // color: #777
 
-          .switch  // 'Send Push Notification'
-            margin-top: 1em
-            label
-              color: #000
-              input[type=checkbox]
-                &:checked+.lever
+      /* ********* RIGHT PANEL ************************************************* */
+      div[panel="RIGHTPANEL"] // RIGHT PANEL
+        .card
+          border: initial
+          box-shadow: 0 0 8px transparentize(black, .7)
+          border-radius:  8px  8px 0 0
+          .card-body
+            background: grey
+            border-radius: 0
+
+            > [class*="group"]
+              input
+                background: grey
+                font-size: .9em
+                color: #333
+                box-shadow: none
+                border: none
+                border-bottom: 1px dashed darkgrey
+              &:last-of-type
+                margin-bottom: 0
+
+            .pub-btn // top buttons
+              margin-bottom: 1em
+              button
+                font-size: .9em
+                text-transform: capitalize
+                &:first-of-type // // 'PUBLISH' button
                   background-color: lighten(green, 10%)
-                  box-shadow: 0px 1px 3px rgba(0,0,0,.7)
-                  &:after
+                  border-color: lighten(green, 10%)
+                  &:hover
+                    background-color: green
+                    border-color: green
+                &:last-of-type // // 'PUBLISH' button
+                  background-color: #ff9800
+                  border-color: #ff9800
+                  color: #fff
+                  &:hover
+                    background-color: darken(#ff9800, 10%)
+                    border-color: darken(#ff9800, 10%)
+
+            .input-group.date // date picker
+              input
+              .fa-calendar
+                font-size: 2em
+                color: #000
+              label // label styling
+                display: none
+
+            .form-group // helps shift time picker upwards
+              padding-top: 0
+              label[for="pub"] // time picker
+                display: none
+
+            .input-field.check-box-inline // Categories
+              &:before
+                display: block
+                content: 'Categories:'
+                font: normal 16px/1.5 'Roboto', sans-serif
+                line-height: 1
+                opacity: 1
+                color: brown
+                margin-bottom: .8em
+              [type="checkbox"]
+                &:checked+label
+                  &:before
+                    border-right: 2px solid lighten(green, 10%)
+                    border-bottom: 2px solid lighten(green, 10%)
+              background: lightgrey
+              border-radius: .25em
+              padding: 1em
+              p
+                margin-bottom: 0
+                &:hover
+                  background-color: lighten(grey, 20%)
+                label // Category labels
+                  color: #000
+                  font-size: .9em
+                  margin: .09em 0
+                  // margin: .35em 0
+                  top: 0
+              br
+                display: none
+
+            .switch  // 'Send Push Notification'
+              margin-top: 1em
+              label
+                color: #000
+                input[type=checkbox]
+                  &:checked+.lever
                     background-color: lighten(green, 10%)
                     box-shadow: 0px 1px 3px rgba(0,0,0,.7)
-            & + span
-              font: normal 1em/1.5 'Roboto', sans-serif
-              color: brown
+                    &:after
+                      background-color: lighten(green, 10%)
+                      box-shadow: 0px 1px 3px rgba(0,0,0,.7)
+              & + span
+                font: normal 1em/1.5 'Roboto', sans-serif
+                color: brown
 /* *********************************************************************** */
 /* ********* FORM SEQUENCE *********************************************** */
 /* *********************************************************************** */

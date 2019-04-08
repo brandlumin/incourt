@@ -41,9 +41,11 @@ $(function () {
     });
 /*!* RE-SETTING GALLERY DISPLAY ROW ***/
   $(".gallery_opner").click(function (){
+    func_alert('Face-lifting gallery.');
     if (!IsGalleryManaged) { 
-      func_alert('Readying gallery.',5000);
-      func_BetterGallery();
+      setTimeout(function () {
+        func_BetterGallery();
+      },1);
     } else {
        $('.ImageGallery .img-container .gallery').css('display', '');
     }
@@ -558,7 +560,7 @@ function func_BetterGallery() {
   $('.ImageGallery.customModal .img-container .gallery').css('display', '');
   setTimeout(function () {
     func_alert('Gallery ready.');
-  },300);
+  },1);
 }
 
 function func_LH_Open() {

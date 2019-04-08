@@ -41,9 +41,11 @@ $(function () {
     });
   /*!* RE-SETTING GALLERY DISPLAY ROW ***/
   $(".gallery_opner").click(function (){
+    func_alert('Face-lifting gallery.');
     if (!IsGalleryManaged) { // setup the gallery if not done already
-      func_alert('Readying gallery.',5000);
-      func_BetterGallery();
+      setTimeout(function () {
+        func_BetterGallery();
+      },1);
     } else {
        $('.ImageGallery .img-container .gallery').css('display', '');
     }

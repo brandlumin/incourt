@@ -133,12 +133,6 @@ header#header {
 
 
 
-.card-head {
-  display: none; }
-
-
-
-
 .card-body ul.pull-right {
   position: absolute;
   top: -3.2em;
@@ -152,6 +146,12 @@ header#header {
       position: relative;
       bottom: 0;
       right: 0; }
+
+.card-head {
+  display: none; }
+
+
+
 
 .card-body table.table {
   color: black; }
@@ -186,3 +186,27 @@ header#header {
         font: 500 16px/1.5 'Roboto', sans-serif; }
     .card-body table.table tbody tr td:nth-of-type(1), .card-body table.table tbody tr td:nth-of-type(5), .card-body table.table tbody tr td:nth-of-type(6) {
       display: none; }
+
+
+
+
+#base > .alert.alert-success {
+  margin: 0 !important;
+  z-index: 99999999;
+  padding: 45px 110px 45px 60px;
+  -webkit-box-shadow: 0 0 1em #00000055;
+          box-shadow: 0 0 1em #00000055;
+  border: 7px solid white;
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%); }
+  #base > .alert.alert-success button {
+    background: lightgray !important;
+    opacity: .5;
+    padding: 1em;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px; }

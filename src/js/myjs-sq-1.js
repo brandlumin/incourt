@@ -61,10 +61,10 @@ function Func_RegEx(HelpMeText) {
   /* creating array of received value */
   ToBeReplaced = HelpMeText.split(/\n/);
   /* making values nicer */
-  NewsTitleToDo = (Func_TrimAndCrisp(ToBeReplaced[0]) ?
+  NewsURLNotToDo = (Func_TrimAndCrisp(ToBeReplaced[0]) ?
    Func_TrimAndCrisp(ToBeReplaced[0]) :
     '*** Title EMPTY ***');
-  NewsURLNotToDo = (Func_TrimAndCrisp(ToBeReplaced[1]) ?
+  NewsTitleToDo = (Func_TrimAndCrisp(ToBeReplaced[1]) ?
    Func_TrimAndCrisp(ToBeReplaced[1]) :
     '*** URL EMPTY ***');
   NewsDscToDo = (Func_TrimAndCrisp(ToBeReplaced[2]) ?
@@ -77,8 +77,8 @@ function Func_RegEx(HelpMeText) {
   NewsURLNotToDo = (NewsURLNotToDo.match('^(https?)(?::\/\/)','gi')) ? NewsURLNotToDo : 'http://'+NewsURLNotToDo;
   /* populating abbreviations in the textarea */
   $('#id_news').val(
-                    NewsTitleToDo+'\n'+
                     NewsURLNotToDo+'\n'+
+                    NewsTitleToDo+'\n'+
                     NewsDscToDo
                     );
 }

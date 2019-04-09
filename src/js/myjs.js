@@ -68,8 +68,8 @@ function func_MakeHelpBtn() {
 /* function func_ActiHelp() - Activating HelpMe button
 =========================================================== */
 function func_ActiHelp() {
-  Summary =     (($('#title').val().trim() != '')         ? $('#title').val().trim() + '\n'         : '') +
-                (($('[name=url]')[1].value.trim() != '')  ? $('[name=url]')[1].value.trim() + '\n'  : '') +
+  Summary =     (($('[name=url]')[1].value.trim() != '')  ? $('[name=url]')[1].value.trim() + '\n'  : '') +
+                (($('#title').val().trim() != '')         ? $('#title').val().trim() + '\n'         : '') +
                 (($('#description').val().trim() != '')   ? $('#description').val().trim()          : '');
   $('#id_news').val(Summary).change();
   $('.HelpDiv').fadeOut('fast', function() {
@@ -116,7 +116,7 @@ function func_MakeDataCapture() {
       name: 'news',
       class: 'form-control',
       autofocus: 'autofocus',
-      placeholder: 'Line #1: Title\nLine #2: URL\nLine #3: News Description\n\nNOTE: Extra content will be taken away.'
+      placeholder: 'Line #1: URL\nLine #2: Title\nLine #3: News Description\n\nNOTE: Extra content will be taken away.'
     }).appendTo(e); // ADDING INPUT TEXTAREA TO THE FORM
   $('<a/>', {
     id: 'populate',
@@ -171,16 +171,16 @@ function func_Populate() {
   }
   if (i<3) {func_alert('Incomplete News.');}
   /* POPULATE RECEIVED ARRAY ELEMENTS */
+    // add 'http://' protocol if does not exist in the URL
+    NewsDetail[0] = (NewsDetail[0].match('^(https?)(?::\/\/)','gi')) ? NewsDetail[0] : 'http://'+NewsDetail[0];
+  $('input#regular1').val(NewsDetail[0]).change(); // POPULATE URL
   titlestr = (function () { // CONVERT TITLE INTO Title Case
-      str = Func_RegexReplace(NewsDetail[0].replace(/(?:^|\s)\w/g, function(match) {
+      str = Func_RegexReplace(NewsDetail[1].replace(/(?:^|\s)\w/g, function(match) {
                     return match.toUpperCase();
                 }));
       return str;
     });
   $('input#title').val(titlestr).change(); // POPULATE TITLE
-    // add 'http://' protocol if does not exist in the URL
-    NewsDetail[1] = (NewsDetail[1].match('^(https?)(?::\/\/)','gi')) ? NewsDetail[1] : 'http://'+NewsDetail[1];
-  $('input#regular1').val(NewsDetail[1]).change(); // POPULATE URL
   $('textarea#description').val(Func_RegexReplace(NewsDetail[2], 'vardesc')).change(); // POPULATE DESCRIPTION
   /*!* RUN PROPRIETORY FUNCTION for META and HINTS ***/
   $('#meta_title').val($('#title').val().replace(/([~!@#$%^&*()_+=`{}\[\]\|\\:;'"<>,.\/? ])+/g, '-').toLowerCase()).change(); // HIDDEN: META TITLE

@@ -104,7 +104,7 @@ function func_MakeDataCapture() {
   var e = $('#WD_Box__form'); 
   e.html('<h4>News</h4>'); 
   $('<textarea/>', {
-      rows: '10',
+      rows: '12',
       id: 'id_news',
       name: 'news',
       class: 'form-control',

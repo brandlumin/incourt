@@ -111,7 +111,7 @@ function func_MakeDataCapture() {
   var e = $('#WD_Box__form'); // TO REFER THE FORM AS VARIABLE
   e.html('<h4>News</h4>'); // setting the heading
   $('<textarea/>', {
-      rows: '10',
+      rows: '12',
       id: 'id_news',
       name: 'news',
       class: 'form-control',

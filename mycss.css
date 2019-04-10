@@ -512,7 +512,7 @@ body .WordData_Container {
         margin-bottom: 8px;
         border: 1px solid darkgray;
         padding: 8px 16px;
-        font: normal 18px/1.75 'Roboto', sans-serif; }
+        font: normal 18px/1.5 'Roboto', sans-serif; }
         body .WordData_Container .WordData_Box form textarea:focus {
           background: #fff;
           border: 1px solid darkgray; }

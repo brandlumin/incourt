@@ -50,7 +50,7 @@ function Func_AbbreviateNews() {
   UndoText = HelpMeText = $('#id_news').val();
   NeedToUndo = false; // safe side approach to reset every time
   /* call regex function to replace abbreviations of the variable */
-  if ( HelpMeText ) Func_RegEx(HelpMeText);
+  if ( HelpMeText ) {Func_RegEx(HelpMeText);} else {func_alert("<b>Err...</b><br/>Write the news first!", 1500);}
   if (NeedToUndo) Func_CreateUndo();
   $('#id_news').focus();
 }
@@ -60,6 +60,22 @@ function Func_AbbreviateNews() {
 function Func_RegEx(HelpMeText) {
   /* creating array of received value */
   ToBeReplaced = HelpMeText.split(/\n/);
+  if (HelpMeText.length <3) {func_alert("<b>Err...</b><br/>Write the news first!", 1500);return false;}
+  /* getting HashText */
+  HashText = $.grep(ToBeReplaced, function(n,i){
+              return (n.match('^>',''));
+            }, false);
+  HashText = HashText.join(',').replace(/(>)|,(\s)/g,'');
+  /* filtering sans HashText */
+  ToBeReplaced = $.grep(ToBeReplaced, function(n,i){
+                  return (n.match('^>',''));
+                }, true);
+  /* concatinating complete news-description block */
+  for (var i=3; i < ToBeReplaced.length; i++) {
+    ToBeReplaced[2] += ' '+ToBeReplaced[i];
+  }
+  /* deleting excess elements*/
+  ToBeReplaced.splice(3);
   /* making values nicer */
   NewsURLNotToDo = (Func_TrimAndCrisp(ToBeReplaced[0]) ?
    Func_TrimAndCrisp(ToBeReplaced[0]) :
@@ -79,7 +95,8 @@ function Func_RegEx(HelpMeText) {
   $('#id_news').val(
                     NewsURLNotToDo+'\n'+
                     NewsTitleToDo+'\n'+
-                    NewsDscToDo
+                    NewsDscToDo+
+                    ((HashText) ? '\n'+HashText : '')
                     );
 }
 

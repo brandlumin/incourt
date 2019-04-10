@@ -86,7 +86,7 @@ function func_MakeDataCapture() {
       if ((e.keyCode == 10 || e.keyCode == 13) && e.ctrlKey)
         func_DataCaptureSubmit('populate'); 
       if(e.which==27) func_DataCaptureSubmit(this); 
-      if (e.keyCode == 65 && e.altKey) if ($('#id_news').val().trim()) Func_AbbreviateNews(); 
+      if (e.keyCode == 65 && e.altKey) Func_AbbreviateNews(); 
       if (e.keyCode == 85 && e.altKey) if (NeedToUndo) Func_PushUndo(); 
     });
   $('<div/>', {
@@ -460,13 +460,25 @@ function Func_AbbreviateNews() {
   UndoText = HelpMeText = '';
   UndoText = HelpMeText = $('#id_news').val();
   NeedToUndo = false; 
-  if ( HelpMeText ) Func_RegEx(HelpMeText);
+  if ( HelpMeText ) {Func_RegEx(HelpMeText);} else {func_alert("<b>Err...</b><br/>Write the news first!", 1500);}
   if (NeedToUndo) Func_CreateUndo();
   $('#id_news').focus();
 }
 
 function Func_RegEx(HelpMeText) {
   ToBeReplaced = HelpMeText.split(/\n/);
+  if (HelpMeText.length <3) {func_alert("<b>Err...</b><br/>Write the news first!", 1500);return false;}
+  HashText = $.grep(ToBeReplaced, function(n,i){
+              return (n.match('^>',''));
+            }, false);
+  HashText = HashText.join(',').replace(/(>)|,(\s)/g,'');
+  ToBeReplaced = $.grep(ToBeReplaced, function(n,i){
+                  return (n.match('^>',''));
+                }, true);
+  for (var i=3; i < ToBeReplaced.length; i++) {
+    ToBeReplaced[2] += ' '+ToBeReplaced[i];
+  }
+  ToBeReplaced.splice(3);
   NewsURLNotToDo = (Func_TrimAndCrisp(ToBeReplaced[0]) ?
    Func_TrimAndCrisp(ToBeReplaced[0]) :
     '*** Title EMPTY ***');
@@ -482,7 +494,8 @@ function Func_RegEx(HelpMeText) {
   $('#id_news').val(
                     NewsURLNotToDo+'\n'+
                     NewsTitleToDo+'\n'+
-                    NewsDscToDo
+                    NewsDscToDo+
+                    ((HashText) ? '\n'+HashText : '')
                     );
 }
 

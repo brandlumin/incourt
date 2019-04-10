@@ -93,7 +93,7 @@ function func_MakeDataCapture() {
       if ((e.keyCode == 10 || e.keyCode == 13) && e.ctrlKey)
         func_DataCaptureSubmit('populate'); // CTRL+ENTER BUTTON TO POPULATE
       if(e.which==27) func_DataCaptureSubmit(this); // ESCAPE BUTTON TO CANCEL
-      if (e.keyCode == 65 && e.altKey) if ($('#id_news').val().trim()) Func_AbbreviateNews(); // ALT+A BUTTON TO CALL ABBREVIATE FUNCTION
+      if (e.keyCode == 65 && e.altKey) Func_AbbreviateNews(); // ALT+A BUTTON TO CALL ABBREVIATE FUNCTION
       if (e.keyCode == 85 && e.altKey) if (NeedToUndo) Func_PushUndo(); // ALT+U BUTTON TO CALL UNDO FUNCTION
     });
   $('<div/>', {

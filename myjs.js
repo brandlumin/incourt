@@ -63,9 +63,10 @@ function func_MakeHelpBtn() {
 }
 
 function func_ActiHelp() {
-  Summary =     (($('[name=url]')[1].value.trim() != '')  ? $('[name=url]')[1].value.trim() + '\n'  : '') +
-                (($('#title').val().trim() != '')         ? $('#title').val().trim() + '\n'         : '') +
-                (($('#description').val().trim() != '')   ? $('#description').val().trim()          : '');
+  Summary =     (($('[name=url]')[1].value.trim() != '')  ? $('[name=url]')[1].value + '\n'  : '') +
+                (($('#title').val().trim() != '')         ? $('#title').val()        + '\n'  : '') +
+                (($('#description').val().trim() != '')   ? $('#description').val()  + '\n'  : '') +
+                (($('#token-input-topic').val().trim() != '')   ? '>'+$('#token-input-topic').val() : '');
   $('#id_news').val(Summary).change();
   $('.HelpDiv').fadeOut('fast', function() {
     $('.WordData_Container').fadeIn( function () {
@@ -150,14 +151,31 @@ function func_DataCaptureSubmit(e) {
 }
 
 function func_Populate() {
-  news = $('#id_news').val().trim(); 
-  count_ln  = news.split(/\n/).length; 
-  NewsDetail = news.split("\n"); 
-  var i;
-  for (i = 0; i < count_ln; i++) {
-    NewsDetail[i] = NewsDetail[i].trim();
+  news = $('#id_news').val(); 
+  NewsDetail = news.split(/\n/); 
+  if (NewsDetail.length <3) {func_alert("<b>Err...Incomplete News</b><br/>How can I populate it?", 2400);}
+  else {
+    for (var a = 0; a < NewsDetail.length; a++) {
+      if (typeof NewsDetail[a] === "undefined" || NewsDetail[a] === "") {
+        func_alert("<b>Err...Incomplete News</b><br/>How can I populate it?", 2400);
+        a = NewsDetail.length;
+      }
+    }
   }
-  if (i<3) {func_alert('Incomplete News.');}
+  HashText = $.grep(NewsDetail, function(n,i){
+              return (n.match('^>',''));
+            }, false);
+  HashText = HashText.join(',').replace(/>/g,'').replace(/\s{1,}/gm,' ').replace(/\s?,\s?/gm,',').trim(); 
+  NewsDetail = $.grep(NewsDetail, function(n,i){
+                  return (n.match('^>',''));
+                }, true);
+  for (var i = 3; i < NewsDetail.length; i++) {
+    NewsDetail[2] += ' '+NewsDetail[i];
+  }
+  NewsDetail.splice(3);
+  for (var j = 0; j < NewsDetail.length; j++) {
+    NewsDetail[j] = Func_TrimAndCrisp(NewsDetail[j]);
+  }
     NewsDetail[0] = (NewsDetail[0].match('^(https?)(?::\/\/)','gi')) ? NewsDetail[0] : 'http://'+NewsDetail[0];
   $('input#regular1').val(NewsDetail[0]).change(); 
   titlestr = (function () { 
@@ -184,6 +202,8 @@ function func_Populate() {
     $('#characterLeftDesc').text((max-words)+' words left');
   }
   func_BL_CountDesc();
+/*!* Push HashTexh ***/
+  $('#token-input-topic').val(HashText);
 /*!* CHOOSE PUBLISHER BASED ON ENTERED URL ***/
   func_AutoSelectPublisher();
 }
@@ -471,11 +491,11 @@ function Func_RegEx(HelpMeText) {
   HashText = $.grep(ToBeReplaced, function(n,i){
               return (n.match('^>',''));
             }, false);
-  HashText = HashText.join(',').replace(/(>)|,(\s)/g,'');
+  HashText = '> '+HashText.join(',').replace(/>/g,'').replace(/\s{1,}/gm,' ').replace(/\s?,\s?/gm,',').trim(); 
   ToBeReplaced = $.grep(ToBeReplaced, function(n,i){
                   return (n.match('^>',''));
                 }, true);
-  for (var i=3; i < ToBeReplaced.length; i++) {
+  for (var i = 3; i < ToBeReplaced.length; i++) {
     ToBeReplaced[2] += ' '+ToBeReplaced[i];
   }
   ToBeReplaced.splice(3);

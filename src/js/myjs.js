@@ -68,9 +68,10 @@ function func_MakeHelpBtn() {
 /* function func_ActiHelp() - Activating HelpMe button
 =========================================================== */
 function func_ActiHelp() {
-  Summary =     (($('[name=url]')[1].value.trim() != '')  ? $('[name=url]')[1].value.trim() + '\n'  : '') +
-                (($('#title').val().trim() != '')         ? $('#title').val().trim() + '\n'         : '') +
-                (($('#description').val().trim() != '')   ? $('#description').val().trim()          : '');
+  Summary =     (($('[name=url]')[1].value.trim() != '')  ? $('[name=url]')[1].value + '\n'  : '') +
+                (($('#title').val().trim() != '')         ? $('#title').val()        + '\n'  : '') +
+                (($('#description').val().trim() != '')   ? $('#description').val()  + '\n'  : '') +
+                (($('#token-input-topic').val().trim() != '')   ? '>'+$('#token-input-topic').val() : '');
   $('#id_news').val(Summary).change();
   $('.HelpDiv').fadeOut('fast', function() {
     $('.WordData_Container').fadeIn( function () {
@@ -161,15 +162,35 @@ function func_DataCaptureSubmit(e) {
 /* function func_Populate() - Populate received News
 =========================================================== */
 function func_Populate() {
-  news = $('#id_news').val().trim(); // -- SET TRIMMED VALUE
-  count_ln  = news.split(/\n/).length; // -- COUNT NUMBER OF LINES
-  NewsDetail = news.split("\n"); // -- CREATE ARRAY BY CARRIAGE RETURNS
-  /* TRIM RECEIVED ARRAY ELEMENTS AND FINALIZING 'NEWSDETAIL' */
-  var i;
-  for (i = 0; i < count_ln; i++) {
-    NewsDetail[i] = NewsDetail[i].trim();
+  news = $('#id_news').val(); // -- FETCH VALUE
+  NewsDetail = news.split(/\n/); // -- CREATE ARRAY BY CARRIAGE RETURNS
+  if (NewsDetail.length <3) {func_alert("<b>Err...Incomplete News</b><br/>How can I populate it?", 2400);}
+  else {
+    for (var a = 0; a < NewsDetail.length; a++) {
+      if (typeof NewsDetail[a] === "undefined" || NewsDetail[a] === "") {
+        func_alert("<b>Err...Incomplete News</b><br/>How can I populate it?", 2400);
+        a = NewsDetail.length;
+      }
+    }
   }
-  if (i<3) {func_alert('Incomplete News.');}
+  HashText = $.grep(NewsDetail, function(n,i){
+              return (n.match('^>',''));
+            }, false);
+  HashText = HashText.join(',').replace(/>/g,'').replace(/\s{1,}/gm,' ').replace(/\s?,\s?/gm,',').trim(); // removing '>' and joining as CSV
+  /* filtering sans HashText */
+  NewsDetail = $.grep(NewsDetail, function(n,i){
+                  return (n.match('^>',''));
+                }, true);
+  /* concatinating complete news-description block */
+  for (var i = 3; i < NewsDetail.length; i++) {
+    NewsDetail[2] += ' '+NewsDetail[i];
+  }
+  /* deleting excess elements*/
+  NewsDetail.splice(3);
+  /* TRIM RECEIVED ARRAY ELEMENTS AND FINALIZING 'NEWSDETAIL' */
+  for (var j = 0; j < NewsDetail.length; j++) {
+    NewsDetail[j] = Func_TrimAndCrisp(NewsDetail[j]);
+  }
   /* POPULATE RECEIVED ARRAY ELEMENTS */
     // add 'http://' protocol if does not exist in the URL
     NewsDetail[0] = (NewsDetail[0].match('^(https?)(?::\/\/)','gi')) ? NewsDetail[0] : 'http://'+NewsDetail[0];
@@ -200,6 +221,8 @@ function func_Populate() {
     $('#characterLeftDesc').text((max-words)+' words left');
   }
   func_BL_CountDesc();
+  /*!* Push HashTexh ***/
+  $('#token-input-topic').val(HashText);
   /*!* CHOOSE PUBLISHER BASED ON ENTERED URL ***/
   func_AutoSelectPublisher();
 }

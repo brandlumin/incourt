@@ -65,13 +65,13 @@ function Func_RegEx(HelpMeText) {
   HashText = $.grep(ToBeReplaced, function(n,i){
               return (n.match('^>',''));
             }, false);
-  HashText = HashText.join(',').replace(/(>)|,(\s)/g,'');
+  HashText = '> '+HashText.join(',').replace(/>/g,'').replace(/\s{1,}/gm,' ').replace(/\s?,\s?/gm,',').trim(); // removing '>' and joining as CSV
   /* filtering sans HashText */
   ToBeReplaced = $.grep(ToBeReplaced, function(n,i){
                   return (n.match('^>',''));
                 }, true);
   /* concatinating complete news-description block */
-  for (var i=3; i < ToBeReplaced.length; i++) {
+  for (var i = 3; i < ToBeReplaced.length; i++) {
     ToBeReplaced[2] += ' '+ToBeReplaced[i];
   }
   /* deleting excess elements*/

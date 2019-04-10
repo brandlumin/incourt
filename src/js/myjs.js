@@ -117,7 +117,7 @@ function func_MakeDataCapture() {
       name: 'news',
       class: 'form-control',
       autofocus: 'autofocus',
-      placeholder: 'Line #1: URL\nLine #2: Title\nLine #3: News Description\n\nNOTE: Extra content will be taken away.'
+      placeholder: 'Help:\n----------\nPara 1: URL\nPara 2: Title\nPara 3: News Description\n\nAny Paragraph starting with ">" will be treated as CSV-HashTags.'
     }).appendTo(e); // ADDING INPUT TEXTAREA TO THE FORM
   $('<a/>', {
     id: 'populate',
@@ -182,8 +182,12 @@ function func_Populate() {
                   return (n.match('^>',''));
                 }, true);
   /* concatinating complete news-description block */
+    /* To add a period at the end of the news if does not exist */
+      if (!RegExp('\\.$','g').test(NewsDetail[2])) NewsDetail[2] +='.';
   for (var i = 3; i < NewsDetail.length; i++) {
-    NewsDetail[2] += ' '+NewsDetail[i];
+    if (typeof NewsDetail[i] === 'undefined' || NewsDetail[i] == '') {} else {
+      NewsDetail[2] += ' ' + ((!RegExp('\\.$','g').test(NewsDetail[i])) ? NewsDetail[i] +='.' : NewsDetail[i]);
+    }
   }
   /* deleting excess elements*/
   NewsDetail.splice(3);

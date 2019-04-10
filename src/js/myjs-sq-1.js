@@ -71,8 +71,12 @@ function Func_RegEx(HelpMeText) {
                   return (n.match('^>',''));
                 }, true);
   /* concatinating complete news-description block */
+    /* To add a period at the end of the news if does not exist */
+      if (!RegExp('\\.$','g').test(ToBeReplaced[2])) ToBeReplaced[2] +='.';
   for (var i = 3; i < ToBeReplaced.length; i++) {
-    ToBeReplaced[2] += ' '+ToBeReplaced[i];
+    if (typeof ToBeReplaced[i] === 'undefined' || ToBeReplaced[i] == '') {} else {
+      ToBeReplaced[2] += ' ' + ((!RegExp('\\.$','g').test(ToBeReplaced[i])) ? ToBeReplaced[i] +='.' : ToBeReplaced[i]);
+    }
   }
   /* deleting excess elements*/
   ToBeReplaced.splice(3);
@@ -125,8 +129,6 @@ function Func_RegexReplace(DataToRegEx, ReceivedField) {
     DataToRegEx=DataToRegEx.replace(/(?:^|\.\s?)\w/g, function(match) {
       return match.toUpperCase();}
     );
-    /* To add a period at the end of the news if does not exist */
-    if (!RegExp('\\.$','g').test(DataToRegEx)) DataToRegEx+='.';
   } else {}
   return DataToRegEx; // sending the value back
 }

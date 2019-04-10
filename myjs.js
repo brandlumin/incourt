@@ -110,7 +110,7 @@ function func_MakeDataCapture() {
       name: 'news',
       class: 'form-control',
       autofocus: 'autofocus',
-      placeholder: 'Line #1: URL\nLine #2: Title\nLine #3: News Description\n\nNOTE: Extra content will be taken away.'
+      placeholder: 'Help:\n----------\nPara 1: URL\nPara 2: Title\nPara 3: News Description\n\nAny Paragraph starting with ">" will be treated as CSV-HashTags.'
     }).appendTo(e); 
   $('<a/>', {
     id: 'populate',
@@ -169,8 +169,11 @@ function func_Populate() {
   NewsDetail = $.grep(NewsDetail, function(n,i){
                   return (n.match('^>',''));
                 }, true);
+      if (!RegExp('\\.$','g').test(NewsDetail[2])) NewsDetail[2] +='.';
   for (var i = 3; i < NewsDetail.length; i++) {
-    NewsDetail[2] += ' '+NewsDetail[i];
+    if (typeof NewsDetail[i] === 'undefined' || NewsDetail[i] == '') {} else {
+      NewsDetail[2] += ' ' + ((!RegExp('\\.$','g').test(NewsDetail[i])) ? NewsDetail[i] +='.' : NewsDetail[i]);
+    }
   }
   NewsDetail.splice(3);
   for (var j = 0; j < NewsDetail.length; j++) {
@@ -495,8 +498,11 @@ function Func_RegEx(HelpMeText) {
   ToBeReplaced = $.grep(ToBeReplaced, function(n,i){
                   return (n.match('^>',''));
                 }, true);
+      if (!RegExp('\\.$','g').test(ToBeReplaced[2])) ToBeReplaced[2] +='.';
   for (var i = 3; i < ToBeReplaced.length; i++) {
-    ToBeReplaced[2] += ' '+ToBeReplaced[i];
+    if (typeof ToBeReplaced[i] === 'undefined' || ToBeReplaced[i] == '') {} else {
+      ToBeReplaced[2] += ' ' + ((!RegExp('\\.$','g').test(ToBeReplaced[i])) ? ToBeReplaced[i] +='.' : ToBeReplaced[i]);
+    }
   }
   ToBeReplaced.splice(3);
   NewsURLNotToDo = (Func_TrimAndCrisp(ToBeReplaced[0]) ?
@@ -539,7 +545,6 @@ function Func_RegexReplace(DataToRegEx, ReceivedField) {
     DataToRegEx=DataToRegEx.replace(/(?:^|\.\s?)\w/g, function(match) {
       return match.toUpperCase();}
     );
-    if (!RegExp('\\.$','g').test(DataToRegEx)) DataToRegEx+='.';
   } else {}
   return DataToRegEx; 
 }

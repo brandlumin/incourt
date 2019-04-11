@@ -133,12 +133,6 @@ header#header {
 
 
 
-.card-head {
-  display: none; }
-
-
-
-
 .card-body ul.pull-right {
   position: absolute;
   top: -3.2em;
@@ -153,13 +147,20 @@ header#header {
       bottom: 0;
       right: 0; }
 
+.card-head {
+  display: none; }
+
+
+
+
 .card-body table.table {
   color: black; }
   .card-body table.table thead {
     border: none;
-    -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
-            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
-    background-color: green; }
+    background-color: green;
+    border-bottom: 2px solid white;
+    -webkit-box-shadow: 0 4px 6px -3px rgba(0, 0, 0, 0.8);
+            box-shadow: 0 4px 6px -3px rgba(0, 0, 0, 0.8); }
     .card-body table.table thead tr th {
       border: none;
       border-radius: 0;
@@ -170,11 +171,14 @@ header#header {
     .card-body table.table thead tr th:nth-of-type(1), .card-body table.table thead tr th:nth-of-type(5), .card-body table.table thead tr th:nth-of-type(6) {
       display: none; }
   .card-body table.table tbody tr {
-    background: whitesmoke;
-    -webkit-box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.3);
-            box-shadow: 0 2px 4px -2px rgba(0, 0, 0, 0.3); }
-    .card-body table.table tbody tr:hover td {
-      background: white; }
+    background: #eee;
+    border-bottom: 1px solid #ddd;
+    -webkit-transition: 50ms ease-in-out box-shadow;
+    transition: 50ms ease-in-out box-shadow; }
+    .card-body table.table tbody tr:hover {
+      background: white;
+      -webkit-box-shadow: 0 0 1em rgba(0, 0, 0, 0.3);
+              box-shadow: 0 0 1em rgba(0, 0, 0, 0.3); }
     .card-body table.table tbody tr td {
       border: none;
       border-radius: 0; }
@@ -182,3 +186,27 @@ header#header {
         font: 500 16px/1.5 'Roboto', sans-serif; }
     .card-body table.table tbody tr td:nth-of-type(1), .card-body table.table tbody tr td:nth-of-type(5), .card-body table.table tbody tr td:nth-of-type(6) {
       display: none; }
+
+
+
+
+#base > .alert.alert-success {
+  margin: 0 !important;
+  z-index: 99999999;
+  padding: 45px 110px 45px 60px;
+  -webkit-box-shadow: 0 0 1em #00000055;
+          box-shadow: 0 0 1em #00000055;
+  border: 7px solid white;
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%); }
+  #base > .alert.alert-success button {
+    background: lightgray !important;
+    opacity: .5;
+    padding: 1em;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px; }

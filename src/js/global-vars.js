@@ -4,8 +4,8 @@
 var GlobalNewsArray = [];
 GlobalNewsArray = [
   ["full form","short"],
+  ["^(:|\\.|,|\\))[\\s{0,}]?",""],         // beginning correction: no/multiple white-spaces before and after colon, comma, period, closing bracket
   ["\\s{1,}(:|\\.|,|\\))[\\s{0,}]?","$1 "],   // no/multiple white-spaces before and after colon, comma, period, closing bracket
-  ["^(v:)","VIEW:"],
   ["additional chief metrapolitan magistrate","ACMM"],
   ["all india muslim personal law board","AIMPLB"],
   ["amma makkal munnetra kazhagam","AMMK party"],
@@ -69,6 +69,8 @@ GlobalNewsArray = [
   ["new delhi municipal council","NDMC"],
   ["pension fund regulatory and development authority","PFRDA"],
   ["petroleum and natural gas board","PNGRB"],
+  ["Prevention of Corruption Act","PC Act"],
+  ["Prevention of Money Laundering Act","PMLA"],
   ["prime minister","PM"],
   ["protection of children from sexual offences","POCSO"],
   ["protection of children from sexual offenses","POCSO"],
@@ -101,7 +103,8 @@ GlobalNewsArray = [
   ["(?:[\\s]?)\\(([A-Z|&]*)\\)",""],    // removes in bracket if NOT space | numeric
   ["(?:on)\\s[a-zA-Z]+day,?\\s?",""],   // removing weekdays
   ["\\s[a-zA-Z]+day",""],               // removing today yesterday
-  ["\\s\\[read[a-zA-Z|\\s]+]",""]       // removing [READ ORDER]
+  ["\\s\\[read[a-zA-Z|\\s]+]",""],      // removing [READ ORDER]
+  [",\\sread[a-zA-Z|\\s]+",""]          // removing ', read xyz'
 
 
 ];

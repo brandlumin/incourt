@@ -50,7 +50,7 @@ function Func_AbbreviateNews() {
   UndoText = HelpMeText = $('#id_news').val();
   NeedToUndo = false; // safe side approach to reset every time
   /* call regex function to replace abbreviations of the variable */
-  if ( HelpMeText ) Func_RegEx(HelpMeText);
+  if ( HelpMeText ) {Func_RegEx(HelpMeText);} else {func_alert("<b>Err...</b><br/>Write the news first!", 1500);}
   if (NeedToUndo) Func_CreateUndo();
   $('#id_news').focus();
 }
@@ -60,11 +60,31 @@ function Func_AbbreviateNews() {
 function Func_RegEx(HelpMeText) {
   /* creating array of received value */
   ToBeReplaced = HelpMeText.split(/\n/);
+  if (HelpMeText.length <3) {func_alert("<b>Err...</b><br/>Write the news first!", 1500);return false;}
+  /* getting HashText */
+  HashText = $.grep(ToBeReplaced, function(n,i){
+              return (n.match('^#',''));
+            }, false);
+  HashText = (HashText.length > 0) ? '# '+HashText.join(',').replace(/#\s?/g,'').replace(/\s{1,}/gm,' ').replace(/\s?,\s?/gm,',').trim() : ''; // removing '>' and joining as CSV
+  /* filtering sans HashText */
+  ToBeReplaced = $.grep(ToBeReplaced, function(n,i){
+                  return (n.match('^#',''));
+                }, true);
+  /* concatinating complete news-description block */
+    /* To add a period at the end of the news if does not exist */
+      if (!RegExp('\\.$','g').test(ToBeReplaced[2])) ToBeReplaced[2] +='.';
+  for (var i = 3; i < ToBeReplaced.length; i++) {
+    if (typeof ToBeReplaced[i] === 'undefined' || ToBeReplaced[i] == '') {} else {
+      ToBeReplaced[2] += ' ' + ((!RegExp('\\.$','g').test(ToBeReplaced[i])) ? ToBeReplaced[i] +='.' : ToBeReplaced[i]);
+    }
+  }
+  /* deleting excess elements*/
+  ToBeReplaced.splice(3);
   /* making values nicer */
-  NewsTitleToDo = (Func_TrimAndCrisp(ToBeReplaced[0]) ?
+  NewsURLNotToDo = (Func_TrimAndCrisp(ToBeReplaced[0]) ?
    Func_TrimAndCrisp(ToBeReplaced[0]) :
     '*** Title EMPTY ***');
-  NewsURLNotToDo = (Func_TrimAndCrisp(ToBeReplaced[1]) ?
+  NewsTitleToDo = (Func_TrimAndCrisp(ToBeReplaced[1]) ?
    Func_TrimAndCrisp(ToBeReplaced[1]) :
     '*** URL EMPTY ***');
   NewsDscToDo = (Func_TrimAndCrisp(ToBeReplaced[2]) ?
@@ -77,10 +97,17 @@ function Func_RegEx(HelpMeText) {
   NewsURLNotToDo = (NewsURLNotToDo.match('^(https?)(?::\/\/)','gi')) ? NewsURLNotToDo : 'http://'+NewsURLNotToDo;
   /* populating abbreviations in the textarea */
   $('#id_news').val(
-                    NewsTitleToDo+'\n'+
                     NewsURLNotToDo+'\n'+
-                    NewsDscToDo
+                    NewsTitleToDo+'\n'+
+                    NewsDscToDo+
+                    ((HashText) ? '\n'+HashText : '')
                     );
+  /* FLASHING Status Message */
+  nTitleCount = NewsTitleToDo.length; // Title
+  sTitleMessg = (nTitleCount <= 75) ? '<b>OK</b> by '+(75 - nTitleCount)+' char(s)' : '<b>exceeded</b> by <b>'+(nTitleCount - 75)+'</b> char(s)'; // Message Creation
+  nDescrCount = NewsDscToDo.split(' ').length; // Description
+  sDescrMessg = (nDescrCount <= 60) ? '<b>OK</b> by '+(60 - nDescrCount)+' word(s)' : '<b>exceeded</b> by <b>'+(nDescrCount - 60)+'</b> word(s)'; // Message Creation
+  func_alert('Title '+sTitleMessg+'<br>News '+sDescrMessg, 1500); // Message Flash
 }
 
 /* Func_RegexReplace() - Gets DataToRegEx, sets up the RegEx and returns
@@ -108,8 +135,6 @@ function Func_RegexReplace(DataToRegEx, ReceivedField) {
     DataToRegEx=DataToRegEx.replace(/(?:^|\.\s?)\w/g, function(match) {
       return match.toUpperCase();}
     );
-    /* To add a period at the end of the news if does not exist */
-    if (!RegExp('\\.$','g').test(DataToRegEx)) DataToRegEx+='.';
   } else {}
   return DataToRegEx; // sending the value back
 }
@@ -131,7 +156,7 @@ function Func_CreateUndo() {
       class: 'btn btn-danger float-right',
       onClick: 'Func_PushUndo(this);'
     })
-    .html('<span class="text-white">[Alt+U]</span> Undo')
+    .html('[Alt+U]<span class="d-none d-md-inline"> Undo</span>')
     .css('text-transform', 'initial')
   );
 }
@@ -179,5 +204,5 @@ function func_BetterGallery() {
   $('.ImageGallery.customModal .img-container .gallery').css('display', '');
   setTimeout(function () {
     func_alert('Gallery ready.');
-  },300);
+  },1);
 }

@@ -41,9 +41,11 @@ $(function () {
     });
   /*!* RE-SETTING GALLERY DISPLAY ROW ***/
   $(".gallery_opner").click(function (){
+    func_alert('Face-lifting gallery.');
     if (!IsGalleryManaged) { // setup the gallery if not done already
-      func_alert('Readying gallery.',5000);
-      func_BetterGallery();
+      setTimeout(function () {
+        func_BetterGallery();
+      },1);
     } else {
        $('.ImageGallery .img-container .gallery').css('display', '');
     }
@@ -66,9 +68,10 @@ function func_MakeHelpBtn() {
 /* function func_ActiHelp() - Activating HelpMe button
 =========================================================== */
 function func_ActiHelp() {
-  Summary =     (($('#title').val().trim() != '')         ? $('#title').val().trim() + '\n'         : '') +
-                (($('[name=url]')[1].value.trim() != '')  ? $('[name=url]')[1].value.trim() + '\n'  : '') +
-                (($('#description').val().trim() != '')   ? $('#description').val().trim()          : '');
+  Summary =     (($('[name=url]')[1].value.trim() != '')  ? $('[name=url]')[1].value + '\n'  : '') +
+                (($('#title').val().trim() != '')         ? $('#title').val()        + '\n'  : '') +
+                (($('#description').val().trim() != '')   ? $('#description').val()          : '') +
+                (($('#token-input-topic').val().trim() != '')   ? '\n'+'# '+$('#token-input-topic').val() : '');
   $('#id_news').val(Summary).change();
   $('.HelpDiv').fadeOut('fast', function() {
     $('.WordData_Container').fadeIn( function () {
@@ -91,7 +94,7 @@ function func_MakeDataCapture() {
       if ((e.keyCode == 10 || e.keyCode == 13) && e.ctrlKey)
         func_DataCaptureSubmit('populate'); // CTRL+ENTER BUTTON TO POPULATE
       if(e.which==27) func_DataCaptureSubmit(this); // ESCAPE BUTTON TO CANCEL
-      if (e.keyCode == 65 && e.altKey) if ($('#id_news').val().trim()) Func_AbbreviateNews(); // ALT+A BUTTON TO CALL ABBREVIATE FUNCTION
+      if (e.keyCode == 65 && e.altKey) Func_AbbreviateNews(); // ALT+A BUTTON TO CALL ABBREVIATE FUNCTION
       if (e.keyCode == 85 && e.altKey) if (NeedToUndo) Func_PushUndo(); // ALT+U BUTTON TO CALL UNDO FUNCTION
     });
   $('<div/>', {
@@ -109,33 +112,33 @@ function func_MakeDataCapture() {
   var e = $('#WD_Box__form'); // TO REFER THE FORM AS VARIABLE
   e.html('<h4>News</h4>'); // setting the heading
   $('<textarea/>', {
-      rows: '10',
+      rows: '12',
       id: 'id_news',
       name: 'news',
       class: 'form-control',
       autofocus: 'autofocus',
-      placeholder: 'Line #1: Title\nLine #2: URL\nLine #3: News Description\n\nNOTE: Extra content will be taken away.'
+      placeholder: 'Help:\n----------\nPara 1: URL\nPara 2: Title\nPara 3: News Description\n\nAny Paragraph starting with "#" will be treated as CSV-HashTags.'
     }).appendTo(e); // ADDING INPUT TEXTAREA TO THE FORM
   $('<a/>', {
     id: 'populate',
     class: 'btn btn-success',
     onClick: 'func_DataCaptureSubmit("populate");'
   })
-    .html('<span class="text-white">[Ctrl+Enter]</span> Populate')
+    .html('[Ctrl+Ent]<span class="d-none d-md-inline"> Populate</span>')
     .appendTo(e).css('text-transform', 'initial'); // POPULATE BUTTON
   $('<a/>',{
     class: 'btn btn-warning',
     id: 'abbreviate',
     onClick: 'Func_AbbreviateNews()'
   })
-    .html('<span class="text-white">[Alt+A]</span> Abbreviate')
+    .html('[Alt+A]<span class="d-none d-md-inline"> Abbreviate</span>')
     .appendTo(e).css('text-transform', 'initial'); // ABBREVIATE BUTTON
   $('<a/>', {
     id: 'rollback',
     class: 'btn btn-outline-secondary',
     onClick: 'func_DataCaptureSubmit("");'
   })
-    .html('<span class="text-white">[Esc]</span> Cancel')
+    .html('[Esc]<span class="d-none d-md-inline"> Cancel</span>')
     .appendTo(e).css('text-transform', 'initial'); // CANCEL BUTTON
 }
 
@@ -159,26 +162,50 @@ function func_DataCaptureSubmit(e) {
 /* function func_Populate() - Populate received News
 =========================================================== */
 function func_Populate() {
-  news = $('#id_news').val().trim(); // -- SET TRIMMED VALUE
-  count_ln  = news.split(/\n/).length; // -- COUNT NUMBER OF LINES
-  NewsDetail = news.split("\n"); // -- CREATE ARRAY BY CARRIAGE RETURNS
-  /* TRIM RECEIVED ARRAY ELEMENTS AND FINALIZING 'NEWSDETAIL' */
-  var i;
-  for (i = 0; i < count_ln; i++) {
-    NewsDetail[i] = NewsDetail[i].trim();
+  news = $('#id_news').val(); // -- FETCH VALUE
+  NewsDetail = news.split(/\n/); // -- CREATE ARRAY BY CARRIAGE RETURNS
+  if (NewsDetail.length <3) {func_alert("<b>Err...Incomplete News</b><br/>How can I populate it?", 2400);}
+  else {
+    for (var a = 0; a < NewsDetail.length; a++) {
+      if (typeof NewsDetail[a] === "undefined" || NewsDetail[a] === "") {
+        func_alert("<b>Err...Incomplete News</b><br/>How can I populate it?", 2400);
+        a = NewsDetail.length;
+      }
+    }
   }
-  if (i<3) {func_alert('Incomplete News.');}
+  HashText = $.grep(NewsDetail, function(n,i){
+              return (n.match('^#',''));
+            }, false);
+  HashText = (HashText.length > 0) ? HashText.join(',').replace(/#\s?/g,'').replace(/\s{1,}/gm,' ').replace(/\s?,\s?/gm,',').trim() : ''; // removing '>' and joining as CSV
+  /* filtering sans HashText */
+  NewsDetail = $.grep(NewsDetail, function(n,i){
+                  return (n.match('^#',''));
+                }, true);
+  /* concatinating complete news-description block */
+    /* To add a period at the end of the news if does not exist */
+      if (!RegExp('\\.$','g').test(NewsDetail[2])) NewsDetail[2] +='.';
+  for (var i = 3; i < NewsDetail.length; i++) {
+    if (typeof NewsDetail[i] === 'undefined' || NewsDetail[i] == '') {} else {
+      NewsDetail[2] += ' ' + ((!RegExp('\\.$','g').test(NewsDetail[i])) ? NewsDetail[i] +='.' : NewsDetail[i]);
+    }
+  }
+  /* deleting excess elements*/
+  NewsDetail.splice(3);
+  /* TRIM RECEIVED ARRAY ELEMENTS AND FINALIZING 'NEWSDETAIL' */
+  for (var j = 0; j < NewsDetail.length; j++) {
+    NewsDetail[j] = Func_TrimAndCrisp(NewsDetail[j]);
+  }
   /* POPULATE RECEIVED ARRAY ELEMENTS */
+    // add 'http://' protocol if does not exist in the URL
+    NewsDetail[0] = (NewsDetail[0].match('^(https?)(?::\/\/)','gi')) ? NewsDetail[0] : 'http://'+NewsDetail[0];
+  $('input#regular1').val(NewsDetail[0]).change(); // POPULATE URL
   titlestr = (function () { // CONVERT TITLE INTO Title Case
-      str = Func_RegexReplace(NewsDetail[0].replace(/(?:^|\s)\w/g, function(match) {
+      str = Func_RegexReplace(NewsDetail[1].replace(/(?:^|\s)\w/g, function(match) {
                     return match.toUpperCase();
                 }));
       return str;
     });
   $('input#title').val(titlestr).change(); // POPULATE TITLE
-    // add 'http://' protocol if does not exist in the URL
-    NewsDetail[1] = (NewsDetail[1].match('^(https?)(?::\/\/)','gi')) ? NewsDetail[1] : 'http://'+NewsDetail[1];
-  $('input#regular1').val(NewsDetail[1]).change(); // POPULATE URL
   $('textarea#description').val(Func_RegexReplace(NewsDetail[2], 'vardesc')).change(); // POPULATE DESCRIPTION
   /*!* RUN PROPRIETORY FUNCTION for META and HINTS ***/
   $('#meta_title').val($('#title').val().replace(/([~!@#$%^&*()_+=`{}\[\]\|\\:;'"<>,.\/? ])+/g, '-').toLowerCase()).change(); // HIDDEN: META TITLE
@@ -198,6 +225,8 @@ function func_Populate() {
     $('#characterLeftDesc').text((max-words)+' words left');
   }
   func_BL_CountDesc();
+  /*!* Push HashTexh ***/
+  $('#token-input-topic').val(HashText);
   /*!* CHOOSE PUBLISHER BASED ON ENTERED URL ***/
   func_AutoSelectPublisher();
 }
@@ -427,8 +456,11 @@ function Func_RePosition(e) {
 function Func_TagSubmit(e) {
   $('#token-input-topic').keydown(function(e){
       if ((e.keyCode == 10 || e.keyCode == 13) && e.ctrlKey) setTimeout( function () {
-        $('#token-input-topic').closest('form').submit();
-      }, 300); // SUBMIT THE FORM
+        func_alert('Saving News',1300);
+        setTimeout(function () {
+          $('#token-input-topic').closest('form').submit();
+        }, 1000);
+      }, 0); // SUBMIT THE FORM
     });
 }
 
@@ -455,7 +487,7 @@ function func_alert(msg,dur,bgc,tc) {
       'border-radius': '.25em',
       'border': '5px solid #fff',
       'padding': '1.25em 3em',
-      'font-size': '1.25em',
+      'font-size': '1.15em',
       'font-weight': '400',
       "background-color": bgc,
       "color": tc,

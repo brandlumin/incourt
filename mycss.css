@@ -184,168 +184,164 @@ header#header {
 
 
 
-div.page {
-  margin-top: 0; }
-  div.page form {
-    
-     }
-    div.page form div[panel="LEFTPANEL"] .card {
-      border: initial;
-      -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
-              box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
-      border-radius: 8px  8px 0 0; }
-      div.page form div[panel="LEFTPANEL"] .card .card-head {
-        min-height: auto !important; }
-        div.page form div[panel="LEFTPANEL"] .card .card-head header {
-          line-height: 1;
-          font-weight: 700; }
-      div.page form div[panel="LEFTPANEL"] .card .card-body {
-        background: lightgrey;
-        padding: 6px 24px;
-        border: none; }
-        div.page form div[panel="LEFTPANEL"] .card .card-body div.text-right {
-          position: absolute;
-          top: -45px;
-          right: 24px;
-          -webkit-box-shadow: 0 0 20px #00000022;
-                  box-shadow: 0 0 20px #00000022; }
-          div.page form div[panel="LEFTPANEL"] .card .card-body div.text-right a.btn.ink-reaction.btn-raised.btn-primary {
-            font-size: .9em;
-            text-transform: lowercase;
-            color: #ffffff;
-            background-color: #ff9800;
-            border-color: #ff9800;
-            line-height: 2.5;
-            padding: 1px 1em 0; }
-            div.page form div[panel="LEFTPANEL"] .card .card-body div.text-right a.btn.ink-reaction.btn-raised.btn-primary:hover {
-              background-color: #cc7a00;
-              border-color: #cc7a00; }
-        div.page form div[panel="LEFTPANEL"] .card .card-body .form-group select.form-control {
-          color: #555 !important; }
-          div.page form div[panel="LEFTPANEL"] .card .card-body .form-group select.form-control option {
-            background-color: #fff;
-            color: #777; }
-        div.page form div[panel="LEFTPANEL"] .card .card-body .form-group label[for="attachmentType"] {
-          font: normal 16px/1.5 'Roboto', sans-serif;
-          line-height: 1;
-          opacity: 1;
-          color: brown; }
-        div.page form div[panel="LEFTPANEL"] .card .card-body .form-group .form-control ~ label {
-          display: none;
-          font: normal 16px/1.5 'Roboto', sans-serif;
-          line-height: 1;
-          opacity: 1;
-          color: brown; }
-        div.page form div[panel="LEFTPANEL"] .card .card-body .form-group #characterLeftTitle, div.page form div[panel="LEFTPANEL"] .card .card-body .form-group #characterLeftDesc {
-          font: normal .85em/1.1 'Roboto', sans-serif;
-          color: #666; }
-        div.page form div[panel="LEFTPANEL"] .card .card-body .row {
-          margin-bottom: 0;
-          clear: right; }
-          div.page form div[panel="LEFTPANEL"] .card .card-body .row h4 {
-            display: none; }
-          div.page form div[panel="LEFTPANEL"] .card .card-body .row h5 {
-            font: normal 400 15px/38.5px 'Roboto', sans-serif;
-            color: #333;
-            margin: 0; }
-          div.page form div[panel="LEFTPANEL"] .card .card-body .row .form-group {
-            padding-top: 0; }
-          div.page form div[panel="LEFTPANEL"] .card .card-body .row [class*="col-md"] {
-            margin-bottom: 0; }
-            div.page form div[panel="LEFTPANEL"] .card .card-body .row [class*="col-md"] label[for="meta_title"] {
-              display: none; }
-            div.page form div[panel="LEFTPANEL"] .card .card-body .row [class*="col-md"]:last-of-type {
-              padding-right: .75em; }
-          div.page form div[panel="LEFTPANEL"] .card .card-body .row + div {
-            margin-bottom: 0; }
-            div.page form div[panel="LEFTPANEL"] .card .card-body .row + div label {
-              color: black; }
-    div.page form div[panel="RIGHTPANEL"] .card {
-      border: initial;
-      -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
-              box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
-      border-radius: 8px  8px 0 0; }
-      div.page form div[panel="RIGHTPANEL"] .card .card-body {
-        background: grey;
-        border-radius: 0; }
-        div.page form div[panel="RIGHTPANEL"] .card .card-body > [class*="group"] input {
-          background: grey;
-          font-size: .9em;
-          color: #333;
-          -webkit-box-shadow: none;
-                  box-shadow: none;
-          border: none;
-          border-bottom: 1px dashed darkgrey; }
-        div.page form div[panel="RIGHTPANEL"] .card .card-body > [class*="group"]:last-of-type {
-          margin-bottom: 0; }
-        div.page form div[panel="RIGHTPANEL"] .card .card-body .pub-btn {
-          margin-bottom: 1em; }
-          div.page form div[panel="RIGHTPANEL"] .card .card-body .pub-btn button {
-            font-size: .9em;
-            text-transform: capitalize; }
-            div.page form div[panel="RIGHTPANEL"] .card .card-body .pub-btn button:first-of-type {
-              background-color: #00b300;
-              border-color: #00b300; }
-              div.page form div[panel="RIGHTPANEL"] .card .card-body .pub-btn button:first-of-type:hover {
-                background-color: green;
-                border-color: green; }
-            div.page form div[panel="RIGHTPANEL"] .card .card-body .pub-btn button:last-of-type {
+div#base {
+  padding: initial; }
+  div#base div.page {
+    margin-top: 0; }
+    div#base div.page form {
+      
+       }
+      div#base div.page form div[panel="LEFTPANEL"] .card {
+        border: initial;
+        -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+                box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+        border-radius: 8px  8px 0 0; }
+        div#base div.page form div[panel="LEFTPANEL"] .card .card-head {
+          min-height: auto !important; }
+          div#base div.page form div[panel="LEFTPANEL"] .card .card-head header {
+            line-height: 1;
+            font-weight: 700; }
+        div#base div.page form div[panel="LEFTPANEL"] .card .card-body {
+          background: lightgrey;
+          padding: 6px 24px;
+          border: none; }
+          div#base div.page form div[panel="LEFTPANEL"] .card .card-body div.text-right {
+            position: absolute;
+            top: -45px;
+            right: 24px;
+            -webkit-box-shadow: 0 0 20px #00000022;
+                    box-shadow: 0 0 20px #00000022; }
+            div#base div.page form div[panel="LEFTPANEL"] .card .card-body div.text-right a.btn.ink-reaction.btn-raised.btn-primary {
+              font-size: .9em;
+              text-transform: lowercase;
+              color: #ffffff;
               background-color: #ff9800;
               border-color: #ff9800;
-              color: #fff; }
-              div.page form div[panel="RIGHTPANEL"] .card .card-body .pub-btn button:last-of-type:hover {
+              line-height: 2.5;
+              padding: 1px 1em 0; }
+              div#base div.page form div[panel="LEFTPANEL"] .card .card-body div.text-right a.btn.ink-reaction.btn-raised.btn-primary:hover {
                 background-color: #cc7a00;
                 border-color: #cc7a00; }
-        div.page form div[panel="RIGHTPANEL"] .card .card-body .input-group.date .fa-calendar {
-          font-size: 2em;
-          color: #000; }
-        div.page form div[panel="RIGHTPANEL"] .card .card-body .input-group.date label {
-          display: none; }
-        div.page form div[panel="RIGHTPANEL"] .card .card-body .form-group {
-          padding-top: 0; }
-          div.page form div[panel="RIGHTPANEL"] .card .card-body .form-group label[for="pub"] {
-            display: none; }
-        div.page form div[panel="RIGHTPANEL"] .card .card-body .input-field.check-box-inline {
-          background: lightgrey;
-          border-radius: .25em;
-          padding: 1em; }
-          div.page form div[panel="RIGHTPANEL"] .card .card-body .input-field.check-box-inline:before {
-            display: block;
-            content: 'Categories:';
+          div#base div.page form div[panel="LEFTPANEL"] .card .card-body .form-group select.form-control {
+            color: #555 !important; }
+            div#base div.page form div[panel="LEFTPANEL"] .card .card-body .form-group select.form-control option {
+              background-color: #fff;
+              color: #777; }
+          div#base div.page form div[panel="LEFTPANEL"] .card .card-body .form-group label[for="attachmentType"] {
             font: normal 16px/1.5 'Roboto', sans-serif;
             line-height: 1;
             opacity: 1;
-            color: brown;
-            margin-bottom: .8em; }
-          div.page form div[panel="RIGHTPANEL"] .card .card-body .input-field.check-box-inline [type="checkbox"]:checked + label:before {
-            border-right: 2px solid #00b300;
-            border-bottom: 2px solid #00b300; }
-          div.page form div[panel="RIGHTPANEL"] .card .card-body .input-field.check-box-inline p {
+            color: brown; }
+          div#base div.page form div[panel="LEFTPANEL"] .card .card-body .form-group .form-control ~ label {
+            display: none;
+            font: normal 16px/1.5 'Roboto', sans-serif;
+            line-height: 1;
+            opacity: 1;
+            color: brown; }
+          div#base div.page form div[panel="LEFTPANEL"] .card .card-body .form-group #characterLeftTitle, div#base div.page form div[panel="LEFTPANEL"] .card .card-body .form-group #characterLeftDesc {
+            font: normal .85em/1.1 'Roboto', sans-serif;
+            color: #666; }
+          div#base div.page form div[panel="LEFTPANEL"] .card .card-body .row {
+            margin-bottom: 0;
+            clear: right; }
+            div#base div.page form div[panel="LEFTPANEL"] .card .card-body .row h4 {
+              display: none; }
+            div#base div.page form div[panel="LEFTPANEL"] .card .card-body .row h5 {
+              font: normal 400 15px/38.5px 'Roboto', sans-serif;
+              color: #333;
+              margin: 0; }
+            div#base div.page form div[panel="LEFTPANEL"] .card .card-body .row .form-group {
+              padding-top: 0; }
+            div#base div.page form div[panel="LEFTPANEL"] .card .card-body .row [class*="col-md"] {
+              margin-bottom: 0; }
+              div#base div.page form div[panel="LEFTPANEL"] .card .card-body .row [class*="col-md"] label[for="meta_title"] {
+                display: none; }
+              div#base div.page form div[panel="LEFTPANEL"] .card .card-body .row [class*="col-md"]:last-of-type {
+                padding-right: .75em; }
+            div#base div.page form div[panel="LEFTPANEL"] .card .card-body .row + div {
+              margin-bottom: 0; }
+              div#base div.page form div[panel="LEFTPANEL"] .card .card-body .row + div label {
+                color: black; }
+      div#base div.page form div[panel="RIGHTPANEL"] .card {
+        border: initial;
+        -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+                box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+        border-radius: 8px  8px 0 0; }
+        div#base div.page form div[panel="RIGHTPANEL"] .card .card-body {
+          background: grey;
+          border-radius: 0; }
+          div#base div.page form div[panel="RIGHTPANEL"] .card .card-body > [class*="group"] input {
+            background: grey;
+            font-size: .9em;
+            color: #333;
+            -webkit-box-shadow: none;
+                    box-shadow: none;
+            border: none;
+            border-bottom: 1px dashed darkgrey; }
+          div#base div.page form div[panel="RIGHTPANEL"] .card .card-body > [class*="group"]:last-of-type {
             margin-bottom: 0; }
-            div.page form div[panel="RIGHTPANEL"] .card .card-body .input-field.check-box-inline p:hover {
-              background-color: #b3b3b3; }
-            div.page form div[panel="RIGHTPANEL"] .card .card-body .input-field.check-box-inline p label {
-              color: #000;
+          div#base div.page form div[panel="RIGHTPANEL"] .card .card-body .pub-btn {
+            margin-bottom: 1em; }
+            div#base div.page form div[panel="RIGHTPANEL"] .card .card-body .pub-btn button {
               font-size: .9em;
-              margin: .09em 0;
-              top: 0; }
-          div.page form div[panel="RIGHTPANEL"] .card .card-body .input-field.check-box-inline br {
-            display: none; }
-        div.page form div[panel="RIGHTPANEL"] .card .card-body .switch {
-          margin-top: 1em; }
-          div.page form div[panel="RIGHTPANEL"] .card .card-body .switch label {
+              text-transform: capitalize;
+              left: 25%; }
+              div#base div.page form div[panel="RIGHTPANEL"] .card .card-body .pub-btn button:first-of-type {
+                background-color: #00b300;
+                border-color: #00b300; }
+                div#base div.page form div[panel="RIGHTPANEL"] .card .card-body .pub-btn button:first-of-type:hover {
+                  background-color: green;
+                  border-color: green; }
+          div#base div.page form div[panel="RIGHTPANEL"] .card .card-body .input-group.date .fa-calendar {
+            font-size: 2em;
             color: #000; }
-            div.page form div[panel="RIGHTPANEL"] .card .card-body .switch label input[type=checkbox]:checked + .lever {
-              background-color: #00b300;
-              -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.7);
-                      box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.7); }
-              div.page form div[panel="RIGHTPANEL"] .card .card-body .switch label input[type=checkbox]:checked + .lever:after {
+          div#base div.page form div[panel="RIGHTPANEL"] .card .card-body .input-group.date label {
+            display: none; }
+          div#base div.page form div[panel="RIGHTPANEL"] .card .card-body .form-group {
+            padding-top: 0; }
+            div#base div.page form div[panel="RIGHTPANEL"] .card .card-body .form-group label[for="pub"] {
+              display: none; }
+          div#base div.page form div[panel="RIGHTPANEL"] .card .card-body .input-field.check-box-inline {
+            background: lightgrey;
+            border-radius: .25em;
+            padding: 1em; }
+            div#base div.page form div[panel="RIGHTPANEL"] .card .card-body .input-field.check-box-inline:before {
+              display: block;
+              content: 'Categories:';
+              font: normal 16px/1.5 'Roboto', sans-serif;
+              line-height: 1;
+              opacity: 1;
+              color: brown;
+              margin-bottom: .8em; }
+            div#base div.page form div[panel="RIGHTPANEL"] .card .card-body .input-field.check-box-inline [type="checkbox"]:checked + label:before {
+              border-right: 2px solid #00b300;
+              border-bottom: 2px solid #00b300; }
+            div#base div.page form div[panel="RIGHTPANEL"] .card .card-body .input-field.check-box-inline p {
+              margin-bottom: 0; }
+              div#base div.page form div[panel="RIGHTPANEL"] .card .card-body .input-field.check-box-inline p:hover {
+                background-color: #b3b3b3; }
+              div#base div.page form div[panel="RIGHTPANEL"] .card .card-body .input-field.check-box-inline p label {
+                color: #000;
+                font-size: .9em;
+                margin: .09em 0;
+                top: 0; }
+            div#base div.page form div[panel="RIGHTPANEL"] .card .card-body .input-field.check-box-inline br {
+              display: none; }
+          div#base div.page form div[panel="RIGHTPANEL"] .card .card-body .switch {
+            margin-top: 1em; }
+            div#base div.page form div[panel="RIGHTPANEL"] .card .card-body .switch label {
+              color: #000; }
+              div#base div.page form div[panel="RIGHTPANEL"] .card .card-body .switch label input[type=checkbox]:checked + .lever {
                 background-color: #00b300;
                 -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.7);
                         box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.7); }
-          div.page form div[panel="RIGHTPANEL"] .card .card-body .switch + span {
-            font: normal 1em/1.5 'Roboto', sans-serif;
-            color: brown; }
+                div#base div.page form div[panel="RIGHTPANEL"] .card .card-body .switch label input[type=checkbox]:checked + .lever:after {
+                  background-color: #00b300;
+                  -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.7);
+                          box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.7); }
+            div#base div.page form div[panel="RIGHTPANEL"] .card .card-body .switch + span {
+              font: normal 1em/1.5 'Roboto', sans-serif;
+              color: brown; }
 
 
 
@@ -510,18 +506,22 @@ body .WordData_Container {
         margin-bottom: 8px;
         border: 1px solid darkgray;
         padding: 8px 16px;
-        font: normal 18px/1.75 'Roboto', sans-serif; }
+        font: normal 18px/1.5 'Roboto', sans-serif; }
         body .WordData_Container .WordData_Box form textarea:focus {
           background: #fff;
           border: 1px solid darkgray; }
       body .WordData_Container .WordData_Box form a {
-        font: normal 14px/1.8 'Roboto', sans-serif; }
+        font: bold 14px/22px 'Roboto', sans-serif;
+        width: 23%;
+        text-align: center; }
         body .WordData_Container .WordData_Box form a span {
-          text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); }
+          font-weight: normal; }
         body .WordData_Container .WordData_Box form a:not(:last-of-type) {
           margin-right: 8px; }
         body .WordData_Container .WordData_Box form a:hover {
           color: #fff; }
+        body .WordData_Container .WordData_Box form a:nth-of-type(2):hover {
+          color: #145523; }
     body .WordData_Container .WordData_Box .btn:hover, body .WordData_Container .WordData_Box .btn:focus {
       outline: 0; }
     body .WordData_Container .WordData_Box .hidden {
@@ -539,14 +539,12 @@ body .WordData_Container {
     body [SEQ="NEWSDESCRIPTION"] textarea {
       height: 10em; }
     body .WordData_Container .WordData_Box {
-      width: 90%;
-      height: 70%;
       -webkit-transform: translate(-50%, -50%);
               transform: translate(-50%, -50%); }
       body .WordData_Container .WordData_Box form textarea {
-        font: normal 1em/1.5 'Roboto', sans-serif;
-        height: 20em; }
+        font: normal 17px/calc(17px * 1.7) "Roboto", sans-serif;
+        min-height: 60vH;
+        max-height: 70vH;
+        text-shadow: none; }
       body .WordData_Container .WordData_Box form a {
-        font: normal 12px/2 'Roboto', sans-serif; }
-        body .WordData_Container .WordData_Box form a span {
-          font-weight: bold; } }
+        font: bold 13px/24px 'Roboto', sans-serif; } }

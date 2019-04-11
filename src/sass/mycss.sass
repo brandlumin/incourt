@@ -526,13 +526,17 @@ body
             background: #fff
             border: 1px solid darkgray
         a
-          font: normal 14px/1.8 'Roboto', sans-serif
+          font: bold 14px/22px 'Roboto', sans-serif
+          width: 23%
+          text-align: center
           & span
-            text-shadow: 1px 1px 2px transparentize(black, .2)
+            font-weight: normal
           &:not(:last-of-type)
             margin-right: 8px
           &:hover
             color: #fff
+          &:nth-of-type(2):hover
+            color: darken(#28a745,20%)
       .btn
         &:hover, &:focus
           outline: 0

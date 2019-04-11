@@ -117,21 +117,21 @@ function func_MakeDataCapture() {
     class: 'btn btn-success',
     onClick: 'func_DataCaptureSubmit("populate");'
   })
-    .html('<span class="text-white">[Ctrl+Enter]</span> Populate')
+    .html('[Ctrl+Ent]<span class="d-none d-md-inline"> Populate</span>')
     .appendTo(e).css('text-transform', 'initial'); 
   $('<a/>',{
     class: 'btn btn-warning',
     id: 'abbreviate',
     onClick: 'Func_AbbreviateNews()'
   })
-    .html('<span class="text-white">[Alt+A]</span> Abbreviate')
+    .html('[Alt+A]<span class="d-none d-md-inline"> Abbreviate</span>')
     .appendTo(e).css('text-transform', 'initial'); 
   $('<a/>', {
     id: 'rollback',
     class: 'btn btn-outline-secondary',
     onClick: 'func_DataCaptureSubmit("");'
   })
-    .html('<span class="text-white">[Esc]</span> Cancel')
+    .html('[Esc]<span class="d-none d-md-inline"> Cancel</span>')
     .appendTo(e).css('text-transform', 'initial'); 
 }
 
@@ -428,7 +428,7 @@ function func_alert(msg,dur,bgc,tc) {
       'border-radius': '.25em',
       'border': '5px solid #fff',
       'padding': '1.25em 3em',
-      'font-size': '1.25em',
+      'font-size': '1.15em',
       'font-weight': '400',
       "background-color": bgc,
       "color": tc,
@@ -527,7 +527,7 @@ function Func_RegEx(HelpMeText) {
   sTitleMessg = (nTitleCount <= 75) ? '<b>OK</b> by '+(75 - nTitleCount)+' char(s)' : '<b>exceeded</b> by <b>'+(nTitleCount - 75)+'</b> char(s)'; 
   nDescrCount = NewsDscToDo.split(' ').length; 
   sDescrMessg = (nDescrCount <= 60) ? '<b>OK</b> by '+(60 - nDescrCount)+' word(s)' : '<b>exceeded</b> by <b>'+(nDescrCount - 60)+'</b> word(s)'; 
-  func_alert('Title '+sTitleMessg+'<br>Description '+sDescrMessg, 1200); 
+  func_alert('Title '+sTitleMessg+'<br>News '+sDescrMessg, 1500); 
 }
 
 function Func_RegexReplace(DataToRegEx, ReceivedField) {
@@ -567,7 +567,7 @@ function Func_CreateUndo() {
       class: 'btn btn-danger float-right',
       onClick: 'Func_PushUndo(this);'
     })
-    .html('<span class="text-white">[Alt+U]</span> Undo')
+    .html('[Alt+U]<span class="d-none d-md-inline"> Undo</span>')
     .css('text-transform', 'initial')
   );
 }

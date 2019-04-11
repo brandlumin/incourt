@@ -124,21 +124,21 @@ function func_MakeDataCapture() {
     class: 'btn btn-success',
     onClick: 'func_DataCaptureSubmit("populate");'
   })
-    .html('<span class="text-white">[Ctrl+Enter]</span> Populate')
+    .html('[Ctrl+Ent]<span class="d-none d-md-inline"> Populate</span>')
     .appendTo(e).css('text-transform', 'initial'); // POPULATE BUTTON
   $('<a/>',{
     class: 'btn btn-warning',
     id: 'abbreviate',
     onClick: 'Func_AbbreviateNews()'
   })
-    .html('<span class="text-white">[Alt+A]</span> Abbreviate')
+    .html('[Alt+A]<span class="d-none d-md-inline"> Abbreviate</span>')
     .appendTo(e).css('text-transform', 'initial'); // ABBREVIATE BUTTON
   $('<a/>', {
     id: 'rollback',
     class: 'btn btn-outline-secondary',
     onClick: 'func_DataCaptureSubmit("");'
   })
-    .html('<span class="text-white">[Esc]</span> Cancel')
+    .html('[Esc]<span class="d-none d-md-inline"> Cancel</span>')
     .appendTo(e).css('text-transform', 'initial'); // CANCEL BUTTON
 }
 
@@ -487,7 +487,7 @@ function func_alert(msg,dur,bgc,tc) {
       'border-radius': '.25em',
       'border': '5px solid #fff',
       'padding': '1.25em 3em',
-      'font-size': '1.25em',
+      'font-size': '1.15em',
       'font-weight': '400',
       "background-color": bgc,
       "color": tc,

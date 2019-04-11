@@ -107,7 +107,7 @@ function Func_RegEx(HelpMeText) {
   sTitleMessg = (nTitleCount <= 75) ? '<b>OK</b> by '+(75 - nTitleCount)+' char(s)' : '<b>exceeded</b> by <b>'+(nTitleCount - 75)+'</b> char(s)'; // Message Creation
   nDescrCount = NewsDscToDo.split(' ').length; // Description
   sDescrMessg = (nDescrCount <= 60) ? '<b>OK</b> by '+(60 - nDescrCount)+' word(s)' : '<b>exceeded</b> by <b>'+(nDescrCount - 60)+'</b> word(s)'; // Message Creation
-  func_alert('Title '+sTitleMessg+'<br>Description '+sDescrMessg, 1200); // Message Flash
+  func_alert('Title '+sTitleMessg+'<br>News '+sDescrMessg, 1500); // Message Flash
 }
 
 /* Func_RegexReplace() - Gets DataToRegEx, sets up the RegEx and returns
@@ -156,7 +156,7 @@ function Func_CreateUndo() {
       class: 'btn btn-danger float-right',
       onClick: 'Func_PushUndo(this);'
     })
-    .html('<span class="text-white">[Alt+U]</span> Undo')
+    .html('[Alt+U]<span class="d-none d-md-inline"> Undo</span>')
     .css('text-transform', 'initial')
   );
 }

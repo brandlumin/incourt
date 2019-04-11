@@ -511,13 +511,17 @@ body .WordData_Container {
           background: #fff;
           border: 1px solid darkgray; }
       body .WordData_Container .WordData_Box form a {
-        font: normal 14px/1.8 'Roboto', sans-serif; }
+        font: bold 14px/22px 'Roboto', sans-serif;
+        width: 23%;
+        text-align: center; }
         body .WordData_Container .WordData_Box form a span {
-          text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); }
+          font-weight: normal; }
         body .WordData_Container .WordData_Box form a:not(:last-of-type) {
           margin-right: 8px; }
         body .WordData_Container .WordData_Box form a:hover {
           color: #fff; }
+        body .WordData_Container .WordData_Box form a:nth-of-type(2):hover {
+          color: #145523; }
     body .WordData_Container .WordData_Box .btn:hover, body .WordData_Container .WordData_Box .btn:focus {
       outline: 0; }
     body .WordData_Container .WordData_Box .hidden {
@@ -543,6 +547,4 @@ body .WordData_Container {
         max-height: 70vH;
         text-shadow: none; }
       body .WordData_Container .WordData_Box form a {
-        font: normal 10px/2.2 'Roboto', sans-serif; }
-        body .WordData_Container .WordData_Box form a span {
-          font-weight: bold; } }
+        font: bold 13px/24px 'Roboto', sans-serif; } }

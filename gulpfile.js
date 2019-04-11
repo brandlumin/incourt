@@ -98,8 +98,8 @@ gulp.task('serve', function(){ // This just displayes upon run and triggers the 
 gulp.task('watch:sass', function () {
   // restore the following line by replacing the next one, afterwards
   // gulp.watch(['src/sass/mycss.sass','src/sass/_mycss*.sass'], gulp.series('workflowcss'));
-  gulp.watch(['src/sass/mycss.sass'    ,'src/sass/modules/addpost/*.sass'  ], gulp.series('workflowcss'));
-  gulp.watch(['src/sass/dashboard.sass','src/sass/modules/dashboard/*.sass'], gulp.series('dashcss'));
+  gulp.watch(['src/sass/mycss.sass','src/sass/_mycss*.sass','src/sass/modules/addpost/**/*.sass'  ], gulp.series('workflowcss'));
+  gulp.watch(['src/sass/dashboard.sass','src/sass/modules/dashboard/**/*.sass'], gulp.series('dashcss'));
 });
 
 gulp.task('watch:js', function () {

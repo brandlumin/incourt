@@ -523,6 +523,11 @@ function Func_RegEx(HelpMeText) {
                     NewsDscToDo+
                     ((HashText) ? '\n'+HashText : '')
                     );
+  nTitleCount = NewsTitleToDo.length; 
+  sTitleMessg = (nTitleCount <= 75) ? '<b>OK</b> by '+(75 - nTitleCount)+' char(s)' : '<b>exceeded</b> by <b>'+(nTitleCount - 75)+'</b> char(s)'; 
+  nDescrCount = NewsDscToDo.split(' ').length; 
+  sDescrMessg = (nDescrCount <= 60) ? '<b>OK</b> by '+(60 - nDescrCount)+' word(s)' : '<b>exceeded</b> by <b>'+(nDescrCount - 60)+'</b> word(s)'; 
+  func_alert('Title '+sTitleMessg+'<br>Description '+sDescrMessg, 1200); 
 }
 
 function Func_RegexReplace(DataToRegEx, ReceivedField) {

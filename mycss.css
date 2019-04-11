@@ -535,14 +535,14 @@ body .WordData_Container {
     body [SEQ="NEWSDESCRIPTION"] textarea {
       height: 10em; }
     body .WordData_Container .WordData_Box {
-      width: 90%;
-      height: 70%;
       -webkit-transform: translate(-50%, -50%);
               transform: translate(-50%, -50%); }
       body .WordData_Container .WordData_Box form textarea {
-        font: normal 1em/1.5 'Roboto', sans-serif;
-        height: 20em; }
+        font: normal 17px/calc(17px * 1.7) "Roboto", sans-serif;
+        min-height: 60vH;
+        max-height: 70vH;
+        text-shadow: none; }
       body .WordData_Container .WordData_Box form a {
-        font: normal 12px/2 'Roboto', sans-serif; }
+        font: normal 10px/2.2 'Roboto', sans-serif; }
         body .WordData_Container .WordData_Box form a span {
           font-weight: bold; } }

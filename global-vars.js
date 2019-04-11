@@ -69,6 +69,8 @@ GlobalNewsArray = [
   ["new delhi municipal council","NDMC"],
   ["pension fund regulatory and development authority","PFRDA"],
   ["petroleum and natural gas board","PNGRB"],
+  ["Prevention of Corruption Act","PC Act"],
+  ["Prevention of Money Laundering Act","PMLA"],
   ["prime minister","PM"],
   ["protection of children from sexual offences","POCSO"],
   ["protection of children from sexual offenses","POCSO"],

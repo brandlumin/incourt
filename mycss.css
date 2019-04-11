@@ -284,20 +284,14 @@ div#base {
             margin-bottom: 1em; }
             div#base div.page form div[panel="RIGHTPANEL"] .card .card-body .pub-btn button {
               font-size: .9em;
-              text-transform: capitalize; }
+              text-transform: capitalize;
+              left: 25%; }
               div#base div.page form div[panel="RIGHTPANEL"] .card .card-body .pub-btn button:first-of-type {
                 background-color: #00b300;
                 border-color: #00b300; }
                 div#base div.page form div[panel="RIGHTPANEL"] .card .card-body .pub-btn button:first-of-type:hover {
                   background-color: green;
                   border-color: green; }
-              div#base div.page form div[panel="RIGHTPANEL"] .card .card-body .pub-btn button:last-of-type {
-                background-color: #ff9800;
-                border-color: #ff9800;
-                color: #fff; }
-                div#base div.page form div[panel="RIGHTPANEL"] .card .card-body .pub-btn button:last-of-type:hover {
-                  background-color: #cc7a00;
-                  border-color: #cc7a00; }
           div#base div.page form div[panel="RIGHTPANEL"] .card .card-body .input-group.date .fa-calendar {
             font-size: 2em;
             color: #000; }

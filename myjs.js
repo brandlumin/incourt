@@ -65,8 +65,8 @@ function func_MakeHelpBtn() {
 function func_ActiHelp() {
   Summary =     (($('[name=url]')[1].value.trim() != '')  ? $('[name=url]')[1].value + '\n'  : '') +
                 (($('#title').val().trim() != '')         ? $('#title').val()        + '\n'  : '') +
-                (($('#description').val().trim() != '')   ? $('#description').val()  + '\n'  : '') +
-                (($('#token-input-topic').val().trim() != '')   ? '>'+$('#token-input-topic').val() : '');
+                (($('#description').val().trim() != '')   ? $('#description').val()          : '') +
+                (($('#token-input-topic').val().trim() != '')   ? '\n'+'# '+$('#token-input-topic').val() : '');
   $('#id_news').val(Summary).change();
   $('.HelpDiv').fadeOut('fast', function() {
     $('.WordData_Container').fadeIn( function () {
@@ -110,7 +110,7 @@ function func_MakeDataCapture() {
       name: 'news',
       class: 'form-control',
       autofocus: 'autofocus',
-      placeholder: 'Help:\n----------\nPara 1: URL\nPara 2: Title\nPara 3: News Description\n\nAny Paragraph starting with ">" will be treated as CSV-HashTags.'
+      placeholder: 'Help:\n----------\nPara 1: URL\nPara 2: Title\nPara 3: News Description\n\nAny Paragraph starting with "#" will be treated as CSV-HashTags.'
     }).appendTo(e); 
   $('<a/>', {
     id: 'populate',
@@ -163,11 +163,11 @@ function func_Populate() {
     }
   }
   HashText = $.grep(NewsDetail, function(n,i){
-              return (n.match('^>',''));
+              return (n.match('^#',''));
             }, false);
-  HashText = HashText.join(',').replace(/>/g,'').replace(/\s{1,}/gm,' ').replace(/\s?,\s?/gm,',').trim(); 
+  HashText = (HashText.length > 0) ? HashText.join(',').replace(/#\s?/g,'').replace(/\s{1,}/gm,' ').replace(/\s?,\s?/gm,',').trim() : ''; 
   NewsDetail = $.grep(NewsDetail, function(n,i){
-                  return (n.match('^>',''));
+                  return (n.match('^#',''));
                 }, true);
       if (!RegExp('\\.$','g').test(NewsDetail[2])) NewsDetail[2] +='.';
   for (var i = 3; i < NewsDetail.length; i++) {
@@ -492,11 +492,11 @@ function Func_RegEx(HelpMeText) {
   ToBeReplaced = HelpMeText.split(/\n/);
   if (HelpMeText.length <3) {func_alert("<b>Err...</b><br/>Write the news first!", 1500);return false;}
   HashText = $.grep(ToBeReplaced, function(n,i){
-              return (n.match('^>',''));
+              return (n.match('^#',''));
             }, false);
-  HashText = '> '+HashText.join(',').replace(/>/g,'').replace(/\s{1,}/gm,' ').replace(/\s?,\s?/gm,',').trim(); 
+  HashText = (HashText.length > 0) ? '# '+HashText.join(',').replace(/#\s?/g,'').replace(/\s{1,}/gm,' ').replace(/\s?,\s?/gm,',').trim() : ''; 
   ToBeReplaced = $.grep(ToBeReplaced, function(n,i){
-                  return (n.match('^>',''));
+                  return (n.match('^#',''));
                 }, true);
       if (!RegExp('\\.$','g').test(ToBeReplaced[2])) ToBeReplaced[2] +='.';
   for (var i = 3; i < ToBeReplaced.length; i++) {

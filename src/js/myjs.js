@@ -70,8 +70,8 @@ function func_MakeHelpBtn() {
 function func_ActiHelp() {
   Summary =     (($('[name=url]')[1].value.trim() != '')  ? $('[name=url]')[1].value + '\n'  : '') +
                 (($('#title').val().trim() != '')         ? $('#title').val()        + '\n'  : '') +
-                (($('#description').val().trim() != '')   ? $('#description').val()  + '\n'  : '') +
-                (($('#token-input-topic').val().trim() != '')   ? '>'+$('#token-input-topic').val() : '');
+                (($('#description').val().trim() != '')   ? $('#description').val()          : '') +
+                (($('#token-input-topic').val().trim() != '')   ? '\n'+'# '+$('#token-input-topic').val() : '');
   $('#id_news').val(Summary).change();
   $('.HelpDiv').fadeOut('fast', function() {
     $('.WordData_Container').fadeIn( function () {
@@ -117,7 +117,7 @@ function func_MakeDataCapture() {
       name: 'news',
       class: 'form-control',
       autofocus: 'autofocus',
-      placeholder: 'Help:\n----------\nPara 1: URL\nPara 2: Title\nPara 3: News Description\n\nAny Paragraph starting with ">" will be treated as CSV-HashTags.'
+      placeholder: 'Help:\n----------\nPara 1: URL\nPara 2: Title\nPara 3: News Description\n\nAny Paragraph starting with "#" will be treated as CSV-HashTags.'
     }).appendTo(e); // ADDING INPUT TEXTAREA TO THE FORM
   $('<a/>', {
     id: 'populate',
@@ -174,12 +174,12 @@ function func_Populate() {
     }
   }
   HashText = $.grep(NewsDetail, function(n,i){
-              return (n.match('^>',''));
+              return (n.match('^#',''));
             }, false);
-  HashText = HashText.join(',').replace(/>/g,'').replace(/\s{1,}/gm,' ').replace(/\s?,\s?/gm,',').trim(); // removing '>' and joining as CSV
+  HashText = (HashText.length > 0) ? HashText.join(',').replace(/#\s?/g,'').replace(/\s{1,}/gm,' ').replace(/\s?,\s?/gm,',').trim() : ''; // removing '>' and joining as CSV
   /* filtering sans HashText */
   NewsDetail = $.grep(NewsDetail, function(n,i){
-                  return (n.match('^>',''));
+                  return (n.match('^#',''));
                 }, true);
   /* concatinating complete news-description block */
     /* To add a period at the end of the news if does not exist */

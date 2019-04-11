@@ -63,12 +63,12 @@ function Func_RegEx(HelpMeText) {
   if (HelpMeText.length <3) {func_alert("<b>Err...</b><br/>Write the news first!", 1500);return false;}
   /* getting HashText */
   HashText = $.grep(ToBeReplaced, function(n,i){
-              return (n.match('^>',''));
+              return (n.match('^#',''));
             }, false);
-  HashText = '> '+HashText.join(',').replace(/>/g,'').replace(/\s{1,}/gm,' ').replace(/\s?,\s?/gm,',').trim(); // removing '>' and joining as CSV
+  HashText = (HashText.length > 0) ? '# '+HashText.join(',').replace(/#\s?/g,'').replace(/\s{1,}/gm,' ').replace(/\s?,\s?/gm,',').trim() : ''; // removing '>' and joining as CSV
   /* filtering sans HashText */
   ToBeReplaced = $.grep(ToBeReplaced, function(n,i){
-                  return (n.match('^>',''));
+                  return (n.match('^#',''));
                 }, true);
   /* concatinating complete news-description block */
     /* To add a period at the end of the news if does not exist */

@@ -10,6 +10,8 @@ $(function () {
   func_MakeHelpBtn(); // CREATE AND SHOW HELP BUTTON
   func_MakeDataCapture(); // CREATE DATA_CAPTURE_SCREEN
   func_ActiHelp(); // CALL HELP MODULE UPFRONT // **optional**
+
+
   /*!* STARTUP POST-HELPSCREEN ***/
   $('.attachmentType').val(function (AttTypeValue) {
     $('.attachment-images').removeClass('hide');
@@ -19,15 +21,24 @@ $(function () {
     if (!$('.attachment-url').hasClass('hide')) $('.attachment-url').addClass('hide');
     return 'images';
   }).change(); // CHANGE ATTACHMENT TO IMAGE
+
+
+  /*!* TITLE BUTTON, CAT-SELECT and TAG-SUBMIT ***/
   func_TitleCBtn(); // CREATE THE BUTTON AND ENABLE TITLE CASE CONVERSION
   func_InitialCatSelect(); // CATEGORY SECTION
   Func_TagSubmit(); // SUBMIT BY PRESSING 'Ctrl+Enter' IN TAGS
+
+
   /*!* SETTING ON.CHANGE EVENTS ***/
   $('#cat_select').change(func_CatSelError); // MANAGE ERRORS IN CATEGORY SELECTION
   $('[name="publisher_id"]').change(func_PubSelError); // MANAGE ERRORS IN PUBLICATION SELECTION
+
+
   /*!* COLOR VALIDATIONS ***/
   $('#title').on('keypress keyup change blur',func_BL_CountTitle); //  NEWS
   $('#description').on('keypress keyup change blur',func_BL_CountDesc); // DESCRIPTION
+
+
   /*!* CREATING KEYBOARD SHORTCUT ***/
   $(window).keydown(function(e){
       if (e.keyCode > 47 && e.keyCode <= 59 && e.ctrlKey && e.shiftKey) func_SelectCategoryFromKeyboard(e.keyCode); // ENABLES CTRL+SHIFT+N BUTTON for CATEGORY SELECTION
@@ -39,6 +50,8 @@ $(function () {
         $('#token-input-topic').closest('form').submit();
       }, 300); // SUBMIT THE FORM from TIME FIELD
     });
+
+
   /*!* RE-SETTING GALLERY DISPLAY ROW ***/
   $(".gallery_opner").click(function (){
     func_alert('Face-lifting gallery.');
@@ -50,6 +63,11 @@ $(function () {
        $('.ImageGallery .img-container .gallery').css('display', '');
     }
   });
+
+
+  /*!* DRAFT BUTTON REMOVAL ***/
+  $('#draft_button').remove();
+
 });
 
 /*! FUNCTIONS

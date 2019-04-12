@@ -10,6 +10,8 @@ $(function () {
   func_MakeHelpBtn(); 
   func_MakeDataCapture(); 
   func_ActiHelp(); 
+
+
 /*!* STARTUP POST-HELPSCREEN ***/
   $('.attachmentType').val(function (AttTypeValue) {
     $('.attachment-images').removeClass('hide');
@@ -19,15 +21,24 @@ $(function () {
     if (!$('.attachment-url').hasClass('hide')) $('.attachment-url').addClass('hide');
     return 'images';
   }).change(); 
+
+
+/*!* TITLE BUTTON, CAT-SELECT and TAG-SUBMIT ***/
   func_TitleCBtn(); 
   func_InitialCatSelect(); 
   Func_TagSubmit(); 
+
+
 /*!* SETTING ON.CHANGE EVENTS ***/
   $('#cat_select').change(func_CatSelError); 
   $('[name="publisher_id"]').change(func_PubSelError); 
+
+
 /*!* COLOR VALIDATIONS ***/
   $('#title').on('keypress keyup change blur',func_BL_CountTitle); 
   $('#description').on('keypress keyup change blur',func_BL_CountDesc); 
+
+
 /*!* CREATING KEYBOARD SHORTCUT ***/
   $(window).keydown(function(e){
       if (e.keyCode > 47 && e.keyCode <= 59 && e.ctrlKey && e.shiftKey) func_SelectCategoryFromKeyboard(e.keyCode); 
@@ -39,6 +50,8 @@ $(function () {
         $('#token-input-topic').closest('form').submit();
       }, 300); 
     });
+
+
 /*!* RE-SETTING GALLERY DISPLAY ROW ***/
   $(".gallery_opner").click(function (){
     func_alert('Face-lifting gallery.');
@@ -50,6 +63,11 @@ $(function () {
        $('.ImageGallery .img-container .gallery').css('display', '');
     }
   });
+
+
+/*!* DRAFT BUTTON REMOVAL ***/
+  $('#draft_button').remove();
+
 });
 
 /*! FUNCTIONS

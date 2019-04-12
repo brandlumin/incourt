@@ -95,6 +95,7 @@ GlobalNewsArray = [
   ["electronic voting machine","EVM"],
   ["rajiv gandhi national university of law","RGNUL"],
   ["Central Information Commission","CIC"],
+  ["(apex|top) court","SC"],
 
 
 

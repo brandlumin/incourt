@@ -65,7 +65,8 @@ function Func_RegEx(HelpMeText) {
   HashText = $.grep(ToBeReplaced, function(n,i){
               return (n.match('^#',''));
             }, false);
-  HashText = (HashText.length > 0) ? '# '+HashText.join(',').replace(/#\s?/g,'').replace(/\s{1,}/gm,' ').replace(/\s?,\s?/gm,',').trim() : ''; // removing '>' and joining as CSV
+  HashText = (HashText.length > 0) ? '# '+HashText.join(',').replace(/#\s?/g,'').replace(/\s{1,}/gm,' ').replace(/\s?,\s?/gm,',').trim() : '# '; // removing '>' and joining as CSV
+  // HashText = (HashText.length > 0) ? '# '+HashText.join(',').replace(/#\s?/g,'').replace(/\s{1,}/gm,' ').replace(/\s?,\s?/gm,',').trim() : ''; // removing '>' and joining as CSV
   /* filtering sans HashText */
   ToBeReplaced = $.grep(ToBeReplaced, function(n,i){
                   return (n.match('^#',''));

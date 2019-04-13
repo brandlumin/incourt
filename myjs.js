@@ -83,8 +83,8 @@ function func_MakeHelpBtn() {
 function func_ActiHelp() {
   Summary =     (($('[name=url]')[1].value.trim() != '')  ? $('[name=url]')[1].value + '\n'  : '') +
                 (($('#title').val().trim() != '')         ? $('#title').val()        + '\n'  : '') +
-                (($('#description').val().trim() != '')   ? $('#description').val()          : '') +
-                (($('#token-input-topic').val().trim() != '')   ? '\n'+'# '+$('#token-input-topic').val() : '');
+                (($('#description').val().trim() != '')   ? $('#description').val()  + '\n' +'# ': '') +
+                (($('#token-input-topic').val().trim() != '')   ? $('#token-input-topic').val() : '');
   $('#id_news').val(Summary).change();
   $('.HelpDiv').fadeOut('fast', function() {
     $('.WordData_Container').fadeIn( function () {
@@ -512,7 +512,7 @@ function Func_RegEx(HelpMeText) {
   HashText = $.grep(ToBeReplaced, function(n,i){
               return (n.match('^#',''));
             }, false);
-  HashText = (HashText.length > 0) ? '# '+HashText.join(',').replace(/#\s?/g,'').replace(/\s{1,}/gm,' ').replace(/\s?,\s?/gm,',').trim() : ''; 
+  HashText = (HashText.length > 0) ? '# '+HashText.join(',').replace(/#\s?/g,'').replace(/\s{1,}/gm,' ').replace(/\s?,\s?/gm,',').trim() : '# '; 
   ToBeReplaced = $.grep(ToBeReplaced, function(n,i){
                   return (n.match('^#',''));
                 }, true);

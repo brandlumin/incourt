@@ -55,7 +55,7 @@ gulp.task('workflowcss', function () {
     .pipe(sass.sync({
                   errLogToConsole: true,
                   precision: 10,
-                  outputStyle: 'nested'
+                  outputStyle: 'nested' //compressed'
                   }).on('error', sass.logError))
     .pipe(postcss([ autoprefixer({browsers: ['> 0.01% in IN', 'iOS 4'], grid: true}) ]))
     .pipe(stripCSS({preserve: /^!|@|#/}))
@@ -73,7 +73,7 @@ gulp.task('dashcss', function () {
     .pipe(sass.sync({
                   errLogToConsole: true,
                   precision: 10,
-                  outputStyle: 'nested'
+                  outputStyle: 'nested' //compressed'
                   }).on('error', sass.logError))
     .pipe(postcss([ autoprefixer({browsers: ['> 0.01% in IN', 'iOS 4'], grid: true}) ]))
     .pipe(stripCSS({preserve: /^!|@|#/}))

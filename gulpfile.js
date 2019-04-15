@@ -22,6 +22,7 @@ var autoprefixer = require('autoprefixer'),
 // JS SECTION // ---------------------------------------
 gulp.task('myvars', function () {
   return gulp.src('src/js/global-vars.js')
+    .pipe(uglify())
     .pipe(stripJS({safe: true,
                   ignore: /url\([\w\s:\/=\-\+;,]*\)/g}))
     .pipe(gulp.dest('./'))
@@ -36,7 +37,7 @@ gulp.task('myvars', function () {
 gulp.task('workflowjs', function () {
   return gulp.src(['src/js/myjs.js','src/js/myjs-*.js'])
     // .pipe(sourcemaps.init())
-    // .pipe(uglify())
+    .pipe(uglify())
     .pipe(concat('myjs.js'))
     .pipe(stripJS({safe: true,
                   ignore: /url\([\w\s:\/=\-\+;,]*\)/g}))
@@ -55,7 +56,7 @@ gulp.task('workflowcss', function () {
     .pipe(sass.sync({
                   errLogToConsole: true,
                   precision: 10,
-                  outputStyle: 'nested' //compressed'
+                  outputStyle: 'compressed' //nested'
                   }).on('error', sass.logError))
     .pipe(postcss([ autoprefixer({browsers: ['> 0.01% in IN', 'iOS 4'], grid: true}) ]))
     .pipe(stripCSS({preserve: /^!|@|#/}))
@@ -73,7 +74,7 @@ gulp.task('dashcss', function () {
     .pipe(sass.sync({
                   errLogToConsole: true,
                   precision: 10,
-                  outputStyle: 'nested' //compressed'
+                  outputStyle: 'compressed' //nested'
                   }).on('error', sass.logError))
     .pipe(postcss([ autoprefixer({browsers: ['> 0.01% in IN', 'iOS 4'], grid: true}) ]))
     .pipe(stripCSS({preserve: /^!|@|#/}))

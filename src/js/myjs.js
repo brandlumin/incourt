@@ -135,7 +135,8 @@ function func_MakeDataCapture() {
       name: 'news',
       class: 'form-control',
       autofocus: 'autofocus',
-      placeholder: 'Help:\n----------\nPara 1: URL\nPara 2: Title\nPara 3: News Description\n\nAny Paragraph starting with "#" will be treated as CSV-HashTags.'
+      placeholder: 'Para 1: URL\nPara 2: Title\nPara 3: News Description\n\nPre-requisit: Brains primarily, coz its applied here'
+      // placeholder: 'Help:\n----------\nPara 1: URL\nPara 2: Title\nPara 3: News Description\n\nAny Paragraph starting with "#" will be treated as CSV-HashTags.'
     }).appendTo(e); // ADDING INPUT TEXTAREA TO THE FORM
   $('<a/>', {
     id: 'populate',

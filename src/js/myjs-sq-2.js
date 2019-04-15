@@ -1,3 +1,22 @@
+function fetchHash(recArray,recEl,recHash) {
+  // create hashPattern
+  var hashPattern = /#(\w+)/gmi;
+  // run IF hashPattern.test(recArray[recEl]) is true
+  if (hashPattern.test(recArray[recEl])) {
+    tempHash = recArray[recEl].match(hashPattern);
+    tempHash = Func_TrimAndCrisp(tempHash.join(',').replace(/#\s?/g,'').replace(/\s?,\s?/gm,', ').replace(/[_]/gm,' '));
+    if (recHash.replace(/#\s?/g,'').length > 0) tempHash = ', '+tempHash;
+    recHash = (recHash+tempHash).replace(/,[\s]*$/gm,'');
+    if (!(/^#/).test(recHash)) recHash = '# '+recHash;
+    recArray[recEl] = recArray[recEl].replace(/#/g,'').replace(/_/g,' ');
+  }  // ENDIF
+  return {
+    recArrayRet: recArray,
+    recElRet: recEl,
+    recHashRet: recHash
+  };
+}
+
 /*
 create outer-container
   create inner div

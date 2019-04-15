@@ -65,7 +65,7 @@ function Func_RegEx(HelpMeText) {
   HashText = $.grep(ToBeReplaced, function(n,i){
               return (n.match('^#',''));
             }, false);
-  HashText = (HashText.length > 0) ? '# '+HashText.join(',').replace(/#\s?/g,'').replace(/\s{1,}/gm,' ').replace(/\s?,\s?/gm,',').trim() : '# '; // removing '>' and joining as CSV
+  HashText = (HashText.length > 0) ? '# '+HashText.join(',').replace(/#\s?/g,'').replace(/\s{1,}/gm,' ').replace(/\s?,\s?/gm,', ').trim().replace(/,[\s]*$/gm,'') : ''; // removing '>' and joining as CSV
   // HashText = (HashText.length > 0) ? '# '+HashText.join(',').replace(/#\s?/g,'').replace(/\s{1,}/gm,' ').replace(/\s?,\s?/gm,',').trim() : ''; // removing '>' and joining as CSV
   /* filtering sans HashText */
   ToBeReplaced = $.grep(ToBeReplaced, function(n,i){
@@ -81,6 +81,18 @@ function Func_RegEx(HelpMeText) {
   }
   /* deleting excess elements*/
   ToBeReplaced.splice(3);
+
+
+  /* fetching hash */
+    var tempValidate1 = fetchHash(ToBeReplaced,1,HashText);
+    HashText = tempValidate1.recHashRet;
+    ToBeReplaced[1] = tempValidate1.recArrayRet[tempValidate1.recElRet];
+
+    var tempValidate2 = fetchHash(ToBeReplaced,2,HashText);
+    HashText = tempValidate2.recHashRet;
+    ToBeReplaced[2] = tempValidate2.recArrayRet[tempValidate2.recElRet];
+
+
   /* making values nicer */
   NewsURLNotToDo = (Func_TrimAndCrisp(ToBeReplaced[0]) ?
    Func_TrimAndCrisp(ToBeReplaced[0]) :
@@ -108,7 +120,8 @@ function Func_RegEx(HelpMeText) {
   sTitleMessg = (nTitleCount <= 75) ? '<b>OK</b> by '+(75 - nTitleCount)+' char(s)' : '<b>exceeded</b> by <b>'+(nTitleCount - 75)+'</b> char(s)'; // Message Creation
   nDescrCount = NewsDscToDo.split(' ').length; // Description
   sDescrMessg = (nDescrCount <= 60) ? '<b>OK</b> by '+(60 - nDescrCount)+' word(s)' : '<b>exceeded</b> by <b>'+(nDescrCount - 60)+'</b> word(s)'; // Message Creation
-  func_alert('Title '+sTitleMessg+'<br>News '+sDescrMessg, 1500); // Message Flash
+  bgc = (nTitleCount > 75 || nDescrCount > 60) ? "#FFE6F6" : "#E6FFA6";
+  func_alert('Title '+sTitleMessg+'<br>News '+sDescrMessg, 1500, bgc); // Message Flash
 }
 
 /* Func_RegexReplace() - Gets DataToRegEx, sets up the RegEx and returns

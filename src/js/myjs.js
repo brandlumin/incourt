@@ -135,7 +135,7 @@ function func_MakeDataCapture() {
       name: 'news',
       class: 'form-control',
       autofocus: 'autofocus',
-      placeholder: 'Para 1: URL\nPara 2: Title\nPara 3: News Description\n\nPre-requisit: Brains primarily, coz its applied here'
+      placeholder: 'Para 1: URL, must start with protocol else one will be applied\nPara 2: Title, you know the limits, TitleCasing etc. whatever...\nPara 3: News Description, oh come on spoonfed!\n\nTLDR;\nBrains and common-sense are essential coz system is equipped here.\n\nsuper-TLDR;\nWelcome to make mistakes.'
       // placeholder: 'Help:\n----------\nPara 1: URL\nPara 2: Title\nPara 3: News Description\n\nAny Paragraph starting with "#" will be treated as CSV-HashTags.'
     }).appendTo(e); // ADDING INPUT TEXTAREA TO THE FORM
   $('<a/>', {

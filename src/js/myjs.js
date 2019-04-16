@@ -194,7 +194,7 @@ function func_Populate() {
 
   /* POPULATE RECEIVED ARRAY ELEMENTS */
     // add 'http://' protocol if does not exist in the URL
-    NewsDetail[0] = (NewsDetail[0].match('^(https?)(?::\/\/)','gi')) ? NewsDetail[0] : 'http://'+NewsDetail[0];
+    NewsDetail[0] = ((/^https?/i).test(NewsDetail[0])) ? NewsDetail[0] : 'http://'+NewsDetail[0];
   $('input#regular1').val(NewsDetail[0]).change(); // POPULATE URL
   titlestr = (function () { // CONVERT TITLE INTO Title Case
       str = Func_RegexReplace(NewsDetail[1].replace(/(?:^|\s)\w/g, function(match) {

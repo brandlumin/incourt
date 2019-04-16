@@ -13,6 +13,10 @@ $('[name=publisher_id] option').each(function() {
 /* function func_AutoSelectPublisher() - AutoSelect Publisher
 =========================================================== */
 function func_AutoSelectPublisher() {
+  if ( !(/^https?/i).test($('[name=url]')[1].value) ) {
+    x = $('[name=url]')[1].value;
+    $('input#regular1').val('http://'+x).change();
+  }
   var PublisherSiteName = $('<a/>').addClass('tempPubFilter').prop('href', $('[name=url]')[1].value).prop('hostname'); $('a.tempPubFilter').remove(); // remove this anchor.tempPubFilter shit
   var RegexPattern = /^(?:www\.)?(\w*)\.(\w*)/;
   PublisherSiteName = PublisherSiteName.match(RegexPattern)[1] ; // Capture PublisherSiteName FINAL

@@ -47,13 +47,13 @@ function Func_AbbreviateNews() {
   /* setting vars to be returned */
   NewsURLNotToDo = NewsTitleToDo = NewsDscToDo = HashText = '';
 
-  /* disabling previous UNDO ***/
-  $('#id_news ~ a.btn-danger').remove();
-
-  /* capturing textarea's value in a variable also for undo ***/
+  /* capturing textarea's value in a variable, also for undo ***/
   UndoText = HelpMeText = '';
   UndoText = HelpMeText = $('#id_news').val();
   NeedToUndo = false; // safe side approach to reset every time
+
+  /* disabling previous UNDO ***/
+  $('#id_news ~ a.btn-danger').remove();
 
   /* call regex function to replace abbreviations of the variable */
   Func_RegEx(HelpMeText);

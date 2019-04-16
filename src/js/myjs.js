@@ -181,39 +181,17 @@ function func_DataCaptureSubmit(e) {
 /* function func_Populate() - Populate received News
 =========================================================== */
 function func_Populate() {
-  news = $('#id_news').val(); // -- FETCH VALUE
-  NewsDetail = news.split(/\n/); // -- CREATE ARRAY BY CARRIAGE RETURNS
-  if (NewsDetail.length <3) {func_alert("<b>Err...Incomplete News</b><br/>How can I populate it?", 2400);}
-  else {
-    for (var a = 0; a < NewsDetail.length; a++) {
-      if (typeof NewsDetail[a] === "undefined" || NewsDetail[a] === "") {
-        func_alert("<b>Err...Incomplete News</b><br/>How can I populate it?", 2400);
-        a = NewsDetail.length;
-      }
-    }
-  }
-  HashText = $.grep(NewsDetail, function(n,i){
-              return (n.match('^#',''));
-            }, false);
-  HashText = (HashText.length > 0) ? HashText.join(',').replace(/#\s?/g,'').replace(/\s{1,}/gm,' ').replace(/\s?,\s?/gm,',').trim() : ''; // removing '>' and joining as CSV
-  /* filtering sans HashText */
-  NewsDetail = $.grep(NewsDetail, function(n,i){
-                  return (n.match('^#',''));
-                }, true);
-  /* concatinating complete news-description block */
-    /* To add a period at the end of the news if does not exist */
-      if (!RegExp('\\.$','g').test(NewsDetail[2])) NewsDetail[2] +='.';
-  for (var i = 3; i < NewsDetail.length; i++) {
-    if (typeof NewsDetail[i] === 'undefined' || NewsDetail[i] == '') {} else {
-      NewsDetail[2] += ' ' + ((!RegExp('\\.$','g').test(NewsDetail[i])) ? NewsDetail[i] +='.' : NewsDetail[i]);
-    }
-  }
-  /* deleting excess elements*/
-  NewsDetail.splice(3);
-  /* TRIM RECEIVED ARRAY ELEMENTS AND FINALIZING 'NEWSDETAIL' */
-  for (var j = 0; j < NewsDetail.length; j++) {
-    NewsDetail[j] = Func_TrimAndCrisp(NewsDetail[j]);
-  }
+  // ToBeReplaced = ; // removing blanks
+  if ($('#id_news').val().split(/\n/).filter(Boolean).length <3) {func_alert("<strong>Tired, eh!... or irritated!!</strong><br/>Take a sip of your coffee and try again.<br/>You just missed to write the news peroperly, that's all!", 3900, erMsgColor);return false;}
+
+  /* BEGIN if Qualifies */
+  var news = Func_AbbreviateNews(); // -- FETCH VALUE
+  NewsDetail = [];
+  NewsDetail[0] = news.NewsURLNotToDoRet;
+  NewsDetail[1] = news.NewsTitleToDoRet;
+  NewsDetail[2] = news.NewsDscToDoRet;
+  NewsDetail[3] = (news.HashTextRet).replace(/#\s?/,'');
+
   /* POPULATE RECEIVED ARRAY ELEMENTS */
     // add 'http://' protocol if does not exist in the URL
     NewsDetail[0] = (NewsDetail[0].match('^(https?)(?::\/\/)','gi')) ? NewsDetail[0] : 'http://'+NewsDetail[0];
@@ -245,7 +223,7 @@ function func_Populate() {
   }
   func_BL_CountDesc();
   /*!* Push HashTexh ***/
-  $('#token-input-topic').val(HashText);
+  $('#token-input-topic').val(NewsDetail[3]);
   /*!* CHOOSE PUBLISHER BASED ON ENTERED URL ***/
   func_AutoSelectPublisher();
 }
@@ -510,10 +488,20 @@ function func_alert(msg,dur,bgc,tc) {
       'font-weight': '400',
       "background-color": bgc,
       "color": tc,
-      "box-shadow": "0 .5em 1em rgba(0, 0, 0, .4)",
+      "box-shadow": "0 .5em 1em rgba(0, 0, 0, .5)",
       "text-shadow": "0 0 .5px rgba(0, 0, 0, .25)",
       "z-index": "99000000",
   }).appendTo('body').html(msg);
+  box.mouseover(function() { // Pause on hover
+    $(this).stop(true, false);
+  });
+  box.mouseout(function() {  // fadeOut on hover
+    if ($(this).is(":visible") == true) {
+      $(this).fadeOut(300, function () {
+        box.remove();
+      });
+    }
+  });
   box.fadeIn(300)
     .delay(dur)
     .fadeOut(300, function () {

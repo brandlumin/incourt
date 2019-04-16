@@ -88,8 +88,8 @@ function func_MakeHelpBtn() {
 function func_ActiHelp() {
   Summary =     (($('[name=url]')[1].value.trim() != '')  ? $('[name=url]')[1].value + '\n'  : '') +
                 (($('#title').val().trim() != '')         ? $('#title').val()        + '\n'  : '') +
-                (($('#description').val().trim() != '')   ? $('#description').val()  + '\n' +'# ': '') +
-                (($('#token-input-topic').val().trim() != '')   ? $('#token-input-topic').val() : '');
+                (($('#description').val().trim() != '')   ? $('#description').val()  : '') +
+                (($('#token-input-topic').val().trim() != '')   ? '\n# '+$('#token-input-topic').val() : '');
   $('#id_news').val(Summary).change();
   $('.HelpDiv').fadeOut('fast', function() {
     $('.WordData_Container').fadeIn( function () {

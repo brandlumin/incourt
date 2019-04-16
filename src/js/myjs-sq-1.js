@@ -43,16 +43,31 @@ function func_AutoSelectPublisher() {
 /* Func_AbbreviateNews() - Starts Abbreviation, Manages Undo
 =========================================================== */
 function Func_AbbreviateNews() {
-  /* disabling further UNDO ***/
+
+  /* setting vars to be returned */
+  NewsURLNotToDo = NewsTitleToDo = NewsDscToDo = HashText = '';
+
+  /* disabling previous UNDO ***/
   $('#id_news ~ a.btn-danger').remove();
+
   /* capturing textarea's value in a variable also for undo ***/
   UndoText = HelpMeText = '';
   UndoText = HelpMeText = $('#id_news').val();
   NeedToUndo = false; // safe side approach to reset every time
+
   /* call regex function to replace abbreviations of the variable */
-  if ( HelpMeText ) {Func_RegEx(HelpMeText);} else {func_alert("<b>Err...</b><br/>Write the news first!", 1500);}
+  Func_RegEx(HelpMeText);
+  /* Upon returning, check if Undo needed, and create it accordingly */
   if (NeedToUndo) Func_CreateUndo();
+
   $('#id_news').focus();
+
+  return {
+    NewsURLNotToDoRet: NewsURLNotToDo,
+    NewsTitleToDoRet: NewsTitleToDo,
+    NewsDscToDoRet: NewsDscToDo,
+    HashTextRet: HashText
+  };
 }
 
 /* Func_RegEx() - receives TEXTAREA as HelpMeText, calls RegexReplace, and returns
@@ -60,20 +75,24 @@ function Func_AbbreviateNews() {
 function Func_RegEx(HelpMeText) {
   /* creating array of received value */
   ToBeReplaced = HelpMeText.split(/\n/);
-  if (HelpMeText.length <3) {func_alert("<b>Err...</b><br/>Write the news first!", 1500);return false;}
+  ToBeReplaced = ToBeReplaced.filter(Boolean); // removing blanks
+  if (ToBeReplaced.length <3) {func_alert('<strong>Err...Wake up!</strong><br/>Write the news peroperly.', 1200, erMsgColor);return false;}
+
   /* getting HashText */
   HashText = $.grep(ToBeReplaced, function(n,i){
               return (n.match('^#',''));
             }, false);
-  HashText = (HashText.length > 0) ? '# '+HashText.join(',').replace(/#\s?/g,'').replace(/\s{1,}/gm,' ').replace(/\s?,\s?/gm,', ').trim().replace(/,[\s]*$/gm,'') : ''; // removing '>' and joining as CSV
-  // HashText = (HashText.length > 0) ? '# '+HashText.join(',').replace(/#\s?/g,'').replace(/\s{1,}/gm,' ').replace(/\s?,\s?/gm,',').trim() : ''; // removing '>' and joining as CSV
+  HashText = HashText.filter(Boolean); // removing blanks
+  HashText = (HashText.length > 0) ? '# '+HashText.join(',').replace(/#\s?/g,'').replace(/\s{1,}/gm,' ').replace(/\s?,\s?/gm,', ').trim().replace(/,[\s]*$/gm,'') : ''; // removing '#' and joining as CSV
+
   /* filtering sans HashText */
   ToBeReplaced = $.grep(ToBeReplaced, function(n,i){
                   return (n.match('^#',''));
                 }, true);
+
   /* concatinating complete news-description block */
     /* To add a period at the end of the news if does not exist */
-      if (!RegExp('\\.$','g').test(ToBeReplaced[2])) ToBeReplaced[2] +='.';
+    if (!RegExp('\\.$','g').test(ToBeReplaced[2])) ToBeReplaced[2] +='.';
   for (var i = 3; i < ToBeReplaced.length; i++) {
     if (typeof ToBeReplaced[i] === 'undefined' || ToBeReplaced[i] == '') {} else {
       ToBeReplaced[2] += ' ' + ((!RegExp('\\.$','g').test(ToBeReplaced[i])) ? ToBeReplaced[i] +='.' : ToBeReplaced[i]);
@@ -83,7 +102,7 @@ function Func_RegEx(HelpMeText) {
   ToBeReplaced.splice(3);
 
 
-  /* fetching hash */
+  /* fetching hash from between-the-news */
     var tempValidate1 = fetchHash(ToBeReplaced,1,HashText);
     HashText = tempValidate1.recHashRet;
     ToBeReplaced[1] = tempValidate1.recArrayRet[tempValidate1.recElRet];
@@ -92,22 +111,18 @@ function Func_RegEx(HelpMeText) {
     HashText = tempValidate2.recHashRet;
     ToBeReplaced[2] = tempValidate2.recArrayRet[tempValidate2.recElRet];
 
+  /* making NEWS values nicer */
+  NewsURLNotToDo = Func_TrimAndCrisp(ToBeReplaced[0]);
+  NewsTitleToDo = Func_TrimAndCrisp(ToBeReplaced[1]);
+  NewsDscToDo = Func_TrimAndCrisp(ToBeReplaced[2]);
 
-  /* making values nicer */
-  NewsURLNotToDo = (Func_TrimAndCrisp(ToBeReplaced[0]) ?
-   Func_TrimAndCrisp(ToBeReplaced[0]) :
-    '*** Title EMPTY ***');
-  NewsTitleToDo = (Func_TrimAndCrisp(ToBeReplaced[1]) ?
-   Func_TrimAndCrisp(ToBeReplaced[1]) :
-    '*** URL EMPTY ***');
-  NewsDscToDo = (Func_TrimAndCrisp(ToBeReplaced[2]) ?
-   Func_TrimAndCrisp(ToBeReplaced[2]) :
-    '*** News Detail EMPTY ***');
-  /* doing abbreviations and capturing results for title and news */
-  if (NewsTitleToDo  && typeof NewsTitleToDo !== 'undefined') NewsTitleToDo=Func_RegexReplace(NewsTitleToDo, 'vartitle');
-  if (NewsDscToDo  && typeof NewsDscToDo !== 'undefined') NewsDscToDo=Func_RegexReplace(NewsDscToDo, 'vardesc');
-  /* add 'http://' protocol if does not exist in the URL */
+  /* add protocol 'http://' if does not exist in the URL */
   NewsURLNotToDo = (NewsURLNotToDo.match('^(https?)(?::\/\/)','gi')) ? NewsURLNotToDo : 'http://'+NewsURLNotToDo;
+
+  /* doing abbreviations and capturing results for title and news */
+  NewsTitleToDo=Func_RegexReplace(NewsTitleToDo, 'vartitle');
+  NewsDscToDo=Func_RegexReplace(NewsDscToDo, 'vardesc');
+
   /* populating abbreviations in the textarea */
   $('#id_news').val(
                     NewsURLNotToDo+'\n'+
@@ -115,13 +130,16 @@ function Func_RegEx(HelpMeText) {
                     NewsDscToDo+
                     ((HashText) ? '\n'+HashText : '')
                     );
+
   /* FLASHING Status Message */
   nTitleCount = NewsTitleToDo.length; // Title
-  sTitleMessg = (nTitleCount <= 75) ? '<b>OK</b> by '+(75 - nTitleCount)+' char(s)' : '<b>exceeded</b> by <b>'+(nTitleCount - 75)+'</b> char(s)'; // Message Creation
+  sTitleMessg = (nTitleCount <= 75) ? 'OK by '+(75 - nTitleCount)+' char(s)' : '<b>exceeds</b> by <b>'+(nTitleCount - 75)+'</b> char(s)'; // Message Creation
   nDescrCount = NewsDscToDo.split(' ').length; // Description
-  sDescrMessg = (nDescrCount <= 60) ? '<b>OK</b> by '+(60 - nDescrCount)+' word(s)' : '<b>exceeded</b> by <b>'+(nDescrCount - 60)+'</b> word(s)'; // Message Creation
-  bgc = (nTitleCount > 75 || nDescrCount > 60) ? "#FFE6F6" : "#E6FFA6";
-  func_alert('Title '+sTitleMessg+'<br>News '+sDescrMessg, 1500, bgc); // Message Flash
+  sDescrMessg = (nDescrCount <= 60) ? 'OK by '+(60 - nDescrCount)+' word(s)' : '<b>exceeds</b> by <b>'+(nDescrCount - 60)+'</b> word(s)'; // Message Creation
+  bgc = (nTitleCount > 75 || nDescrCount > 60) ? erMsgColor : okMsgColor;
+  hmmmPrepend = ((/exceeds/).test(sDescrMessg) || (/exceeds/).test(sTitleMessg))?'<h5 class="mb-2">Hmm...</h5>':'<h5 class="mb-2">Good!</h5>';
+  func_alert(hmmmPrepend+'Title '+sTitleMessg+'<br>Desc '+sDescrMessg, ((/exceeds/).test(sDescrMessg) || (/exceeds/).test(sTitleMessg))?2100:600, bgc); // Message Flash
+
 }
 
 /* Func_RegexReplace() - Gets DataToRegEx, sets up the RegEx and returns

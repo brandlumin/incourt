@@ -128,7 +128,7 @@ function func_MakeDataCapture() {
       method: ''
   }).appendTo('.WordData_Box'); // Form CREATED IN Box DIV
   var e = $('#WD_Box__form'); // TO REFER THE FORM AS VARIABLE
-  e.html('<h4>News</h4>'); // setting the heading
+  e.html('<h4 class="d-block d-md-inline-block align-baseline w-50">News</h4><div id="id_news__count" class="d-none d-md-inline-block align-baseline w-50 px-3 py-1"></div>'); // setting the heading
   $('<textarea/>', {
       rows: '12',
       id: 'id_news',

@@ -2,8 +2,8 @@
 /*! *****************************************************
 *   COLORS
 ****************************************************** */
-var erMsgColor = '#FFE6F6';
-var okMsgColor = '#E6FFA6';
+var erMsgColor = '#FFE6F6EE';
+var okMsgColor = '#E6FFA6EE';
 
 
 

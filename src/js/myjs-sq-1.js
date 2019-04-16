@@ -133,12 +133,25 @@ function Func_RegEx(HelpMeText) {
 
   /* FLASHING Status Message */
   nTitleCount = NewsTitleToDo.length; // Title
-  sTitleMessg = (nTitleCount <= 75) ? 'OK by '+(75 - nTitleCount)+' char(s)' : '<b>exceeds</b> by <b>'+(nTitleCount - 75)+'</b> char(s)'; // Message Creation
+  sTitleMessg = (nTitleCount <= 75) ? '<b>OK</b> by '+(75 - nTitleCount)+' <span class="d-none d-md-inline">char(s)</span>' : '<b>exceeds</b> by <b>'+(nTitleCount - 75)+'</b> <span class="d-none d-md-inline">char(s)</span>'; // Message Creation
+
   nDescrCount = NewsDscToDo.split(' ').length; // Description
-  sDescrMessg = (nDescrCount <= 60) ? 'OK by '+(60 - nDescrCount)+' word(s)' : '<b>exceeds</b> by <b>'+(nDescrCount - 60)+'</b> word(s)'; // Message Creation
+  sDescrMessg = (nDescrCount <= 60) ? '<b>OK</b> by '+(60 - nDescrCount)+' <span class="d-none d-md-inline">word(s)</span>' : '<b>exceeds</b> by <b>'+(nDescrCount - 60)+'</b> <span class="d-none d-md-inline">word(s)</span>'; // Message Creation
+
   bgc = (nTitleCount > 75 || nDescrCount > 60) ? erMsgColor : okMsgColor;
+
+  flashMessage = '<b>Title</b> '+sTitleMessg+'<br><b>Desc</b> '+sDescrMessg;
+
   hmmmPrepend = ((/exceeds/).test(sDescrMessg) || (/exceeds/).test(sTitleMessg))?'<h5 class="mb-2">Hmm...</h5>':'<h5 class="mb-2">Good!</h5>';
-  func_alert(hmmmPrepend+'Title '+sTitleMessg+'<br>Desc '+sDescrMessg, ((/exceeds/).test(sDescrMessg) || (/exceeds/).test(sTitleMessg))?2100:600, bgc); // Message Flash
+
+  if (window.innerWidth >= 768) {     // Message Flash
+    $('#id_news__count').html('<b>Title</b> '+sTitleMessg+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;||&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Desc</b> '+sDescrMessg).css({
+      'background-color': bgc,
+      'box-shadow': '1px 2px 4px rgba(0,0,0,0.15)'
+    });
+  } else {
+    func_alert(hmmmPrepend+flashMessage, ((/exceeds/).test(sDescrMessg) || (/exceeds/).test(sTitleMessg))?2100:600, bgc);
+  }
 
 }
 

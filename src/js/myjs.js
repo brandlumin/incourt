@@ -137,7 +137,13 @@ function func_MakeDataCapture() {
       autofocus: 'autofocus',
       placeholder: 'Para 1: URL, must start with protocol else one will be applied\nPara 2: Title, you know the limits, TitleCasing etc. whatever...\nPara 3: News Description, oh come on spoonfed!\n\nTLDR;\nBrains and common-sense are essential coz system is equipped here.\n\nsuper-TLDR;\nWelcome to make mistakes.'
       // placeholder: 'Help:\n----------\nPara 1: URL\nPara 2: Title\nPara 3: News Description\n\nAny Paragraph starting with "#" will be treated as CSV-HashTags.'
-    }).appendTo(e); // ADDING INPUT TEXTAREA TO THE FORM
+    }).appendTo(e)
+      .change(function() {
+        $('#id_news__count').html('').css({
+          'background-color': '',
+          'box-shadow': ''
+        });
+      }); // ADDING INPUT TEXTAREA TO THE FORM
   $('<a/>', {
     id: 'populate',
     class: 'btn btn-success',
@@ -293,9 +299,9 @@ function func_TitleCBtn() {
         'box-shadow': '0 1px 3px 0 rgba(0, 0, 0, 0.33)'
       });
     })
+    .attr('onClick', 'func_TitleConvert()')
     .html('TitleCase');
   $( 'LABEL[FOR="title"]' ).after( $( '#caseConvert' ) ); // RELOCATE THE BUTTON
-  $('#caseConvert').click(func_TitleConvert);
 }
 
 /* function func_TitleConvert() - Convert TITLE
@@ -304,7 +310,7 @@ function func_TitleConvert() {
   str = $('#title').val().replace(/(?:^|\s)\w/g, function(match) {
     return match.toUpperCase();
   });
-  $('#title').val(str).change();
+  $('#title').val(Func_TrimAndCrisp(str)).change();
 }
 
 /* function func_InitialCatSelect() - Category AUTO Setup

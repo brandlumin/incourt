@@ -87,11 +87,11 @@ GlobalNewsArray = [
   ["jharkhand state bar council","JSBC"],
   ["lok sabha","LS"],
   ["maharashtra control of organised crimes act","MCOC Act"],
-  ["ministry of corporate affairs","MoCA"],
-  ["ministry of defence","MoD"],
-  ["ministry of health & welfare","MoHW"],
-  ["ministry of home affairs","MoHA"],
-  ["minitsry of environment and forests and climate change","MoEFCC"],
+  ["ministry of corporate affairs","MCA"],
+  ["ministry of defence","MD"],
+  ["ministry of health & welfare","MHW"],
+  ["ministry of home affairs","MHA"],
+  ["minitsry of environment and forests and climate change","MEFCC"],
   ["national register of citizens","NRC"],
   ["national company law appellate tribunal","NCLAT"],
   ["national company law tribunal","NCLT"],
@@ -129,16 +129,23 @@ GlobalNewsArray = [
   ["rajiv gandhi national university of law","RGNUL"],
   ["Central Information Commission","CIC"],
   ["(apex|top) court","SC"],
+  ["Negotiable Instruments Act","NI Act"],
+  ["Reserve Bank of India","RBI"],
+  ["Arbitration and Conciliation Act(, 1996 \\(?Arbitration Act\\)?)?","Arbitration Act"],
+  ["Employees State Insurance Act(, 1948 \\(?ESI Act\\)?)?","ESI Act"],
 
 
 
   ["(^(?:\\w+)\\s?(?:\\w+)?:\\s)",""],  // remove reporting city
   ["\\.{2,}","\."],                     // multiple periods (dots) into one
-  ["(?:[\\s]?)\\(([A-Z|&]*)\\)",""],    // removes in bracket if NOT space | numeric
-  ["(?:on)\\s[a-zA-Z]+day,?\\s?",""],   // removing weekdays
+  [",{2,}\\s{1,}?",", "],               // multiple periods (dots) into one
+  ["\\((\\s)","("],                     // removes space after bracket starts
+  ["(\\s)\\)",")"],                     // removes space before bracket closes
+  ["(?:\\s?)\\(([A-Z|&]*)\\)",""],      // removes abbr if NOT space | '&' | numbers
+  ["\\s(?:on)\\s[a-zA-Z]+day,?\\s?"," "],   // removing weekdays
   ["\\s[a-zA-Z]+day",""],               // removing today yesterday
   ["\\s\\[read[a-zA-Z|\\s]+]",""],      // removing [READ ORDER]
-  [",\\sread[a-zA-Z|\\s]+",""],          // removing ', read xyz'
+  [",\\sread[a-zA-Z|\\s]+",""],         // removing ', read xyz'
   ["\\.(?!\\s)","\. "],                 // adding space after period if absent
 
 

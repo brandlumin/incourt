@@ -95,9 +95,13 @@ function Func_RegEx(HelpMeText) {
                 }, true);
 
   /* concatinating complete news-description block */
-    /* To add a period at the end of the news if does not exist */
-    if (!RegExp('\\.$','g').test(ToBeReplaced[2])) ToBeReplaced[2] +='.';
-  for (var i = 3; i < ToBeReplaced.length; i++) {
+    for (i = 2; i < ToBeReplaced.length; i++) {
+      /* To replace comma by a period at the end of the paragraph if does not exist */
+      ToBeReplaced[i] = ((/,$/).test(ToBeReplaced[i])) ? ToBeReplaced[i].replace(/,$/,'') : ToBeReplaced[i];
+      /* To add a period at the end of the paragraph if does not exist */
+      if (!(/\.$/).test(ToBeReplaced[i])) ToBeReplaced[i] +='.';
+    }
+  for (i = 3; i < ToBeReplaced.length; i++) {
     if (typeof ToBeReplaced[i] === 'undefined' || ToBeReplaced[i] == '') {} else {
       ToBeReplaced[2] += ' ' + ((!RegExp('\\.$','g').test(ToBeReplaced[i])) ? ToBeReplaced[i] +='.' : ToBeReplaced[i]);
     }
@@ -132,7 +136,8 @@ function Func_RegEx(HelpMeText) {
                     NewsURLNotToDo+'\n'+
                     NewsTitleToDo+'\n'+
                     NewsDscToDo+
-                    ((HashText) ? '\n'+HashText : '')
+                    // ((HashText.replace('/^#\s?/','').trim().length > 0) ? '\n'+HashText+', ' : '\n# ')
+                    ((HashText) ? '\n'+HashText : '\n# ')
                     );
 
   /* FLASHING Status Message */

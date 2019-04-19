@@ -1,6 +1,6 @@
 function fetchHash(recArray,recEl,recHash) {
   // create hashPattern
-  var hashPattern = /#(\w+)/gmi;
+  var hashPattern = /#([-|\w]+)/gmi;
   // run IF hashPattern.test(recArray[recEl]) is true
   if (hashPattern.test(recArray[recEl])) {
     tempHash = recArray[recEl].match(hashPattern);
@@ -24,7 +24,6 @@ create outer-container
     create close button
   ./
 ./
-*/
 function func_LH_Open() {
   $('.LH_Container').fadeIn(200, function () {
     $('.LH_Box').fadeIn(200).focus();
@@ -59,3 +58,4 @@ function func_LH_Close() {
     });
   });
 }
+*/

@@ -35,7 +35,7 @@ gulp.task('myvars', function () {
 
 // JS SECTION // ---------------------------------------
 gulp.task('workflowjs', function () {
-  return gulp.src(['src/js/myjs.js','src/js/myjs-*.js'])
+  return gulp.src(['src/import/jquery-3.3.1.min.js','src/js/myjs.js','src/js/myjs-*.js'])
     // .pipe(sourcemaps.init())
     .pipe(uglify())
     .pipe(concat('myjs.js'))

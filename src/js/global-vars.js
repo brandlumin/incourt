@@ -33,9 +33,9 @@ var IsGalleryManaged = false;
 /*! *****************************************************
 *   ABBREVIATIONS
 ****************************************************** */
-var NeedToUndo = false;
+var NeedToUndo      = false;
 var GlobalNewsArray = [];
-GlobalNewsArray = [
+GlobalNewsArray     = [
   ["full form","short"],
   ["^(:|\\.|,|\\))[\\s{0,}]?",""],         // beginning correction: no/multiple white-spaces before and after colon, comma, period, closing bracket
   ["\\s{1,}(:|\\.|,|\\))[\\s{0,}]?","$1 "],   // no/multiple white-spaces before and after colon, comma, period, closing bracket
@@ -52,6 +52,7 @@ GlobalNewsArray = [
   ["chief justice of india ranjan gogoi","CJI"],
   ["chief justice of india","CJI"],
   ["chief justice ranjan gogoi","CJI"],
+  ["CJI Ranjan Gogoi","CJI Gogoi"],
   ["chief minister","CM"],
   ["code of civil procedure","CPC"],
   ["code of criminal procedure","CrPC"],
@@ -133,6 +134,7 @@ GlobalNewsArray = [
   ["Reserve Bank of India","RBI"],
   ["Arbitration and Conciliation Act(, 1996 \\(?Arbitration Act\\)?)?","Arbitration Act"],
   ["Employees State Insurance Act(, 1948 \\(?ESI Act\\)?)?","ESI Act"],
+  ["SC Advocates[\\s|-]?on[\\s|-]?Record Association(\\(?SCAORA\\)?)?","SCAORA"],
 
 
 

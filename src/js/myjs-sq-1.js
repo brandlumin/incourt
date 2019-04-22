@@ -52,8 +52,8 @@ function Func_AbbreviateNews() {
   NewsURLNotToDo = NewsTitleToDo = NewsDscToDo = HashText = '';
 
   /* capturing textarea's value in a variable, also for undo ***/
-  UndoText = HelpMeText = '';
-  UndoText = HelpMeText = $('#id_news').val();
+  UndoText   = HelpMeText = '';
+  UndoText   = HelpMeText = $('#id_news').val();
   NeedToUndo = false; // safe side approach to reset every time
 
   /* disabling previous UNDO ***/
@@ -67,10 +67,10 @@ function Func_AbbreviateNews() {
   $('#id_news').focus();
 
   return {
-    NewsURLNotToDoRet: NewsURLNotToDo,
-    NewsTitleToDoRet: NewsTitleToDo,
-    NewsDscToDoRet: NewsDscToDo,
-    HashTextRet: HashText
+    NewsURLNotToDoRet : NewsURLNotToDo,
+    NewsTitleToDoRet  : NewsTitleToDo,
+    NewsDscToDoRet    : NewsDscToDo,
+    HashTextRet       : HashText
   };
 }
 
@@ -112,26 +112,29 @@ function Func_RegEx(HelpMeText) {
 
   /* fetching hash from between-the-news */
     var tempValidate1 = fetchHash(ToBeReplaced,1,HashText);
-    HashText = tempValidate1.recHashRet;
-    ToBeReplaced[1] = tempValidate1.recArrayRet[tempValidate1.recElRet];
+    HashText          = tempValidate1.recHashRet;
+    ToBeReplaced[1]   = tempValidate1.recArrayRet[tempValidate1.recElRet];
 
     var tempValidate2 = fetchHash(ToBeReplaced,2,HashText);
-    HashText = tempValidate2.recHashRet;
-    ToBeReplaced[2] = tempValidate2.recArrayRet[tempValidate2.recElRet];
+    HashText          = tempValidate2.recHashRet;
+    ToBeReplaced[2]   = tempValidate2.recArrayRet[tempValidate2.recElRet];
 
   /* making NEWS values nicer */
   NewsURLNotToDo = Func_TrimAndCrisp(ToBeReplaced[0]);
-  NewsTitleToDo = Func_TrimAndCrisp(ToBeReplaced[1]);
-  NewsDscToDo = Func_TrimAndCrisp(ToBeReplaced[2]);
+  NewsTitleToDo  = Func_TrimAndCrisp(ToBeReplaced[1]);
+  NewsDscToDo    = Func_TrimAndCrisp(ToBeReplaced[2]);
 
   /* add protocol 'http://' if does not exist in the URL */
   NewsURLNotToDo = (NewsURLNotToDo.match('^(https?)(?::\/\/)','gi')) ? NewsURLNotToDo : 'http://'+NewsURLNotToDo;
 
   /* doing abbreviations and capturing results for title and news */
-  NewsTitleToDo=Func_RegexReplace(NewsTitleToDo, 'vartitle');
-  NewsDscToDo=Func_RegexReplace(NewsDscToDo, 'vardesc');
+  NewsTitleToDo = Func_RegexReplace(NewsTitleToDo, 'vartitle');
+  NewsDscToDo   = Func_RegexReplace(NewsDscToDo, 'vardesc');
 
   /* populating abbreviations in the textarea */
+  HashText = (HashText.trim().length >0) ?
+              HashText :
+              '# '+NewsTitleToDo.split(' ').join(', ');
   $('#id_news').val(
                     NewsURLNotToDo+'\n'+
                     NewsTitleToDo+'\n'+
@@ -146,11 +149,8 @@ function Func_RegEx(HelpMeText) {
 
   nDescrCount = NewsDscToDo.split(' ').length; // Description
   sDescrMessg = (nDescrCount <= 60) ? '<b>OK</b> by '+(60 - nDescrCount)+' <span class="d-none d-md-inline">word(s)</span>' : '<b>exceeds</b> by <b>'+(nDescrCount - 60)+'</b> <span class="d-none d-md-inline">word(s)</span>'; // Message Creation
-
   bgc = (nTitleCount > 75 || nDescrCount > 60) ? erMsgColor : okMsgColor;
-
   flashMessage = '<b>Title</b> '+sTitleMessg+'<br><b>Desc</b> '+sDescrMessg;
-
   hmmmPrepend = ((/exceeds/).test(sDescrMessg) || (/exceeds/).test(sTitleMessg))?'<h5 class="mb-2">Hmm...</h5>':'<h5 class="mb-2">Good!</h5>';
 
   if (window.innerWidth >= 768) {     // Message Flash
@@ -177,7 +177,7 @@ function Func_RegexReplace(DataToRegEx, ReceivedField) {
         : DataToRegEx.match(SearchTerm) ? true
           : false;
     /* capturing replaced regex in variable */
-    Replaced = DataToRegEx.replace(SearchTerm, ReplaceWith).trim();
+    Replaced    = DataToRegEx.replace(SearchTerm, ReplaceWith).trim();
     DataToRegEx = Replaced;
   }
   if (ReceivedField == 'vartitle') {

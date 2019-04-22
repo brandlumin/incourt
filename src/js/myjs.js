@@ -77,8 +77,8 @@ $(function () {
 function func_MakeHelpBtn() {
   // CREATING DIV AND HELPME BUTTON
   $('<div/>', {
-      class: 'HelpDiv HelpDivButton',
-      onClick: 'func_ActiHelp(this);'
+      class   : 'HelpDiv HelpDivButton',
+      onClick : 'func_ActiHelp(this);'
   }).html('<u style="color: yellow">H</u>elp Me!').appendTo('body'); // HelpDiv CREATED IN BODY
   $( '.card-head header' ).after( $( '.HelpDiv.HelpDivButton' ) ); // RELOCATE
 }
@@ -104,9 +104,9 @@ function func_ActiHelp() {
 =========================================================== */
 function func_MakeDataCapture() {
   $('<div/>', {
-      id: 'WD_Container',
-      class: 'WordData_Container',
-      style: 'display: none'
+      id    : 'WD_Container',
+      class : 'WordData_Container',
+      style : 'display: none'
   }).appendTo('body') // Container DIV CREATED IN BODY
   .keydown(function(e){
       if ((e.keyCode == 10 || e.keyCode == 13) && e.ctrlKey)
@@ -116,26 +116,26 @@ function func_MakeDataCapture() {
       if (e.keyCode == 85 && e.altKey) if (NeedToUndo) Func_PushUndo(); // ALT+U BUTTON TO CALL UNDO FUNCTION
     });
   $('<div/>', {
-      id: 'WD_Box',
-      class: 'WordData_Box',
-      style: 'display: none'
+      id    : 'WD_Box',
+      class : 'WordData_Box',
+      style : 'display: none'
   }).appendTo('.WordData_Container'); // Box DIV CREATED IN CONTAINER
   $('<form/>', {
-      id: 'WD_Box__form',
-      name: 'WD_Box__form',
-      class: 'form-group',
-      action: '',
-      method: ''
+      id     : 'WD_Box__form',
+      name   : 'WD_Box__form',
+      class  : 'form-group',
+      action : '',
+      method : ''
   }).appendTo('.WordData_Box'); // Form CREATED IN Box DIV
   var e = $('#WD_Box__form'); // TO REFER THE FORM AS VARIABLE
   e.html('<h4 class="d-block d-md-inline-block align-baseline w-50">News</h4><div id="id_news__count" class="d-none d-md-inline-block align-baseline w-50 px-3 py-1"></div>'); // setting the heading
   $('<textarea/>', {
-      rows: '12',
-      id: 'id_news',
-      name: 'news',
-      class: 'form-control',
-      autofocus: 'autofocus',
-      placeholder: 'Para 1: URL, must start with protocol else one will be applied\nPara 2: Title, you know the limits, TitleCasing etc. whatever...\nPara 3: News Description, oh come on spoonfed!\n\nTLDR;\nBrains and common-sense are essential coz system is equipped here.\n\nsuper-TLDR;\nWelcome to make mistakes.'
+      rows        : '12',
+      id          : 'id_news',
+      name        : 'news',
+      class       : 'form-control',
+      autofocus   : 'autofocus',
+      placeholder : 'Para 1: URL, must start with protocol else one will be applied\nPara 2: Title, you know the limits, TitleCasing etc. whatever...\nPara 3: News Description, oh come on spoonfed!\n\nTLDR;\nBrains and common-sense are essential coz system is equipped here.\n\nsuper-TLDR;\nWelcome to make mistakes.'
       // placeholder: 'Help:\n----------\nPara 1: URL\nPara 2: Title\nPara 3: News Description\n\nAny Paragraph starting with "#" will be treated as CSV-HashTags.'
     }).appendTo(e)
       .change(function() {
@@ -145,23 +145,23 @@ function func_MakeDataCapture() {
         });
       }); // ADDING INPUT TEXTAREA TO THE FORM
   $('<a/>', {
-    id: 'populate',
-    class: 'btn btn-success',
-    onClick: 'func_DataCaptureSubmit("populate");'
+    id      : 'populate',
+    class   : 'btn btn-success',
+    onClick : 'func_DataCaptureSubmit("populate");'
   })
     .html('[Ctrl+Ent]<span class="d-none d-md-inline"> Populate</span>')
     .appendTo(e).css('text-transform', 'initial'); // POPULATE BUTTON
   $('<a/>',{
-    class: 'btn btn-warning',
-    id: 'abbreviate',
-    onClick: 'Func_AbbreviateNews()'
+    class   : 'btn btn-warning',
+    id      : 'abbreviate',
+    onClick : 'Func_AbbreviateNews()'
   })
     .html('[Alt+A]<span class="d-none d-md-inline"> Abbreviate</span>')
     .appendTo(e).css('text-transform', 'initial'); // ABBREVIATE BUTTON
   $('<a/>', {
-    id: 'rollback',
-    class: 'btn btn-outline-secondary',
-    onClick: 'func_DataCaptureSubmit("");'
+    id      : 'rollback',
+    class   : 'btn btn-outline-secondary',
+    onClick : 'func_DataCaptureSubmit("");'
   })
     .html('[Esc]<span class="d-none d-md-inline"> Cancel</span>')
     .appendTo(e).css('text-transform', 'initial'); // CANCEL BUTTON
@@ -221,7 +221,7 @@ function func_Populate() {
   func_BL_CountTitle(); // RUN OWN NEWS_TITLE VALIDATION
   /* NEWS_DESCRIPTION MIXED VALIDATION ***/
   words = $("#description").val().trim().split(' ').length;
-  max = 60;
+  max   = 60;
   if (words > max) {
     $('#characterLeftDesc').text((max-words)+' extra words.');
   } else {
@@ -241,13 +241,13 @@ function func_BL_CountTitle(){
   max = 75;
   if (words > max) {
     $('input#title').css({
-      'transition': 'background-color 0s linear 0s',
-      'background': '#FFE6E6'
+      'transition' : 'background-color 0s linear 0s',
+      'background' : '#FFE6E6'
     });
   } else {
     $('input#title').css({
-      'transition': '',
-      'background': ''
+      'transition' : '',
+      'background' : ''
     });
   }
 }
@@ -259,13 +259,13 @@ function func_BL_CountDesc (){
   max = 60;
   if (words > max) {
     $('textarea#description').css({
-      'transition': 'background-color 0s linear 0s',
-      'background': '#FFE6E6'
+      'transition' : 'background-color 0s linear 0s',
+      'background' : '#FFE6E6'
     });
   } else {
     $('textarea#description').css({
-      'transition': '',
-      'background': ''
+      'transition' : '',
+      'background' : ''
     });
   }
 }
@@ -274,29 +274,29 @@ function func_BL_CountDesc (){
 =========================================================== */
 function func_TitleCBtn() {
   $('<div/>', { // CREATE THE BUTTON
-    id: 'caseConvert'
+    id : 'caseConvert'
   }).appendTo('body');
   $("#caseConvert").css({ // STYLE THE BUTTON
-    'color': 'rgb(85, 85, 85)',
-    'padding': '1px 1rem 0px',
-    'border-radius': '0.25em',
-    'background': 'rgba(255, 255, 0, 0.1)',
-    'box-shadow': 'rgba(0, 0, 0, 0.33) 0px 1px 3px 0px',
-    'cursor': 'pointer',
-    'font': '14px/32px Roboto, sans-serif',
-    'display': 'inline-block',
-    'float': 'right',
-    'margin-top': '5px'
+    'color'         : 'rgb(85, 85, 85)',
+    'padding'       : '1px 1rem 0px',
+    'border-radius' : '0.25em',
+    'background'    : 'rgba(255, 255, 0, 0.1)',
+    'box-shadow'    : 'rgba(0, 0, 0, 0.33) 0px 1px 3px 0px',
+    'cursor'        : 'pointer',
+    'font'          : '14px/32px Roboto, sans-serif',
+    'display'       : 'inline-block',
+    'float'         : 'right',
+    'margin-top'    : '5px'
   })
     .hover(function() {
       $(this).css({
-        'background': 'rgba(255, 255, 0, 0.2)',
-        'box-shadow': '0 3px 8px 0 rgba(0, 0, 0, 0.38)'
+        'background' : 'rgba(255, 255, 0, 0.2)',
+        'box-shadow' : '0 3px 8px 0 rgba(0, 0, 0, 0.38)'
       });
     }, function() {
       $(this).css({
-        'background': 'rgba(255, 255, 0, 0.1)',
-        'box-shadow': '0 1px 3px 0 rgba(0, 0, 0, 0.33)'
+        'background' : 'rgba(255, 255, 0, 0.1)',
+        'box-shadow' : '0 1px 3px 0 rgba(0, 0, 0, 0.33)'
       });
     })
     .attr('onClick', 'func_TitleConvert()')
@@ -391,13 +391,13 @@ function func_CatSelError() {
 function func_PubSelError() {
   if ( !($('[name=publisher_id]').val()) ) { // IF contains NO value
     $("[name=publisher_id]").css({ // ERROR
-      background: 'orangered',
-           color: 'white'
+      background : 'orangered',
+      color      : 'white'
     });
   } else {
     $("[name=publisher_id]").css({ // SUCCESS
-      background: '',
-           color: ''
+      background : '',
+      color      : ''
     });
   }
 }
@@ -475,28 +475,28 @@ function Func_TagSubmit(e) {
 function func_alert(msg,dur,bgc,tc) {
   if (typeof dur === "undefined") {dur=300;} // default; if not provided by caller
   if (typeof bgc === "undefined") {bgc="#F5DA81";} // default; if not provided by caller
-  if (typeof tc === "undefined") {tc="#000";} // default; if not provided by caller
+  if (typeof tc  === "undefined") {tc="#000";} // default; if not provided by caller
   if ($('#myalertwindow'.length)) {
     $('#myalertwindow').remove();
   }
   box = $('<div/>', { // THE ALERT WINDOW
-      id: 'myalertwindow',
-      class: 'text-center'
+      id    : 'myalertwindow',
+      class : 'text-center'
   }).css({
-      "position": "absolute",
-      "left": "50%",
-      "top": "50%",
-      "transform": "translate(-50%,-50%)",
-      'border-radius': '.25em',
-      'border': '5px solid #fff',
-      'padding': '1.25em 3em',
-      'font-size': '1.15em',
-      'font-weight': '400',
-      "background-color": bgc,
-      "color": tc,
-      "box-shadow": "0 .5em 1em rgba(0, 0, 0, .5)",
-      "text-shadow": "0 0 .5px rgba(0, 0, 0, .25)",
-      "z-index": "99000000",
+      "position"         : "absolute",
+      "left"             : "50%",
+      "top"              : "50%",
+      "transform"        : "translate(-50%,-50%)",
+      'border-radius'    : '.25em',
+      'border'           : '5px solid #fff',
+      'padding'          : '1.25em 3em',
+      'font-size'        : '1.15em',
+      'font-weight'      : '400',
+      "background-color" : bgc,
+      "color"            : tc,
+      "box-shadow"       : "0 .5em 1em rgba(0, 0, 0, .5)",
+      "text-shadow"      : "0 0 .5px rgba(0, 0, 0, .25)",
+      "z-index"          : "99000000",
   }).appendTo('body').html(msg);
   box.mouseover(function() { // Pause on hover
     $(this).stop(true, false);

@@ -11,9 +11,9 @@ function fetchHash(recArray,recEl,recHash) {
     recArray[recEl] = recArray[recEl].replace(/#/g,'').replace(/_/g,' ');
   }  // ENDIF
   return {
-    recArrayRet: recArray,
-    recElRet: recEl,
-    recHashRet: recHash
+    recArrayRet : recArray,
+    recElRet    : recEl,
+    recHashRet  : recHash
   };
 }
 

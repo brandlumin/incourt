@@ -25,8 +25,7 @@ gulp.task('myvars', function () {
     .pipe(uglify())
     .pipe(stripJS({safe: true,
                   ignore: /url\([\w\s:\/=\-\+;,]*\)/g}))
-    .pipe(gulp.dest('./'))
-    .pipe(livereload());
+    .pipe(gulp.dest('./'));
 });
 // ---------------------------------------------------------
 

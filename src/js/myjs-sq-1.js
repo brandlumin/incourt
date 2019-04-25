@@ -49,7 +49,7 @@ function func_AutoSelectPublisher() {
 function Func_AbbreviateNews() {
 
   /* setting vars to be returned */
-  NewsURLNotToDo = NewsTitleToDo = NewsDscToDo = HashText = '';
+  // NewsURLNotToDo = NewsTitleToDo = NewsDscToDo = HashText = '';
 
   /* capturing textarea's value in a variable, also for undo ***/
   UndoText   = HelpMeText = '';
@@ -87,7 +87,7 @@ function Func_RegEx(HelpMeText) {
               return (n.match('^#',''));
             }, false);
   HashText = HashText.filter(Boolean); // removing blanks
-  HashText = (HashText.length > 0) ? '# '+HashText.join(',').replace(/#\s?/g,'').replace(/\s{1,}/gm,' ').replace(/\s?,\s?/gm,', ').trim().replace(/,[\s]*$/gm,'') : ''; // removing '#' and joining as CSV
+  HashText = (HashText.length > 0) ? '# '+HashText.join(',').replace(/#\s?/g,'').replace(/\s{2,}/gm,' ').replace(/\s?,\s?/gm,', ').trim().replace(/,[\s]*$/gm,'') : ''; // removing '#' and joining as CSV
 
   /* filtering sans HashText */
   ToBeReplaced = $.grep(ToBeReplaced, function(n,i){
@@ -134,12 +134,11 @@ function Func_RegEx(HelpMeText) {
   /* populating abbreviations in the textarea */
   HashText = (HashText.trim().length >0) ?
               HashText :
-              '# '+NewsTitleToDo.split(' ').join(', ');
+              '# '+NewsTitleToDo; //.split(' ').join(', ');
   $('#id_news').val(
                     NewsURLNotToDo+'\n'+
                     NewsTitleToDo+'\n'+
                     NewsDscToDo+
-                    // ((HashText.replace('/^#\s?/','').trim().length > 0) ? '\n'+HashText+', ' : '\n# ')
                     ((HashText) ? '\n'+HashText : '\n# ')
                     );
 

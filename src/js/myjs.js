@@ -54,7 +54,8 @@ $(function () {
 
   /*!* RE-SETTING GALLERY DISPLAY ROW ***/
   $(".gallery_opner").click(function (){
-    func_alert('Face-lifting gallery.');
+    func_alert('Wait. TajMahal is in making...');
+    // func_alert('Face-lifting gallery.');
     if (!IsGalleryManaged) { // setup the gallery if not done already
       setTimeout(function () {
         func_BetterGallery();

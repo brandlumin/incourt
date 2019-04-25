@@ -39,6 +39,7 @@ GlobalNewsArray     = [
   ["full form","short"],
   ["^(:|\\.|,|\\))[\\s{0,}]?",""],         // beginning correction: no/multiple white-spaces before and after colon, comma, period, closing bracket
   ["\\s{1,}(:|\\.|,|\\))[\\s{0,}]?","$1 "],   // no/multiple white-spaces before and after colon, comma, period, closing bracket
+
   ["additional chief metrapolitan magistrate","ACMM"],
   ["all india muslim personal law board","AIMPLB"],
   ["amma makkal munnetra kazhagam","AMMK party"],
@@ -134,10 +135,17 @@ GlobalNewsArray     = [
   ["Reserve Bank of India","RBI"],
   ["Arbitration and Conciliation Act(, 1996 \\(?Arbitration Act\\)?)?","Arbitration Act"],
   ["Employees State Insurance Act(, 1948 \\(?ESI Act\\)?)?","ESI Act"],
-  ["SC Advocates[\\s|-]?on[\\s|-]?Record Association(\\(?SCAORA\\)?)?","SCAORA"],
+  ["SC Advocates[\\s|-]?on[\\s|-]?Record Association\\s?(\\(?SCAORA\\)?)?","SCAORA"],
+  ["Bharatiya Janata Party","BJP"],
+  ["Delhi Development Authority","DDA"],
+  ["Central Board of Indirect Taxes and Customs","CBIC"],
+  ["National Highways Authority of India","NHAI"],
 
 
 
+
+
+  ["([H|S][C])\\shas","$1"],            // removes HC or SC "has"
   ["(^(?:\\w+)\\s?(?:\\w+)?:\\s)",""],  // remove reporting city
   ["\\.{2,}","\."],                     // multiple periods (dots) into one
   [",{2,}\\s{1,}?",", "],               // multiple periods (dots) into one
@@ -149,6 +157,7 @@ GlobalNewsArray     = [
   ["\\s\\[read[a-zA-Z|\\s]+]",""],      // removing [READ ORDER]
   [",\\sread[a-zA-Z|\\s]+",""],         // removing ', read xyz'
   ["\\.(?!\\s)","\. "],                 // adding space after period if absent
+  ["\\si\\.\\sE\\."," i.e."],                 // adding space after period if absent
 
 
 ];

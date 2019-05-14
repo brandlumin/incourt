@@ -119,22 +119,24 @@ function Func_RegEx(HelpMeText) {
     HashText          = tempValidate2.recHashRet;
     ToBeReplaced[2]   = tempValidate2.recArrayRet[tempValidate2.recElRet];
 
+    HashText = HashText.replace(/(,\s,)/gm,','); // remove by replacing ', ,' by ','
+
   /* making NEWS values nicer */
   NewsURLNotToDo = Func_TrimAndCrisp(ToBeReplaced[0]);
-  NewsTitleToDo  = Func_TrimAndCrisp(ToBeReplaced[1]);
+  NewsTitleHash  = NewsTitleToDo  = Func_TrimAndCrisp(ToBeReplaced[1]);
   NewsDscToDo    = Func_TrimAndCrisp(ToBeReplaced[2]);
 
   /* add protocol 'http://' if does not exist in the URL */
   NewsURLNotToDo = (NewsURLNotToDo.match('^(https?)(?::\/\/)','gi')) ? NewsURLNotToDo : 'http://'+NewsURLNotToDo;
 
-  /* doing abbreviations and capturing results for title and news */
+  /* doing ABBREVIATIONS and capturing results for title and news */
   NewsTitleToDo = Func_RegexReplace(NewsTitleToDo, 'vartitle');
   NewsDscToDo   = Func_RegexReplace(NewsDscToDo, 'vardesc');
 
   /* populating abbreviations in the textarea */
   HashText = (HashText.trim().length >0) ?
               HashText :
-              '# '+NewsTitleToDo; //.split(' ').join(', ');
+              '# '+NewsTitleHash; //.split(' ').join(', ');
   $('#id_news').val(
                     NewsURLNotToDo+'\n'+
                     NewsTitleToDo+'\n'+
@@ -148,7 +150,9 @@ function Func_RegEx(HelpMeText) {
 
   nDescrCount = NewsDscToDo.split(' ').length; // Description
   sDescrMessg = (nDescrCount <= 60) ? '<b>OK</b> by '+(60 - nDescrCount)+' <span class="d-none d-md-inline">word(s)</span>' : '<b>exceeds</b> by <b>'+(nDescrCount - 60)+'</b> <span class="d-none d-md-inline">word(s)</span>'; // Message Creation
+
   bgc = (nTitleCount > 75 || nDescrCount > 60) ? erMsgColor : okMsgColor;
+
   flashMessage = '<b>Title</b> '+sTitleMessg+'<br><b>Desc</b> '+sDescrMessg;
   hmmmPrepend = ((/exceeds/).test(sDescrMessg) || (/exceeds/).test(sTitleMessg))?'<h5 class="mb-2">Hmm...</h5>':'<h5 class="mb-2">Good!</h5>';
 
@@ -160,7 +164,6 @@ function Func_RegEx(HelpMeText) {
   } else {
     func_alert(hmmmPrepend+flashMessage, ((/exceeds/).test(sDescrMessg) || (/exceeds/).test(sTitleMessg))?2100:600, bgc);
   }
-
 }
 
 /* Func_RegexReplace() - Gets DataToRegEx, sets up the RegEx and returns
@@ -184,8 +187,8 @@ function Func_RegexReplace(DataToRegEx, ReceivedField) {
       return match.toUpperCase();
     });
   } else if ( ReceivedField == 'vardesc') {
-    /* To Convert a character followed by a period toUpperCase */
-    DataToRegEx=DataToRegEx.replace(/(?:^|\.\s?)\w/g, function(match) {
+    /* To Convert a character followed by a period or QuestionMark toUpperCase */
+    DataToRegEx=DataToRegEx.replace(/(?:^|[\.\?]\s?)\w/g, function(match) {
       return match.toUpperCase();}
     );
   } else {}
@@ -228,7 +231,7 @@ function func_BetterGallery() {
   /* pp-cell height */
   $('.ImageGallery.customModal .pp-cell > div').css('max-width', '90%');
   /* searchbox removal by over-writing the heading */
-  $('.ImageGallery.customModal .pp-cell > div h2').text('Select Image From Gallery:').addClass('h3');
+    // $('.ImageGallery.customModal .pp-cell > div h2').text('Select Image From Gallery:').addClass('h3');
   /* adding .container */
   $('.ImageGallery.customModal .pp-cell > div .img-container').addClass('container');
   /* adding .row and setting height to 70vH */

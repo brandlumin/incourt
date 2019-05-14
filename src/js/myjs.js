@@ -54,7 +54,8 @@ $(function () {
 
   /*!* RE-SETTING GALLERY DISPLAY ROW ***/
   $(".gallery_opner").click(function (){
-    func_alert('Wait. TajMahal is in making...');
+    func_alert('Hang on!<br/><strong>Shit</strong> is being spread.');
+    // func_alert('Hang on!<br/><strong>Taj Mahal is in making...</strong>');
     // func_alert('Face-lifting gallery.');
     if (!IsGalleryManaged) { // setup the gallery if not done already
       setTimeout(function () {
@@ -87,15 +88,19 @@ function func_MakeHelpBtn() {
 /* function func_ActiHelp() - Activating HelpMe button
 =========================================================== */
 function func_ActiHelp() {
-  Summary =     (($('[name=url]')[1].value.trim() != '')  ? $('[name=url]')[1].value + '\n'  : '') +
+  Summary =     (($('[name=url]')[1].value.trim() != '')  ? $('[name=url]')[1].value + '\n'  : '\n') +
                 (($('#title').val().trim() != '')         ? $('#title').val()        + '\n'  : '') +
                 (($('#description').val().trim() != '')   ? $('#description').val()  : '') +
+                /* To REMOVE '#' from the blank capture to ENABLE hashtags pull heading */
+                // (($('#token-input-topic').val().trim() != '')   ? '\n# '+$('#token-input-topic').val() : '\n# ');
+                /* To KEEP '#' from the blank capture to DISABLE hashtags pull heading */
                 (($('#token-input-topic').val().trim() != '')   ? '\n# '+$('#token-input-topic').val() : '');
   $('#id_news').val(Summary).change();
   $('.HelpDiv').fadeOut('fast', function() {
     $('.WordData_Container').fadeIn( function () {
       $('.WordData_Box').fadeIn(400,function () { // Start Data_Capturing
-        $('#id_news').focus();
+        $('#id_news').focus().get(0).setSelectionRange(0,0); // setting cursor at the begining
+        // $('#id_news').focus();
       });
     });
   });

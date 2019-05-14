@@ -40,7 +40,26 @@ GlobalNewsArray     = [
   ["^(:|\\.|,|\\))[\\s{0,}]?",""],         // beginning correction: no/multiple white-spaces before and after colon, comma, period, closing bracket
   ["\\s{1,}(:|\\.|,|\\))[\\s{0,}]?","$1 "],   // no/multiple white-spaces before and after colon, comma, period, closing bracket
 
+
+
+  ["(apex|top) court","SC"],
   ["additional chief metrapolitan magistrate","ACMM"],
+  ["advocate on record","AoR"],
+  ["arbitration and conciliation act(, 1996 \\(?arbitration act\\)?)?","Arbitration Act"],
+  ["bharatiya janata party","BJP"],
+  ["cji ranjan gogoi","CJI Gogoi"],
+  ["central board of indirect taxes and customs","CBIC"],
+  ["central information commission","CIC"],
+  ["chief metropolitan magistrate","CMM"],
+  ["delhi development authority","DDA"],
+  ["employees state insurance act(, 1948 \\(?esi act\\)?)?","ESI Act"],
+  ["national highways authority of india","NHAI"],
+  ["national stock exchange","NSE"],
+  ["negotiable instruments act","NI Act"],
+  ["prevention of corruption act","PC Act"],
+  ["prevention of money laundering act","PMLA"],
+  ["reserve bank of india","RBI"],
+  ["sc advocates[\\s|-]?on[\\s|-]?record association\\s?(\\(?scaora\\)?)?","SCAORA"],
   ["all india muslim personal law board","AIMPLB"],
   ["amma makkal munnetra kazhagam","AMMK party"],
   ["armed forces tribunal","AFT"],
@@ -53,7 +72,6 @@ GlobalNewsArray     = [
   ["chief justice of india ranjan gogoi","CJI"],
   ["chief justice of india","CJI"],
   ["chief justice ranjan gogoi","CJI"],
-  ["CJI Ranjan Gogoi","CJI Gogoi"],
   ["chief minister","CM"],
   ["code of civil procedure","CPC"],
   ["code of criminal procedure","CrPC"],
@@ -71,6 +89,7 @@ GlobalNewsArray     = [
   ["economically weaker section","EWS"],
   ["election commission of india","EC"],
   ["election commission","EC"],
+  ["electronic voting machine","EVM"],
   ["enforcement directorate","ED"],
   ["fixed drug combination","FDC"],
   ["goods & services tax","GST"],
@@ -94,70 +113,64 @@ GlobalNewsArray     = [
   ["ministry of health & welfare","MHW"],
   ["ministry of home affairs","MHA"],
   ["minitsry of environment and forests and climate change","MEFCC"],
-  ["national register of citizens","NRC"],
   ["national company law appellate tribunal","NCLAT"],
   ["national company law tribunal","NCLT"],
   ["national consumer disputes redressal commission","NCDRC"],
   ["national green tribunal","NGT"],
   ["national human rights commission","NHRC"],
+  ["national register of citizens","NRC"],
   ["new delhi international arbitration centre","NDIAC"],
   ["new delhi municipal council","NDMC"],
   ["pension fund regulatory and development authority","PFRDA"],
   ["petroleum and natural gas board","PNGRB"],
-  ["Prevention of Corruption Act","PC Act"],
-  ["Prevention of Money Laundering Act","PMLA"],
   ["prime minister","PM"],
-  ["protection of children from sexual offences","POCSO"],
-  ["protection of children from sexual offenses","POCSO"],
+  ["protection of children from sexual offen[cs]es","POCSO"],
   ["public interest litigation","PIL"],
   ["public service commission","PSC"],
   ["punjab land preservation act","PLPA"],
   ["quality council of india","QCI"],
+  ["rajiv gandhi national university of law","RGNUL"],
   ["rajya sabha","RS"],
-  ["real estate (regulation and development) act","RERA"],
-  ["real estate regulation and development act","RERA"],
+  ["real estate \\(?regulation and development\\)? act","RERA"],
   ["right to information","RTI"],
   ["scheduled caste","SC"],
   ["scheduled tribe","ST"],
-  ["securities and exchange board of india","SEBI"],
-  ["securities and exchanges board of india","SEBI"],
+  ["securities and exchanges? board of india","SEBI"],
   ["securities appellate tribunal","SAT"],
   ["smuggling and foreign exchange manipulators act","SAFEMA"],
   ["supreme court","SC"],
   ["telecom regulatory authority of india","TRAI"],
   ["unique identification authority of india","UIDAI"],
   ["west bengal housing industry regulation act","WBHIRA"],
-  ["electronic voting machine","EVM"],
-  ["rajiv gandhi national university of law","RGNUL"],
-  ["Central Information Commission","CIC"],
-  ["(apex|top) court","SC"],
-  ["Negotiable Instruments Act","NI Act"],
-  ["Reserve Bank of India","RBI"],
-  ["Arbitration and Conciliation Act(, 1996 \\(?Arbitration Act\\)?)?","Arbitration Act"],
-  ["Employees State Insurance Act(, 1948 \\(?ESI Act\\)?)?","ESI Act"],
-  ["SC Advocates[\\s|-]?on[\\s|-]?Record Association\\s?(\\(?SCAORA\\)?)?","SCAORA"],
-  ["Bharatiya Janata Party","BJP"],
-  ["Delhi Development Authority","DDA"],
-  ["Central Board of Indirect Taxes and Customs","CBIC"],
-  ["National Highways Authority of India","NHAI"],
+  ["model code of conduct","MCC"],
+  ["national law school of india university","NLSIU"],
+  ["pre-conception and pre-natal diagnostic techniques (\\(prohibition of sex selection\\) )?act(, 1994)","PCPNDT Act"],
+  ["Anti[-\\s]Terrorism Squad","ATS"],
+  ["National Investigation Agency","NIA"],
+  ["--------------- anything you need to add ---------------","short-form"],
 
 
 
 
 
-  ["([H|S][C])\\shas","$1"],            // removes HC or SC "has"
-  ["(^(?:\\w+)\\s?(?:\\w+)?:\\s)",""],  // remove reporting city
-  ["\\.{2,}","\."],                     // multiple periods (dots) into one
-  [",{2,}\\s{1,}?",", "],               // multiple periods (dots) into one
-  ["\\((\\s)","("],                     // removes space after bracket starts
-  ["(\\s)\\)",")"],                     // removes space before bracket closes
-  ["(?:\\s?)\\(([A-Z|&]*)\\)",""],      // removes abbr if NOT space | '&' | numbers
-  ["\\s(?:on)\\s[a-zA-Z]+day,?\\s?"," "],   // removing weekdays
-  ["\\s[a-zA-Z]+day",""],               // removing today yesterday
-  ["\\s\\[read[a-zA-Z|\\s]+]",""],      // removing [READ ORDER]
-  [",\\sread[a-zA-Z|\\s]+",""],         // removing ', read xyz'
-  ["\\.(?!\\s)","\. "],                 // adding space after period if absent
-  ["\\si\\.\\sE\\."," i.e."],                 // adding space after period if absent
+  ["([HS][C])\\shas","$1"],                    // removes HC or SC "has"
+  ["(^(?:\\w+)\\s?(?:\\w+)?:\\s)",""],         // remove reporting city
+  ["\\.{2,}","\."],                            // multiple periods (dots) into one
+  [",{2,}\\s{1,}?",", "],                      // multiple commas into one
+  ["\\(\\s","("],                              // removes space after bracket starts
+  ["\\s\\)",")"],                              // removes space before bracket closes
+  ["(?:\\s?)(\\([&a-zA-Z]+\\))",""],           // removes following abbr if contains chars or '&'
+
+
+  ["(,\\s)?\\bon\\s\\w+day,?\\s?",""],        // removing 'on weekdays' --> third alternate with comma
+  // ["\\bon\\s\\w+day,?\\s?",""],             // removing 'on weekdays' --> second alternate
+  // ["\\s(?:on)\\s[a-zA-Z]+day,?\\s?"," "],   // removing 'on weekdays' --> original
+
+
+  ["\\s[a-zA-Z]+day",""],                      // removing all weekdays, today, yesterday
+  ["\\s\\[read[a-zA-Z|\\s]+]",""],             // removing [READ ORDER]
+  [",\\sread[a-zA-Z|\\s]+",""],                // removing ', read xyz'
+  ["(\\.)(?!\\s)([a-zA-Z])","$1 $2"],          // adding space after period, if absent
 
 
 ];

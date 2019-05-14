@@ -144,26 +144,28 @@ function Func_RegEx(HelpMeText) {
                     ((HashText) ? '\n'+HashText : '\n# ')
                     );
 
-  /* FLASHING Status Message */
+  /* SHOWING Status Message */
   nTitleCount = NewsTitleToDo.length; // Title
-  sTitleMessg = (nTitleCount <= 75) ? '<b>OK</b> by '+(75 - nTitleCount)+' <span class="d-none d-md-inline">char(s)</span>' : '<b>exceeds</b> by <b>'+(nTitleCount - 75)+'</b> <span class="d-none d-md-inline">char(s)</span>'; // Message Creation
+  sTitleMessg = (nTitleCount <= 75) ?
+                  'OK<span class="d-lg-none">:</span> <span class="d-none d-lg-inline">by </span>'+(75 - nTitleCount)+'<span class="d-none d-lg-inline"> char(s)</span>' :
+                  '<b>exceeds: '+(nTitleCount - 75)+'</b><span class="d-none d-lg-inline"> char(s)</span>'; // Message Creation
 
   nDescrCount = NewsDscToDo.split(' ').length; // Description
-  sDescrMessg = (nDescrCount <= 60) ? '<b>OK</b> by '+(60 - nDescrCount)+' <span class="d-none d-md-inline">word(s)</span>' : '<b>exceeds</b> by <b>'+(nDescrCount - 60)+'</b> <span class="d-none d-md-inline">word(s)</span>'; // Message Creation
+  sDescrMessg = (nDescrCount <= 60) ?
+                  'OK<span class="d-lg-none">:</span> <span class="d-none d-lg-inline">by </span>'+(60 - nDescrCount)+'<span class="d-none d-lg-inline"> word(s)</span>' :
+                  '<b>exceeds: '+(nDescrCount - 60)+'</b><span class="d-none d-lg-inline"> word(s)</span>'; // Message Creation
 
-  bgc = (nTitleCount > 75 || nDescrCount > 60) ? erMsgColor : okMsgColor;
+  bgcTitle = (nTitleCount > 75) ? erMsgColor : okMsgColor;
+  bgcDescr = (nDescrCount > 60) ? erMsgColor : okMsgColor;
 
-  flashMessage = '<b>Title</b> '+sTitleMessg+'<br><b>Desc</b> '+sDescrMessg;
-  hmmmPrepend = ((/exceeds/).test(sDescrMessg) || (/exceeds/).test(sTitleMessg))?'<h5 class="mb-2">Hmm...</h5>':'<h5 class="mb-2">Good!</h5>';
-
-  if (window.innerWidth >= 768) {     // Message Flash
-    $('#id_news__count').html('<b>Title</b> '+sTitleMessg+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;||&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Desc</b> '+sDescrMessg).css({
-      'background-color': bgc,
-      'box-shadow': '1px 2px 4px rgba(0,0,0,0.15)'
-    });
-  } else {
-    func_alert(hmmmPrepend+flashMessage, ((/exceeds/).test(sDescrMessg) || (/exceeds/).test(sTitleMessg))?2100:600, bgc);
-  }
+  $('#news_count_head').html(sTitleMessg).css({
+    'background-color': bgcTitle,
+    'box-shadow': '-1px 2px 2px rgba(0,0,0,0.35)'
+  });
+  $('#news_count_desc').html(sDescrMessg).css({
+    'background-color': bgcDescr,
+    'box-shadow': '-1px 2px 2px rgba(0,0,0,0.35)'
+  });
 }
 
 /* Func_RegexReplace() - Gets DataToRegEx, sets up the RegEx and returns
@@ -231,7 +233,7 @@ function func_BetterGallery() {
   /* pp-cell height */
   $('.ImageGallery.customModal .pp-cell > div').css('max-width', '90%');
   /* searchbox removal by over-writing the heading */
-    // $('.ImageGallery.customModal .pp-cell > div h2').text('Select Image From Gallery:').addClass('h3');
+    $('.ImageGallery.customModal .pp-cell > div h2').text('Select Image From Gallery:').addClass('h3');
   /* adding .container */
   $('.ImageGallery.customModal .pp-cell > div .img-container').addClass('container');
   /* adding .row and setting height to 70vH */
@@ -245,7 +247,7 @@ function func_BetterGallery() {
   /* remove style from the image container divs */
   $('.ImageGallery.customModal .img-container .gallery .img').removeAttr('style').addClass('mb-3'); // removes every time
   /* adding columns to image container divs */
-  $('.ImageGallery.customModal .img-container .gallery .img').addClass('col-6 col-md-4 col-xl-3').removeAttr('style');
+  $('.ImageGallery.customModal .img-container .gallery .img').addClass('col-4 col-md-3').removeAttr('style');
   /* remove excess row-reset between columns */
   $('.ImageGallery.customModal .img-container .gallery div').not(".img").remove();
   /* resetting HEIGHT and WIDTH from IMG elements */

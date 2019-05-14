@@ -42,7 +42,11 @@ $(function () {
   /*!* CREATING KEYBOARD SHORTCUT ***/
   $(window).keydown(function(e){
       if (e.keyCode > 47 && e.keyCode <= 59 && e.ctrlKey && e.shiftKey) func_SelectCategoryFromKeyboard(e.keyCode); // ENABLES CTRL+SHIFT+N BUTTON for CATEGORY SELECTION
-      if (e.keyCode == 72 && e.altKey) func_ActiHelp(); // ENABLES ALT+H BUTTON TO CALL HELP MODULE
+      if (e.keyCode == 72 && e.altKey) {
+        if ($('#news_count_head').length) $('#news_count_head').html('');
+        if ($('#news_count_desc').length) $('#news_count_desc').html('');
+        func_ActiHelp();
+      } // ENABLES ALT+H BUTTON TO CALL HELP MODULE
 
     });
   $('.time-mask#pub[name="pub_time"]').keydown(function(e){
@@ -69,7 +73,6 @@ $(function () {
 
   /*!* DRAFT BUTTON REMOVAL ***/
   $('#draft_button').remove();
-
 });
 
 /*! FUNCTIONS
@@ -126,6 +129,22 @@ function func_MakeDataCapture() {
       class : 'WordData_Box',
       style : 'display: none'
   }).appendTo('.WordData_Container'); // Box DIV CREATED IN CONTAINER
+  $('<h4/>', {
+      class       : 'd-inline-block mb-2 align-baseline w-50',
+      text        : 'News'
+    }).appendTo('#WD_Box'); // SETTING THE HEADING
+  $('<div/>', {
+      id          : 'news_count',
+      class       : 'd-inline-block align-baseline w-50'
+    }).appendTo('#WD_Box'); // SETTING THE COUNTING DIV CONTAINER
+  $('<div/>', {
+      id          : 'news_count_head',
+      class       : 'd-inline-block w-50 px-sm-2 text-center'
+    }).appendTo('#news_count'); // DIVs TO SHOW HEAD WORD-COUNT IN COUNTING DIV CONTAINER
+  $('<div/>', {
+      id          : 'news_count_desc',
+      class       : 'd-inline-block w-50 px-sm-2 text-center'
+    }).appendTo('#news_count'); // DIVs TO SHOW DESC WORD-COUNT IN COUNTING DIV CONTAINER
   $('<form/>', {
       id     : 'WD_Box__form',
       name   : 'WD_Box__form',
@@ -134,7 +153,6 @@ function func_MakeDataCapture() {
       method : ''
   }).appendTo('.WordData_Box'); // Form CREATED IN Box DIV
   var e = $('#WD_Box__form'); // TO REFER THE FORM AS VARIABLE
-  e.html('<h4 class="d-block d-md-inline-block align-baseline w-50">News</h4><div id="id_news__count" class="d-none d-md-inline-block align-baseline w-50 px-3 py-1"></div>'); // setting the heading
   $('<textarea/>', {
       rows        : '12',
       id          : 'id_news',

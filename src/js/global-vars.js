@@ -147,6 +147,11 @@ GlobalNewsArray     = [
   ["pre-conception and pre-natal diagnostic techniques (\\(prohibition of sex selection\\) )?act(, 1994)","PCPNDT Act"],
   ["Anti[-\\s]Terrorism Squad","ATS"],
   ["National Investigation Agency","NIA"],
+  ["State Consumer Disputes Redressal Commission","SCDRC"],
+  ["(Infrastructure Leasing & Financial Services( Ltd)?)","IL&FS"],
+  ["Central Teacher Eligibility Test","CTET"],
+  ["Central Board of Direct Taxes","CBDT"],
+  ["Securitisation and Reconstruction of Financial Assets and Enforcement of Security Interest","SARFAESI"],
   ["--------------- anything you need to add ---------------","short-form"],
 
 
@@ -157,20 +162,19 @@ GlobalNewsArray     = [
   ["(^(?:\\w+)\\s?(?:\\w+)?:\\s)",""],         // remove reporting city
   ["\\.{2,}","\."],                            // multiple periods (dots) into one
   [",{2,}\\s{1,}?",", "],                      // multiple commas into one
-  ["\\(\\s","("],                              // removes space after bracket starts
-  ["\\s\\)",")"],                              // removes space before bracket closes
+
+  ["\\s*([\\(\\[\\{])\\s*"," $1"],             // corrects space before bracket starts
+  ["\\s*([\\)\\]\\}])\\s*","$1 "],             // corrects space after  bracket closes
+
   ["(?:\\s?)(\\([&a-zA-Z]+\\))",""],           // removes following abbr if contains chars or '&'
 
 
   ["(,\\s)?\\bon\\s\\w+day,?\\s?",""],        // removing 'on weekdays' --> third alternate with comma
-  // ["\\bon\\s\\w+day,?\\s?",""],             // removing 'on weekdays' --> second alternate
-  // ["\\s(?:on)\\s[a-zA-Z]+day,?\\s?"," "],   // removing 'on weekdays' --> original
-
 
   ["\\s[a-zA-Z]+day",""],                      // removing all weekdays, today, yesterday
   ["\\s\\[read[a-zA-Z|\\s]+]",""],             // removing [READ ORDER]
   [",\\sread[a-zA-Z|\\s]+",""],                // removing ', read xyz'
-  ["(\\.)(?!\\s)([a-zA-Z])","$1 $2"],          // adding space after period, if absent
+  ["([\\:,\\?\\.])(?!\\s)([a-zA-Z])","$1 $2"], // adding space after comma, ? and period, if absent
 
 
 ];

@@ -506,7 +506,8 @@ body
       width: 80%
       left: 50%
       top: 50%
-      transform: translate(calc(-50% + 30px), -50%)
+      // transform: translate(calc(-50% + 30px), -50%) // original
+      transform: translateX(calc(-50% + 30px)) translateY(calc(-50% - 0.5px))
       background: #d3d3d3
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.9) !important
       z-index: 10000 !important

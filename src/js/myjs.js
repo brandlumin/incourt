@@ -6,6 +6,8 @@ $.getScript( "http://localhost/incourt/global-vars.js");
 =========================================================== */
 $(function () {
   /*!* STARTUP PREE-HELPSCREEN ***/
+  $('.page').addClass('container-fluid');
+  $('.page.container-fluid #autoform').addClass('row my-md-0');
   func_Sequencify(); // SETTING FIELDS IN DESIRED ORDER
   func_MakeHelpBtn(); // CREATE AND SHOW HELP BUTTON
   func_MakeDataCapture(); // CREATE DATA_CAPTURE_SCREEN
@@ -71,14 +73,46 @@ $(function () {
   });
 
 
+  /*!* ASSIGNING IDENTITY TO PUBLISH BUTTON ***/
+  $('[panel=RIGHTPANEL] .pub-btn > button[type=submit]').attr('bl', 'form_submit');
   /*!* DRAFT BUTTON REMOVAL ***/
   $('#draft_button').remove();
+  func_reposSubmit();
 });
+
+
+
+
+/*! WINDOW RESIZE FUNCTION
+=========================================================== */
+$(window).resize(function() {
+  func_reposSubmit();
+});
+
+
+
+
+
+
 
 /*! FUNCTIONS
 =========================================================== */
 /* function func_MakeHelpBtn() - Floating button to offer help
 =========================================================== */
+function func_reposSubmit() {
+  var windowWidth = window.innerWidth;
+  if (windowWidth > 991.98) {
+    $('[bl=form_submit').appendTo('[panel=RIGHTPANEL] .card-body .pub-btn');
+    $('[panel=RIGHTPANEL] .card-body .pub-btn').show();
+    $('[panel=RIGHTPANEL] .card-body .pub-btn ~ br').show();
+  } else {
+    $('[bl=form_submit').appendTo('[panel=LEFTPANEL] .card-head.style-info');
+    $('[panel=RIGHTPANEL] .card-body .pub-btn ~ br').hide();
+    $('[panel=RIGHTPANEL] .card-body .pub-btn').hide();
+  }
+}
+
+
 function func_MakeHelpBtn() {
   // CREATING DIV AND HELPME BUTTON
   $('<div/>', {
@@ -173,21 +207,21 @@ function func_MakeDataCapture() {
     class   : 'btn btn-success',
     onClick : 'func_DataCaptureSubmit("populate");'
   })
-    .html('[Ctrl+Ent]<span class="d-none d-md-inline"> Populate</span>')
+    .html('[Ctrl+Ent]<span class="d-none d-lg-inline"> Populate</span>')
     .appendTo(e).css('text-transform', 'initial'); // POPULATE BUTTON
   $('<a/>',{
     class   : 'btn btn-warning',
     id      : 'abbreviate',
     onClick : 'Func_AbbreviateNews()'
   })
-    .html('[Alt+A]<span class="d-none d-md-inline"> Abbreviate</span>')
+    .html('[Alt+A]<span class="d-none d-lg-inline"> Abbreviate</span>')
     .appendTo(e).css('text-transform', 'initial'); // ABBREVIATE BUTTON
   $('<a/>', {
     id      : 'rollback',
     class   : 'btn btn-outline-secondary',
     onClick : 'func_DataCaptureSubmit("");'
   })
-    .html('[Esc]<span class="d-none d-md-inline"> Cancel</span>')
+    .html('[Esc]<span class="d-none d-lg-inline"> Cancel</span>')
     .appendTo(e).css('text-transform', 'initial'); // CANCEL BUTTON
 }
 
@@ -253,7 +287,7 @@ function func_Populate() {
   }
   func_BL_CountDesc();
   /*!* Push HashTexh ***/
-  $('#token-input-topic').val(NewsDetail[3]);
+  $('#token-input-topic').val(NewsDetail[3].trim().replace(/[\W]$/,'').replace(/\s{0,}(,)\s{0,}/,'$1'));
   /*!* CHOOSE PUBLISHER BASED ON ENTERED URL ***/
   func_AutoSelectPublisher();
 }
@@ -437,8 +471,8 @@ function func_Sequencify() {
 =========================================================== */
 function Func_SeqInputGroups(e) {
   /*!* ADDING LEFTPANEL AND RIGHTPANEL ***/
-  $('.page .col-md-8').attr('panel', 'LEFTPANEL').removeClass('col-md-8').addClass('col-md-9');
-  $('.page .col-md-4').attr('panel', 'RIGHTPANEL').removeClass('col-md-4').addClass('col-md-3');
+  $('.page .col-md-8').attr('panel', 'LEFTPANEL').removeClass('col-md-8').addClass('col-lg-8 col-xl-9');
+  $('.page .col-md-4').attr('panel', 'RIGHTPANEL').removeClass('col-md-4').addClass('col-lg-4 col-xl-3');
   /*!* ADDING 'SEQ' IDENTIFIER ***/
   $('[panel="LEFTPANEL"] .card-body > .form-group:nth-of-type(2)').attr('seq', 'TITLE');  // TITLE
       $('[SEQ="TITLE"] input').attr('placeholder', 'TITLE');  // TITLE

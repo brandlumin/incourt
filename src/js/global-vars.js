@@ -152,6 +152,12 @@ GlobalNewsArray     = [
   ["Central Teacher Eligibility Test","CTET"],
   ["Central Board of Direct Taxes","CBDT"],
   ["Securitisation and Reconstruction of Financial Assets and Enforcement of Security Interest","SARFAESI"],
+  ["Cr. P. C.","CrPC"],
+  ["non[\\-\\s]banking finance compan(ie|y)","NBFC"],
+  ["Common Law Admission Test","CLAT"],
+  ["Voter Verified Paper Audit Trail","VVPAT"],
+  ["Central Pollution Control Board","CPCB"],
+  ["State Pollution Control Board","SPCB"],
   ["--------------- anything you need to add ---------------","short-form"],
 
 
@@ -175,6 +181,11 @@ GlobalNewsArray     = [
   ["\\s\\[read[a-zA-Z|\\s]+]",""],             // removing [READ ORDER]
   [",\\sread[a-zA-Z|\\s]+",""],                // removing ', read xyz'
   ["([\\:,\\?\\.])(?!\\s)([a-zA-Z])","$1 $2"], // adding space after comma, ? and period, if absent
+
+
+
+
+  ["\\b([A-Z])[\\s]([A-Z])\\b","$1$2"], // removing space between two uppercase Chars, if present
 
 
 ];

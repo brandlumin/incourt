@@ -134,6 +134,9 @@ function Func_RegEx(HelpMeText) {
   NewsDscToDo   = Func_RegexReplace(NewsDscToDo, 'vardesc');
 
   /* populating abbreviations in the textarea */
+  NewsTitleHash = NewsTitleHash
+                  .replace(/[\:]/g,',')
+                  .replace(/(,?\s\[?Read[a-zA-Z\s]+\]?)$/gi,'');
   HashText = (HashText.trim().length >0) ?
               HashText :
               '# '+NewsTitleHash; //.split(' ').join(', ');

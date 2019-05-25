@@ -152,7 +152,7 @@ GlobalNewsArray     = [
   ["Central Teacher Eligibility Test","CTET"],
   ["Central Board of Direct Taxes","CBDT"],
   ["Securitisation and Reconstruction of Financial Assets and Enforcement of Security Interest","SARFAESI"],
-  ["Cr. P. C.","CrPC"],
+  ["Cr\\.\\s?P\\.\\s?C\\.","CrPC"],
   ["non[\\-\\s]banking finance compan(ie|y)","NBFC"],
   ["Common Law Admission Test","CLAT"],
   ["Voter Verified Paper Audit Trail","VVPAT"],
@@ -168,23 +168,17 @@ GlobalNewsArray     = [
   ["(^(?:\\w+)\\s?(?:\\w+)?:\\s)",""],         // remove reporting city
   ["\\.{2,}","\."],                            // multiple periods (dots) into one
   [",{2,}\\s{1,}?",", "],                      // multiple commas into one
-
   ["\\s*([\\(\\[\\{])\\s*"," $1"],             // corrects space before bracket starts
   ["\\s*([\\)\\]\\}])\\s*","$1 "],             // corrects space after  bracket closes
-
   ["(?:\\s?)(\\([&a-zA-Z]+\\))",""],           // removes following abbr if contains chars or '&'
-
-
-  ["(,\\s)?\\bon\\s\\w+day,?\\s?",""],        // removing 'on weekdays' --> third alternate with comma
-
+  ["(,\\s)?\\bon\\s\\w+day,?\\s?",""],         // removing 'on weekdays' --> third alternate with comma
   ["\\s[a-zA-Z]+day",""],                      // removing all weekdays, today, yesterday
-  ["\\s\\[read[a-zA-Z|\\s]+]",""],             // removing [READ ORDER]
-  [",\\sread[a-zA-Z|\\s]+",""],                // removing ', read xyz'
+
+  // ["\\s\\[read[a-zA-Z|\\s]+]",""],          // removing [READ ORDER]
+  // [",\\sread[a-zA-Z|\\s]+",""],             // removing ', read xyz'
+  ["(,?\\s\\[?read[a-zA-Z|\\s]+\\]?)$",""],    // removing the last put ,/[ read...
+
   ["([\\:,\\?\\.])(?!\\s)([a-zA-Z])","$1 $2"], // adding space after comma, ? and period, if absent
-
-
-
-
   ["\\b([A-Z])[\\s]([A-Z])\\b","$1$2"], // removing space between two uppercase Chars, if present
 
 

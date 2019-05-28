@@ -1,0 +1,40 @@
+/**
+ * MEDIA QUERIES FOR VIEWPORT-SIZE UPTO 991.98px
+ * @type {RESPONSIVE ONLY}
+ */
+@media (max-width: 991.98px)
+  header#header // header
+    .headerbar-left // left: logo section
+      .header-nav
+        span.text-primary // brand 'InCourt News Dashboard'
+        a.btn.btn-icon-toggle // hamburger menu
+
+    .headerbar-right // right: menu section
+      ul.header-nav.header-nav-options // button: 'view website'
+        li
+          a
+
+      ul.header-nav.header-nav-profile // 'Contributor' and Drop-down menu
+        li.dropdown // 'Contributor' and Drop-down menu
+          &.open //  OPENED: 'Contributor' and Drop-down menu
+            a.dropdown-toggle.ink-reaction
+          a.dropdown-toggle.ink-reaction // Default view
+            img
+            span.profile-info
+              small
+          a.dropdown-toggle.ink-reaction[aria-expanded="true"] // Drop-down expanded
+            img
+            span.profile-info
+              small
+          ul.dropdown-menu.animation-dock // Drop-down menu
+            li.dropdown-header
+            li
+              a
+
+  @keyframes bounce
+    0%, 20%, 50%, 80%, 100%
+      transform: translateY(0)
+    40%
+      transform: translateY(-6px)
+    60%
+      transform: translateY(-2px)

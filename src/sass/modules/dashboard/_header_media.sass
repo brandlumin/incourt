@@ -4,32 +4,122 @@
  */
 @media (max-width: 991.98px)
   header#header // header
-    .headerbar-left // left: logo section
-      .header-nav
-        span.text-primary // brand 'InCourt News Dashboard'
-        a.btn.btn-icon-toggle // hamburger menu
+    position: fixed !important
+    /* ------------------------ */
+    transition: all 300ms
+    top: -72px
+    background: #620000
+    box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.5)
+    animation: bounce 2s infinite
+    &:hover // header hover
+      top: 0px
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5) !important
+      animation: none
+      &:after // after header hover
+    &:after // after header
+      position: relative
+      display: block
+      width: 70px
+      top: -4px
+      left: 0px
+      content: 'MENU'
+      color: #555
+      font: normal 12px/1 'roboto', sans-serif
+      border-radius: 0 0 4px 4px
+      padding: 1em 1.5em .5em
+      background: #ff9800
+      cursor: pointer
+      transform-origin: left top
+      box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.55)
+    .headerbar
+      background: initial // transparent
 
-    .headerbar-right // right: menu section
-      ul.header-nav.header-nav-options // button: 'view website'
-        li
-          a
+      /* LEFT LOGO SECTION */
+      .headerbar-left
+        box-shadow: none
+        position: fixed
+        left: auto
+        right: auto
+        display: inline-block
+        /* ----------------- */
+        border: none
+        width: auto
+        background: initial // transparent
+        ul.header-nav
+          span.text-primary // brand 'InCourt News Dashboard'
+            color: yellow !important
+          a.btn.btn-icon-toggle // hamburger menu
+            color: #999
+            box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12)
+            margin-left: 1em
+            padding: 0
+            border-radius: .25em !important
+            border: 1px dashed #777
 
-      ul.header-nav.header-nav-profile // 'Contributor' and Drop-down menu
-        li.dropdown // 'Contributor' and Drop-down menu
-          &.open //  OPENED: 'Contributor' and Drop-down menu
-            a.dropdown-toggle.ink-reaction
-          a.dropdown-toggle.ink-reaction // Default view
-            img
-            span.profile-info
-              small
-          a.dropdown-toggle.ink-reaction[aria-expanded="true"] // Drop-down expanded
-            img
-            span.profile-info
-              small
-          ul.dropdown-menu.animation-dock // Drop-down menu
-            li.dropdown-header
-            li
-              a
+      /* RIGHT MENU SECTION */
+      .headerbar-right
+        box-shadow: none
+        position: fixed
+        left: auto
+        right: 0
+        top: 0
+        display: inline-block
+        width: 234px
+        /* ----------------- */
+        background: initial // transparent
+        /* VIEW WEBSITE BUTTON */
+        ul.header-nav.header-nav-options // button: 'view website'
+          display: none
+          li
+            a
+
+        /* CONTRIBUTOR DROPDOWN */
+        ul.header-nav.header-nav-profile // 'Contributor' and Drop-down menu
+          li.dropdown // 'Contributor' and Drop-down menu
+            &:not(.open) //  OPENED: 'Contributor' and Drop-down menu
+              background-color: #ff980033
+            &.open //  OPENED: 'Contributor' and Drop-down menu
+              a.dropdown-toggle.ink-reaction
+                border-radius: .35em .35em 0 0
+                background-color: #ff9800
+                border-color: darken(#ff9800, 10%)
+                &:hover
+                  background-color: #ff9800
+            a.dropdown-toggle.ink-reaction // Default view
+              color: #fff !important
+              &:hover
+                background-color: #ff980077
+              &:after
+                border-top-color: transparent !important
+                color: #fff !important
+              img
+              span.profile-info
+                small
+                  opacity: .7
+                  font-size: 12px
+            a.dropdown-toggle.ink-reaction[aria-expanded="true"] // Drop-down expanded
+              &:after
+                border-top: transparent !important
+                color: #000 !important
+              img
+              span.profile-info
+                small
+                  color: #000
+                  opacity: 1
+                  font-size: 12px
+            ul.dropdown-menu.animation-dock // Drop-down menu
+              border-radius: 0 0 .35em .35em
+              box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.33)
+              border: 1px solid #ddd
+              background-color: #f5f5f5
+              border-top: 0
+              li.dropdown-header
+              li
+                a
+                  font-size: 12px
+                  &:hover,
+                  &:focus
+                    background-color: #ddd
 
   @keyframes bounce
     0%, 20%, 50%, 80%, 100%

@@ -13,7 +13,6 @@ $(function () {
   func_MakeDataCapture(); // CREATE DATA_CAPTURE_SCREEN
   func_ActiHelp(); // CALL HELP MODULE UPFRONT // **optional**
 
-
   /*!* STARTUP POST-HELPSCREEN ***/
   $('.attachmentType').val(function (AttTypeValue) {
     $('.attachment-images').removeClass('hide');
@@ -287,7 +286,7 @@ function func_Populate() {
   }
   func_BL_CountDesc();
   /*!* Push HashTexh ***/
-  $('#token-input-topic').val(NewsDetail[3].trim().replace(/[\W]$/,'').replace(/\s{0,}(,)\s{0,}/,'$1'));
+  $('#token-input-topic').val(NewsDetail[3].trim().replace(/[\W]$/,'').replace(/\s{0,}(,)\s{0,}/g,'$1'));
   /*!* CHOOSE PUBLISHER BASED ON ENTERED URL ***/
   func_AutoSelectPublisher();
 }
@@ -509,7 +508,7 @@ function Func_RePosition(e) {
   $('[seq="TITLE"]').after( $('[seq="NEWSDESCRIPTION"]') );
   $('[seq="NEWSDESCRIPTION"]').after( $('[seq="ATTACHMENT"]') );
   $('label[for="pub_select"]').html('Publisher');
-  $('#topic + label').html('#Tags');
+  $('#topic + label').html('Topic(s)');
 }
 
 /* function Func_TagSubmit() - Submit by pressing 'Ctrl+Enter'

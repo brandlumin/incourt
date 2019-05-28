@@ -15,10 +15,8 @@
       .WordData_Box
         // width: 90%
         // height: 70%
-        // transform: translate(-50%, -50%) // original
-        transform: translateX(-50%) translateY(calc(-50% - .5px)) // working trick
+        transform: translateX(-50%) translateY(calc(-50% - .5px)) // working hack
         text-shadow: none
-        // transform: translateX(-50%) translateY(calc(-50% - .5px)) translateZ(0) // further
         form
           h4
             text-shadow: none
@@ -77,33 +75,20 @@
                         transform: scale(2.5)
                         box-shadow: 0 2px 2em .1em rgba(0,0,0,1) !important
 
-
-@media (max-width: 991.98px)
-  [bl="form_submit"]
-    margin: 0 0 0 calc(50% - ( 30px + 49px + 65px + 8px ) - 47px )
-    top: -1px
-    border-radius: .25em
-    border: none
-    background-color: lighten(green, 10%)
-    padding: .25em 1.5em .15em
-    font: normal 500 14px/2.25 'Roboto', sans-serif
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33)
-    text-transform: none
-    text-shadow: none
-    &:hover
-      color: darkgreen
-      color: #555
-      background-color: lighten(green, 20%)
+    [bl="form_submit"]
+      margin: 0 0 0 calc(50% - ( 30px + 49px + 65px + 8px ) - 47px )
+      top: -1px
+      border-radius: .25em
       border: none
-      box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.38)
-  // [bl="form_submit"]
-  //   // margin: 0 0 0 12%
-  //   font-size: .9em
-  //   background-color: lighten(green, 10%)
-  //   border-color: lighten(green, 10%)
-  //   text-transform: none
-  //   &:hover
-  //     background-color: green
-  //     border-color: green
-
-
+      background-color: lighten(green, 10%)
+      padding: .25em 1.5em .15em
+      font: normal 500 14px/2.25 'Roboto', sans-serif
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33)
+      text-transform: none
+      text-shadow: none
+      &:hover
+        color: darkgreen
+        color: #555
+        background-color: lighten(green, 20%)
+        border: none
+        box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.38)

@@ -1,10 +1,8 @@
-.ImageGallery.customModal
-  img.img-responsive
-    max-height: 30vH
+/*! HEADER */
+@import 'modules/dashboard/header_media'
+/*! REMAINING WEBSITE */
 @media (max-width: 991.98px)
   body
-    /*! HEADER */
-    @import 'modules/dashboard/header_media'
     /*@ TEXTAREA */
     [SEQ="NEWSDESCRIPTION"]
       textarea
@@ -47,6 +45,7 @@
                 text-shadow: 0 .5px .5px #000000aa
             h2.h3
               color: white
+              font-size: 1.5em
               text-shadow: 0 1.5px 2px #00000077
             .img-container
               padding-left: 0 !important
@@ -54,13 +53,13 @@
               .gallery
                 .img
                   &:first-of-type,
-                  &:nth-of-type(4n)
+                  &:nth-of-type(3n+1)         // left of row
                     img
                       transform-origin: left
-                  &:nth-of-type(3n+2)
+                  &:nth-of-type(3n+2)         // center of row
                     img
                       transform-origin: center
-                  &:nth-of-type(3n)
+                  &:nth-of-type(3n)           // right of row
                     img
                       transform-origin: right
                   &:hover
@@ -73,7 +72,7 @@
                         z-index: 10 !important
                         box-shadow: 0 2px 2em .1em rgba(0,0,0,1) !important
                     img.img-responsive
-                      border: 2px solid white !important
+                      border: 3px solid white !important
                       &:hover
 
     [bl="form_submit"]

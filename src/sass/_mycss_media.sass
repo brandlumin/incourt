@@ -67,13 +67,15 @@
                   &:hover
                     z-index: 10 !important
                   a
+                    &:hover
+                      img
+                        transform: scale(1.5)
+                        background-color: white
+                        z-index: 10 !important
+                        box-shadow: 0 2px 2em .1em rgba(0,0,0,1) !important
                     img.img-responsive
                       border: 2px solid white !important
                       &:hover
-                        background-color: white
-                        z-index: 10 !important
-                        transform: scale(2.5)
-                        box-shadow: 0 2px 2em .1em rgba(0,0,0,1) !important
 
     [bl="form_submit"]
       margin: 0 0 0 calc(50% - ( 30px + 49px + 65px + 8px ) - 47px )

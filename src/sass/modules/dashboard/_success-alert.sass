@@ -1,18 +1,31 @@
 #base > .alert.alert-success
   margin: 0 !important
   z-index: 99999999
-  padding: 45px 110px 45px 60px
-  box-shadow: 0 0 1em #00000055
+  padding: 2em 6em 2em 3em
+  @media (max-width: 991.98px)
+    padding: 1rem 2rem
+    padding-right: 4rem
+    font-size: .9em
+    border: 5px solid white
+    top: 40%
+  box-shadow: 0 .25em .7em #00000077
   border: 7px solid white
   position: fixed
   top: 30%
-  left: 50%
-  transform: translate(-50%, -50%)
+  left: calc(50% + .5px)
+  transform: translateX(calc(-50% - 1px))
+  &:hover
+    box-shadow: 0 .1em .3em #00000077
   button
-    background: lightgray !important
+    background: lightgray
     opacity: .5
     padding: 1em
+    @media (max-width: 991.98px)
+      padding: .5em
     position: absolute
     top: 0px
     right: 0px
     bottom: 0px
+    &:hover
+      background: pink
+      color: red

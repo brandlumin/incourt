@@ -42,3 +42,69 @@
           &:nth-of-type(5),
           &:nth-of-type(6)
             display: none
+
+
+
+@media (max-width: 991.98px)
+  .card-body
+
+    table.table
+      color: black
+      thead
+        border: none
+        background-color: green
+        border-bottom: 2px solid white
+        box-shadow: 0 4px 6px -3px transparentize(black, 0.2)
+        tr
+          z-index: auto
+          th
+            border: none
+            border-radius: 0
+            color: yellow
+            font-weight: 700
+            font: 500 16px/1.5 'Roboto', sans-serif
+            text-shadow: 0 1px 3px transparentize(black, .3)
+          th
+            &:nth-of-type(1),
+            &:nth-of-type(4),
+            &:nth-of-type(5),
+            &:nth-of-type(6)
+              display: none
+
+      tbody
+        tr
+          z-index: auto
+          background: #eee
+          border-bottom: 1px solid #ddd
+          transition: 50ms ease-in-out box-shadow
+          &:hover
+            background: white
+            box-shadow: 0 0 .5em transparentize(black, .85)
+          td
+            border: none
+            border-radius: 0
+            em
+              font: 500 16px/1.5rem 'Roboto', sans-serif
+              transition: 450ms ease font-size
+          td
+            &:nth-of-type(1),
+            &:nth-of-type(4),
+            &:nth-of-type(5),
+            &:nth-of-type(6)
+              display: none
+            &:nth-of-type(9) // ACTION's column
+              width: unset !important
+            .btn-floating-action // floating buttons
+              width: unset
+              height: unset
+              border-radius: .25rem !important
+              padding: .2rem
+              &:nth-of-type(1),
+              &:nth-of-type(2)
+                margin-bottom: 0.35rem
+              & i
+                font-size: .85rem
+              & .fa
+                // line-height: unset
+                line-height: .85rem
+

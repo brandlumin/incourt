@@ -146,6 +146,7 @@ function Func_RegEx(HelpMeText) {
                     NewsTitleToDo+'\n'+
                     ((window.innerWidth < 992) ? '\n':'')+
                     NewsDscToDo+
+                    ((window.innerWidth < 992) ? '\n':'')+
                     ((HashText) ? '\n'+HashText : '\n# ')
                     );
 

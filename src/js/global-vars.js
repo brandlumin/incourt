@@ -74,6 +74,7 @@ GlobalNewsArray     = [
   ["chief justice ranjan gogoi","CJI"],
   ["chief minister","CM"],
   ["code of civil procedure","CPC"],
+  ["civil procedure code","CPC"],
   ["code of criminal procedure","CrPC"],
   ["committee of administrators","CoA"],
   ["court recently","court"],

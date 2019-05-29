@@ -129,6 +129,7 @@ function func_ActiHelp() {
                 (($('#title').val().trim() != '')         ? $('#title').val()        + '\n'  : '') +
                     ((window.innerWidth < 992) ? '\n':'')+
                 (($('#description').val().trim() != '')   ? $('#description').val()  : '') +
+                    ((window.innerWidth < 992) ? '\n':'')+
                 /* To REMOVE '#' from the blank capture to ENABLE hashtags pull heading */
                 // (($('#token-input-topic').val().trim() != '')   ? '\n# '+$('#token-input-topic').val() : '\n# ');
                 /* To KEEP '#' from the blank capture to DISABLE hashtags pull heading */

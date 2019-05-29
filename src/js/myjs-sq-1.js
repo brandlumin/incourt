@@ -142,7 +142,9 @@ function Func_RegEx(HelpMeText) {
               '# '+NewsTitleHash; //.split(' ').join(', ');
   $('#id_news').val(
                     NewsURLNotToDo+'\n'+
+                    ((window.innerWidth < 992) ? '\n':'')+
                     NewsTitleToDo+'\n'+
+                    ((window.innerWidth < 992) ? '\n':'')+
                     NewsDscToDo+
                     ((HashText) ? '\n'+HashText : '\n# ')
                     );

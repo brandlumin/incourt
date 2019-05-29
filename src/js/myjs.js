@@ -125,7 +125,9 @@ function func_MakeHelpBtn() {
 =========================================================== */
 function func_ActiHelp() {
   Summary =     (($('[name=url]')[1].value.trim() != '')  ? $('[name=url]')[1].value + '\n'  : '\n') +
+                    ((window.innerWidth < 992) ? '\n':'')+
                 (($('#title').val().trim() != '')         ? $('#title').val()        + '\n'  : '') +
+                    ((window.innerWidth < 992) ? '\n':'')+
                 (($('#description').val().trim() != '')   ? $('#description').val()  : '') +
                 /* To REMOVE '#' from the blank capture to ENABLE hashtags pull heading */
                 // (($('#token-input-topic').val().trim() != '')   ? '\n# '+$('#token-input-topic').val() : '\n# ');

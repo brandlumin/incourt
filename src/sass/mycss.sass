@@ -14,10 +14,14 @@ body
   #content
       padding-top: 1em
 
+  &:not(.menubar-visible) #menubar
+    left: -64px
+  &.menubar-visible #menubar
+    left: 0
   #menubar
-    margin-top: 1em
+    // margin-top: 1em
+    // display: none
     top: 0
-    display: none
 
   .form-control,
   input[type=text],
@@ -101,12 +105,12 @@ header#header // header
       span.text-primary // brand 'InCourt News Dashboard'
         color: yellow !important
       a.btn.btn-icon-toggle // hamburger menu
-        color: #999
-        box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12)
+        color: #ff9800
+        box-shadow: 0 2px 5px 0 rgba(0,0,0,0.5), 0 2px 10px 0 rgba(0,0,0,0.12)
         margin-left: 1em
         padding: 0
         border-radius: .25em !important
-        border: 1px dashed #777
+        // border: 1px dashed #ff9800
 
   .headerbar-right // right: menu section
     ul.header-nav.header-nav-options // button: 'view website'

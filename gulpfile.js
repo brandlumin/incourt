@@ -55,7 +55,7 @@ gulp.task('workflowcss', function () {
     .pipe(sass.sync({
                   errLogToConsole: true,
                   precision: 10,
-                  outputStyle: 'compressed' //nested'
+                  outputStyle: 'nested' //compressed'
                   }).on('error', sass.logError))
     .pipe(postcss([ autoprefixer({browsers: ['> 0.01% in IN', 'iOS 4'], grid: true}) ]))
     .pipe(stripCSS({preserve: /^!|@|#/}))
@@ -73,7 +73,7 @@ gulp.task('dashcss', function () {
     .pipe(sass.sync({
                   errLogToConsole: true,
                   precision: 10,
-                  outputStyle: 'compressed' //nested'
+                  outputStyle: 'nested' //compressed'
                   }).on('error', sass.logError))
     .pipe(postcss([ autoprefixer({browsers: ['> 0.01% in IN', 'iOS 4'], grid: true}) ]))
     .pipe(stripCSS({preserve: /^!|@|#/}))
@@ -96,8 +96,8 @@ gulp.task('serve', function(){ // This just displayes upon run and triggers the 
 
 // WATCH SECTION // ----------------------------------------
 gulp.task('watch:sass', function () {
-  gulp.watch(['src/sass/mycss.sass','src/sass/_mycss*.sass','src/sass/modules/addpost/**/*.sass','src/sass/modules/sidemenu/**/*.sass'  ], gulp.series('workflowcss'));
-  gulp.watch(['src/sass/dashboard.sass','src/sass/modules/dashboard/**/*.sass'], gulp.series('dashcss'));
+  gulp.watch(['src/sass/mycss.sass','src/sass/_mycss*.sass','src/sass/modules/addpost/**/*.sass'], gulp.series('workflowcss'));
+  gulp.watch(['src/sass/dashboard.sass','src/sass/modules/dashboard/**/*.sass','src/sass/modules/sidemenu/**/*.sass'  ], gulp.series('dashcss'));
 });
 
 gulp.task('watch:js', function () {

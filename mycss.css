@@ -8346,7 +8346,7 @@ div#base {
             font-weight: 700; }
         div#base div.page form div[panel="LEFTPANEL"] .card .card-body {
           background: lightgrey;
-          padding: 6px 24px;
+          padding: 0.3em 1.5em 1.5em;
           border: none; }
           div#base div.page form div[panel="LEFTPANEL"] .card .card-body div.text-right {
             position: absolute;
@@ -8384,6 +8384,8 @@ div#base {
           div#base div.page form div[panel="LEFTPANEL"] .card .card-body .form-group #characterLeftTitle, div#base div.page form div[panel="LEFTPANEL"] .card .card-body .form-group #characterLeftDesc {
             font: normal .85em/1.1 'Roboto', sans-serif;
             color: #666; }
+          div#base div.page form div[panel="LEFTPANEL"] .card .card-body .form-group.s12 {
+            margin-top: 0; }
           div#base div.page form div[panel="LEFTPANEL"] .card .card-body .row {
             margin-bottom: 0;
             clear: right; }

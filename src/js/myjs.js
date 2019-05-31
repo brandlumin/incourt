@@ -5,6 +5,7 @@ $.getScript( "http://localhost/incourt/global-vars.js");
 /*! DOCUMENT READY FUNCTION
 =========================================================== */
 $(function () {
+  $('#header .headerbar-right ul.header-nav.header-nav-options li a').text('InCourt');
   /*!* STARTUP PREE-HELPSCREEN ***/
   $('.page').addClass('container-fluid');
   $('.page.container-fluid #autoform').addClass('row my-md-0');

@@ -96,8 +96,7 @@ gulp.task('serve', function(){ // This just displayes upon run and triggers the 
 
 // WATCH SECTION // ----------------------------------------
 gulp.task('watch:sass', function () {
-  gulp.watch(['src/sass/mycss.sass','src/sass/_mycss*.sass','src/sass/modules/addpost/**/*.sass'], gulp.series('workflowcss'));
-  gulp.watch(['src/sass/dashboard.sass','src/sass/modules/dashboard/**/*.sass','src/sass/modules/sidemenu/**/*.sass'  ], gulp.series('dashcss'));
+  gulp.watch('src/sass/**/*.sass', gulp.series('workflowcss','dashcss'));
 });
 
 gulp.task('watch:js', function () {

@@ -2,41 +2,42 @@
   header#header // header
     transition: all 300ms
     top: -72px
-    background-color: #620000
-    box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.5)
+    background-color: $blue-clr // #620000
+    border-bottom: 3px solid $blue1-clr // #620000
+    box-shadow: 0 .5em 1em 0em rgba(0, 0, 0, 0.7)
     animation: bounce 2s infinite
     &:hover // header hover
       top: 0px
-      box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.5) !important
+      box-shadow: 0 .25em .5em 0em rgba(0, 0, 0, 0.7)
       animation: none
       &:after // after header hover
     &:after // after header
       position: relative
       display: block
       width: 70px
-      top: -4px
+      top: -.25em
       left: 0px
       content: 'MENU'
-      color: #555
-      font: normal 12px/1 'roboto', sans-serif
-      border-radius: 0 0 4px 4px
-      padding: 1em 1.5em .5em
-      background-color: #ff9800
+      color: $black-clr // #555
+      font: normal .8em/1 'roboto', sans-serif
+      border-radius: 0 0 .25em .25em
+      padding: 1em 1.5em .7em
+      background-color: $yellow-clr // #ff9800
       cursor: pointer
       transform-origin: left top
-      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.55)
+      box-shadow: 0 .25em .5em 0em rgba(0, 0, 0, 0.7)
 
     .headerbar-left // left: logo section
       .header-nav
         span.text-primary // brand 'InCourt News Dashboard'
-          color: yellow !important
+          color: $yellow-clr !important // #
         a.btn.btn-icon-toggle // hamburger menu
-          color: #ff9800
+          color: $yellow-clr // #ff9800
           box-shadow: 0 2px 5px 0 rgba(0,0,0,0.5), 0 2px 10px 0 rgba(0,0,0,0.12)
           margin-left: 1em
           padding: 0
           border-radius: .25em !important
-          // border: 1px dashed #ff9800
+          // border: 1px dashed $yellow-clr // #ff9800
 
     .headerbar-right // right: menu section
       ul.header-nav.header-nav-options // button: 'view website'
@@ -44,58 +45,65 @@
           padding-bottom: 0
           a
             margin-right: 4em
-            color: yellow
-            text-transform: lowercase !important
+            border: none
+            background-color: transparentize($white-clr, .9)
+            color: $yellow-clr // #
+            text-transform: unset !important
             letter-spacing: 0px
-            box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26), 0 2px 10px 0 rgba(0,0,0,0.22)
+            // box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26), 0 2px 10px 0 rgba(0,0,0,0.22)
             &:hover
-              background-color: yellow
-              color: black
+              background-color: $yellow-clr // #
+              color: $black-clr
 
       ul.header-nav.header-nav-profile // 'Contributor' and Drop-down menu
         li.dropdown // 'Contributor' and Drop-down menu
           &.open //  OPENED: 'Contributor' and Drop-down menu
             a.dropdown-toggle.ink-reaction
               border-radius: .35em .35em 0 0
-              background-color: #ff9800
-              border-color: darken(#ff9800, 10%)
+              background-color: $yellow-clr // #ff9800
+              border-color: darken($yellow-clr, 10%)
               &:hover
-                background-color: #ff9800
+                background-color: $yellow-clr // #ff9800
           a.dropdown-toggle.ink-reaction // Default view
-            color: #fff !important
+            color: $white-clr // #fff
             &:hover
-              background-color: #ff980077
+              background-color: $yellow-clr // #ff980077
+              color: $black-clr
+              &:after
+                color: $black-clr
             &:after
               border-top-color: transparent !important
-              color: #fff !important
+              color: $white-clr // #fff
             img
             span.profile-info
               small
                 opacity: .7
-                font-size: 12px
+                font-size: .85em
           a.dropdown-toggle.ink-reaction[aria-expanded="true"] // Drop-down expanded
             &:after
               border-top: transparent !important
-              color: #000 !important
+              color: $black-clr !important // #000
             img
             span.profile-info
               small
-                color: #000
+                color: $black-clr // #000
                 opacity: 1
-                font-size: 12px
+                font-size: .85em
           ul.dropdown-menu.animation-dock // Drop-down menu
             border-radius: 0 0 .35em .35em
-            box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.33)
-            border: 1px solid #ddd
-            background-color: #f5f5f5
+            box-shadow: 0 .35em .5em 0em rgba(0, 0, 0, 0.3)
+            border: 1px solid darken($white-clr, 25%) // #ddd
+            background-color: $white-clr // #f5f5f5
             border-top: 0
             li.dropdown-header
             li
+              &.divider
+                background-color: darken($white-clr, 25%)
               a
-                font-size: 12px
+                font-size: .85em
                 &:hover,
                 &:focus
-                  background-color: #ddd
+                  background-color: darken($white-clr, 25%) // #ddd
 
 @keyframes bounce
   0%, 20%, 50%, 80%, 100%

@@ -339,12 +339,12 @@ function func_TitleCBtn() {
   }).appendTo('body');
   $("#caseConvert").css({ // STYLE THE BUTTON
     'color'         : 'rgb(85, 85, 85)',
-    'padding'       : '1px 1rem 0px',
+    'padding'       : '.8em 1.5em .8em',
     'border-radius' : '0.25em',
     'background'    : 'rgba(255, 255, 0, 0.1)',
-    'box-shadow'    : 'rgba(0, 0, 0, 0.33) 0px 1px 3px 0px',
+    'box-shadow'    : '0 .15em .3em 0 rgba(0, 0, 0, 0.33)',
     'cursor'        : 'pointer',
-    'font'          : '14px/32px Roboto, sans-serif',
+    'font'          : '.85em/1 Roboto, sans-serif',
     'display'       : 'inline-block',
     'float'         : 'right',
     'margin-top'    : '5px'
@@ -352,12 +352,12 @@ function func_TitleCBtn() {
     .hover(function() {
       $(this).css({
         'background' : 'rgba(255, 255, 0, 0.2)',
-        'box-shadow' : '0 3px 8px 0 rgba(0, 0, 0, 0.38)'
+        'box-shadow' : '0 .15em .5em 0 rgba(0, 0, 0, 0.38)'
       });
     }, function() {
       $(this).css({
         'background' : 'rgba(255, 255, 0, 0.1)',
-        'box-shadow' : '0 1px 3px 0 rgba(0, 0, 0, 0.33)'
+        'box-shadow' : '0 .15em .3em 0 rgba(0, 0, 0, 0.33)'
       });
     })
     .attr('onClick', 'func_TitleConvert()')

@@ -8,7 +8,7 @@ $(function () {
   $('#header .headerbar-right ul.header-nav.header-nav-options li a').text('InCourt');
   /*!* STARTUP PREE-HELPSCREEN ***/
   $('.page').addClass('container-fluid');
-  $('.page.container-fluid #autoform').addClass('row my-md-0');
+  $('.page.container-fluid #autoform').addClass('my-md-0');
   func_Sequencify(); // SETTING FIELDS IN DESIRED ORDER
   func_MakeHelpBtn(); // CREATE AND SHOW HELP BUTTON
   func_MakeDataCapture(); // CREATE DATA_CAPTURE_SCREEN

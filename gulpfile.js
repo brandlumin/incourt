@@ -44,6 +44,17 @@ gulp.task('workflowjs', function () {
     .pipe(gulp.dest('./'))
     .pipe(livereload());
 });
+gulp.task('localjs', function () {
+  return gulp.src(['src/import/jquery-3.3.1.min.js','src/js/local*.js'])
+    // .pipe(sourcemaps.init())
+    .pipe(uglify())
+    .pipe(concat('local.js'))
+    .pipe(stripJS({safe: true,
+                  ignore: /url\([\w\s:\/=\-\+;,]*\)/g}))
+    // .pipe(sourcemaps.write())
+    .pipe(gulp.dest('./'))
+    .pipe(livereload());
+});
 // ---------------------------------------------------------
 
 
@@ -51,6 +62,20 @@ gulp.task('workflowjs', function () {
 // SASS SECTION // -----------------------------------------
 gulp.task('workflowcss', function () {
   return gulp.src('src/sass/mycss.sass')
+    // .pipe(sourcemaps.init())
+    .pipe(sass.sync({
+                  errLogToConsole: true,
+                  precision: 10,
+                  outputStyle: 'nested' //compressed'
+                  }).on('error', sass.logError))
+    .pipe(postcss([ autoprefixer({browsers: ['> 0.01% in IN', 'iOS 4'], grid: true}) ]))
+    .pipe(stripCSS({preserve: /^!|@|#/}))
+    // .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest('./'))
+    .pipe(livereload());
+});
+gulp.task('localcss', function () {
+  return gulp.src('src/sass/local.sass')
     // .pipe(sourcemaps.init())
     .pipe(sass.sync({
                   errLogToConsole: true,
@@ -97,10 +122,12 @@ gulp.task('serve', function(){ // This just displayes upon run and triggers the 
 // WATCH SECTION // ----------------------------------------
 gulp.task('watch:sass', function () {
   gulp.watch('src/sass/**/*.sass', gulp.series('workflowcss','dashcss'));
+  gulp.watch(['src/sass/local*.sass','src/sass/_colors.sass'], gulp.series('localcss'));
 });
 
 gulp.task('watch:js', function () {
   gulp.watch('src/js/myjs*.js', gulp.series('workflowjs'));
+  gulp.watch('src/js/local*.js', gulp.series('localjs'));
 });
 
 gulp.task('watch:vars', function () {
@@ -108,7 +135,7 @@ gulp.task('watch:vars', function () {
 });
 
 gulp.task('watch:frontend', function () {
-  gulp.watch(['**/*.html', '**/*.csv']).on('change', livereload.reload);
+  gulp.watch('**/*.html').on('change', livereload.reload);
 });
 gulp.task('watch', gulp.parallel('watch:sass','watch:js','watch:frontend','watch:vars'));
 // ---------------------------------------------------------
@@ -118,8 +145,10 @@ gulp.task('watch', gulp.parallel('watch:sass','watch:js','watch:frontend','watch
 // REQUIRE SECTION // --------------------------------------
 gulp.task('default', gulp.series(
                                  'workflowcss',
+                                 'localcss',
                                  'dashcss',
                                  'workflowjs',
+                                 'localjs',
                                  'myvars',
                                   gulp.parallel(
                                                 'serve',

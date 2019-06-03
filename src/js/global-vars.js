@@ -39,6 +39,7 @@ GlobalNewsArray     = [
   ["full form","short"],
   ["^(:|\\.|,|\\))[\\s{0,}]?",""],         // beginning correction: no/multiple white-spaces before and after colon, comma, period, closing bracket
   ["\\s{1,}(:|\\.|,|\\))[\\s{0,}]?","$1 "],   // no/multiple white-spaces before and after colon, comma, period, closing bracket
+  ["(\\d{2})\\.(\\d{2})\\.(\\d{4})","$1-$2-$3"],   // no/multiple white-spaces before and after colon, comma, period, closing bracket
 
 
 

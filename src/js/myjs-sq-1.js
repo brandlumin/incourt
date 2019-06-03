@@ -5,7 +5,7 @@ var ObjAllPublication = {};
 $('[name=publisher_id] option').each(function() {
   /* capturing Publishers into Object */
     // ObjAllPublication[$(this).html()] = $(this).val(); // SYNTAX
-  ObjAllPublication[$(this).html().replace(/(\s)+/g, '').toLowerCase()] = $(this).val(); // removing spaces and making lowercase
+  ObjAllPublication[$(this).html().toLowerCase().replace(/(\s)+/g, "").replace(/^(https?:?\/?\/?)+/g, "").replace(/^(w{3}\.)+/g, "").replace(/(\.[a-z]+\/?)$/g, "")] = $(this).val(); // removing spaces and making lowercase
 });
 
 /*! PUBLISHER FUNCTIONS

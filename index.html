@@ -20,10 +20,11 @@
   <!-- Add your site or application content here -->
   <p hidden="hidden">Hello Devs! This is our landing page.</p>
   <p hidden="hidden">However, it is nomore on web-interface. It is now purely made for JS and CSS which works on live working environment on <u>beta.incourt.in/contributor/login</u> onwards. This page, hereonwards, may or may not be working as a ReadMe or Notes page.</p>
+
   <div class="blNavigation container-fluid d-flex">
     <div class="leftNav d-flex">
       <div class="blLogo">
-        <img src="https://incourt.in/site/wp-content/uploads/2018/10/incourt-logo-white.png" alt="inCourtLogo" class="img-responsive">
+        <img src="https://incourt.in/site/wp-content/uploads/2018/10/incourt-logo-white.png" alt="&nbsp;&nbsp;internet error" class="img-responsive text-danger">
       </div>
       <!-- /.blLogo -->
     </div>
@@ -41,16 +42,34 @@
     <!-- /.d-flex -->
   </div>
   <!-- /.blNavigation -->
-  <section class="container-fluid my-3 form">
+
+  <section class="container-fluid my-3 mt-5 form">
     <div class="row">
       <div class="col-10 offset-1 col-md-8 offset-md-2">
-        <div class="formdiv">
+        <div class="header_div">
+          <div class="header_div-header d-flex p-2">
+            <h4 class="d-inline-block align-baseline w-50 px-2">News</h4>
+            <div id="news_count" class="d-inline-block align-baseline w-50 d-lg-flex">
+              <div id="news_count_head" class="w-100 text-center"></div>
+              <div id="news_count_desc" class="w-100 text-center"></div>
+            </div>
+          </div>
+          <!-- /.header_div-header.d-flex -->
           <form action="">
-            <textarea name="HelpDiv" class="HelpDiv p-3" id="helpdiv" rows="20" resize="none"
-            placeholder="Create News Here..."></textarea>
+            <textarea name="HelpDiv" class="HelpDiv p-3" id="helpdiv" rows="15" resize="none"
+            placeholder="Para 1: URL, must start with protocol else one will be applied.
+Para 2: Title, you know the limits, TitleCasing etc. whatever...
+Para 3: News Description, oh come on spoonfed!
+
+TLDR;
+Brains and common-sense are essential coz system is equipped here.
+
+super-TLDR;
+Welcome to make mistakes."></textarea>
           </form>
+          <!-- /form -->
         </div>
-        <!-- /.somediv -->
+        <!-- /.header_div -->
       </div>
       <!-- /.col-8 offset-2 -->
     </div>
@@ -58,17 +77,16 @@
     <div class="row">
       <div class="col-10 offset-1 col-md-8 offset-md-2">
         <div class="action_set-buttons p-3">
-          <a href="" class="btn btn-success mr-3">[Ctrl+Ent]<span class="d-none d-lg-inline"> Populate</span></a>
-          <a href="" class="btn btn-warning mr-3">[Alt+A]<span class="d-none d-lg-inline"> Abbreviate</span></a>
-          <a href="" class="btn btn-outline-secondary">[Esc]<span class="d-none d-lg-inline"> Cancel</span></span></a>
-          <a href="" class="btn btn-danger float-right">[Alt+U]<span class="d-none d-md-inline"> Undo</span></a>
+          <a href="JavaScript:void(0)" class="btn btn-success mr-3" onclick="func_alert('Oh Snap!<br/>This function is disabled in this module.',1000);">[Ctrl+Ent]<span class="d-none d-lg-inline"> Populate</span></a>
+          <a href="JavaScript:void(0)" class="btn btn-warning mr-3" onclick="Func_AbbreviateNews(document.getElementById('helpdiv').value);return false;">[Alt+A]<span class="d-none d-lg-inline"> Abbreviate</span></a>
+          <a href="JavaScript:void(0)" class="btn btn-outline-secondary text-white" onclick="Func_Reset()">[Esc]<span class="d-none d-lg-inline"> Cancel</span></span></a>
+          <a href="JavaScript:void(0)" class="btn btn-danger float-right" onclick="if (NeedToUndo) {Func_PushUndo()}" style="display: none">[Alt+U]<span class="d-none d-md-inline"> Undo</span></a>
         </div>
         <!-- /.action-set -->
       </div>
     </div>
   </section>
   <!-- /.container form -->
-  </form>
 
 
   <!-- PUT SCRIPTS -->

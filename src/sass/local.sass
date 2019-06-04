@@ -8,14 +8,23 @@
 /**
  *      Classes and placeholders to be extended
  */
-%shadowL-Up0
+%BXshadowL-Up0
   box-shadow: 0 .1em .25em transparentize($black-clr, 0)
-%shadowL-Up1
+%BXshadowL-Up1
   box-shadow: 0 .1em .5em transparentize($black-clr, 0.1)
-%shadowL-Up3
+%BXshadowL-Up2
   box-shadow: 0 .1em .75em transparentize($black-clr, 0.15)
-%shadowL-Up4
+%BXshadowL-Up3
   box-shadow: 0 .1em 1em transparentize($black-clr, 0.2)
+
+%TXshadowL-Up0
+  text-shadow: 0 0em .1em transparentize($black-clr, 0)
+%TXshadowL-Up1
+  text-shadow: 0 .1em .15em transparentize($black-clr, 0.5)
+%TXshadowL-Up2
+  text-shadow: 0 .15em .25em transparentize($black-clr, 0)
+%TXshadowL-Up3
+  text-shadow: 0 .2em 1em transparentize($black-clr, 0)
 
 /**
  *      the stylesheet
@@ -42,28 +51,46 @@ body
     &:focus-within
       outline: none
   [class *= "btn"],
-  [class *= "form"]
+  [class ^= "form"]
       outline: none
       box-shadow: none !important
   .blNavigation
-    @extend %shadowL-Up1
+    @extend %BXshadowL-Up1
     color: $white-clr
     background: $blue-clr
+    border-bottom: 3px solid #426e86
     // deploying flex-widths
     > div
       width: 50%
       > div
         width: 50%
     .leftNav
-      /*@ left-right partition */
       .blLogo
         img
           max-height: 3em
     .rightNav
-      /*@ right side partition */
   section.form
-    .formdiv
-      background: $blue-clr
+
+    .header_div
+      @extend %BXshadowL-Up2
+      background: $green1-clr
+      .header_div-header
+        background: $green1-clr
+        h4
+          @extend %TXshadowL-Up0
+          color: $yellow-clr
+          margin-bottom: 0
+          @media (max-width: 991.98px)
+            line-height: 44px
+        #news_count
+          > div
+            font-size: 1em
+            span
+              font-size: .85em
+            @media (min-width: 992px)
+              line-height: 27px
+          #news_count_head
+          #news_count_desc
       form
         margin: 0
         .HelpDiv
@@ -74,13 +101,12 @@ body
           color: transparentize($black-clr, .1)
           border: 2px solid #f5f5f500
           &:focus-within
-            @extend %shadowL-Up3
+            @extend %BXshadowL-Up3
             border: 2px solid white
             background: #e9e9ff
             color: $black-clr
+
     .action_set-buttons
-      background: $blue-clr
-      border: 2px solid $black-clr
+      @extend %BXshadowL-Up2
+      background: $green1-clr
       border-radius: 0 0 .5em .5em
-      // .btn
-      //   box-shadow: inset .15em .1em .1em transparentize($white-clr, 0.7), inset -.15em -.15em .2em transparentize($black-clr, 0.8)

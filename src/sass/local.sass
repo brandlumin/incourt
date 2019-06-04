@@ -1,7 +1,28 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700');
-@import "../import/bootstrap-min"
 @import 'colors'
 
 /*! **********************************************
  *                  LOCAL CSS
  * ******************************************** */
+html,
+body
+  background: darkslategrey
+  font: normal 400 15px/1.5 'Roboto', sans-serif
+
+body
+  .blNavigation
+    color: $white-clr
+    background: $blue-clr
+    box-shadow: 0 .1em .3em transparentize($black-clr, .17)
+    // deploying flex-widths
+    > div
+      width: 50%
+      > div
+        width: 50%
+    .leftNav
+      /*@ left-right partition */
+      .blLogo
+        img
+          max-height: 3em
+    .rightNav
+      /*@ right side partition */

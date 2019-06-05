@@ -135,18 +135,18 @@ function Func_RegEx(HelpMeText) {
 
   /* populating abbreviations in the textarea */
   NewsTitleHash = NewsTitleHash
-                  .replace(/[\:]/g,',')
+                  .replace(/\s?\/?\:/g,',')
                   .replace(/(,?\s\[?Read[a-zA-Z\s]+\]?)$/gi,'');
   HashText = (HashText.trim().length >0) ?
               HashText :
               '# '+NewsTitleHash; //.split(' ').join(', ');
   $('#id_news').val(
                     NewsURLNotToDo+'\n'+
-                    ((window.innerWidth < 992) ? '\n':'')+
+                    '\n'+
                     NewsTitleToDo+'\n'+
-                    ((window.innerWidth < 992) ? '\n':'')+
+                    '\n'+
                     NewsDscToDo+
-                    ((window.innerWidth < 992) ? '\n':'')+
+                    '\n'+
                     ((HashText) ? '\n'+HashText : '\n# ')
                     );
 

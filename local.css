@@ -1,10 +1,10 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto:400,500,700");
 /*!
  * Bootstrap v4.2.1 (https://getbootstrap.com/)
  * Copyright 2011-2018 The Bootstrap Authors
  * Copyright 2011-2018 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,500,700");
 :root {
   --blue:#007bff;
   --indigo:#6610f2;
@@ -8150,3 +8150,121 @@ a.text-dark:focus, a.text-dark:hover {
 /*! **********************************************
  *                  LOCAL CSS
  * ******************************************** */
+
+body .blNavigation {
+  -webkit-box-shadow: 0 0.1em 0.5em rgba(32, 35, 42, 0.9);
+          box-shadow: 0 0.1em 0.5em rgba(32, 35, 42, 0.9); }
+
+body section.form .header_div, body section.form .action_set-buttons {
+  -webkit-box-shadow: 0 0.1em 0.75em rgba(32, 35, 42, 0.85);
+          box-shadow: 0 0.1em 0.75em rgba(32, 35, 42, 0.85); }
+
+body section.form .header_div form .HelpDiv:focus-within {
+  -webkit-box-shadow: 0 0.1em 1em rgba(32, 35, 42, 0.8);
+          box-shadow: 0 0.1em 1em rgba(32, 35, 42, 0.8); }
+
+body section.form .header_div .header_div-header h4 {
+  text-shadow: 0 0em 0.1em #20232a; }
+
+
+html,
+body {
+  background: darkslategrey;
+  font: normal 400 15px/1.5 'Roboto', sans-serif; }
+  html div, html span, html p, html input, html textarea, html a, html button,
+  body div,
+  body span,
+  body p,
+  body input,
+  body textarea,
+  body a,
+  body button {
+    -webkit-transition: all 300ms ease-in-out;
+    transition: all 300ms ease-in-out; }
+
+body div,
+body span,
+body p,
+body input,
+body textarea,
+body a,
+body button {
+  font: normal 400 15px/1.5 'Roboto', sans-serif; }
+  body div:focus, body div:hover, body div:active, body div:focus-within,
+  body span:focus,
+  body span:hover,
+  body span:active,
+  body span:focus-within,
+  body p:focus,
+  body p:hover,
+  body p:active,
+  body p:focus-within,
+  body input:focus,
+  body input:hover,
+  body input:active,
+  body input:focus-within,
+  body textarea:focus,
+  body textarea:hover,
+  body textarea:active,
+  body textarea:focus-within,
+  body a:focus,
+  body a:hover,
+  body a:active,
+  body a:focus-within,
+  body button:focus,
+  body button:hover,
+  body button:active,
+  body button:focus-within {
+    outline: none; }
+
+body [class*="btn"],
+body [class^="form"] {
+  outline: none;
+  -webkit-box-shadow: none !important;
+          box-shadow: none !important; }
+
+body .blNavigation {
+  color: #f7efe2;
+  background: #00293c;
+  border-bottom: 3px solid #426e86; }
+  body .blNavigation > div {
+    width: 50%; }
+    body .blNavigation > div > div {
+      width: 50%; }
+  body .blNavigation .leftNav .blLogo img {
+    max-height: 3em; }
+
+body section.form .header_div {
+  background: #1e656d; }
+  body section.form .header_div .header_div-header {
+    background: #1e656d; }
+    body section.form .header_div .header_div-header h4 {
+      color: #f9ba32;
+      margin-bottom: 0; }
+      @media (max-width: 991.98px) {
+        body section.form .header_div .header_div-header h4 {
+          line-height: 44px; } }
+    body section.form .header_div .header_div-header #news_count > div {
+      font-size: 1em; }
+      body section.form .header_div .header_div-header #news_count > div span {
+        font-size: .85em; }
+      @media (min-width: 992px) {
+        body section.form .header_div .header_div-header #news_count > div {
+          line-height: 27px; } }
+  body section.form .header_div form {
+    margin: 0; }
+    body section.form .header_div form .HelpDiv {
+      background: #f5f5f5aa;
+      width: 100%;
+      resize: none;
+      border: none;
+      color: rgba(32, 35, 42, 0.9);
+      border: 2px solid #f5f5f500; }
+      body section.form .header_div form .HelpDiv:focus-within {
+        border: 2px solid white;
+        background: #e9e9ff;
+        color: #20232a; }
+
+body section.form .action_set-buttons {
+  background: #1e656d;
+  border-radius: 0 0 .5em .5em; }

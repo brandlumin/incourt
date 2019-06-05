@@ -139,7 +139,11 @@ function func_ActiHelp() {
   $('.HelpDiv').fadeOut('fast', function() {
     $('.WordData_Container').fadeIn( function () {
       $('.WordData_Box').fadeIn(400,function () { // Start Data_Capturing
-        $('#id_news').focus().get(0).setSelectionRange(0,0); // setting cursor at the begining
+        if ($.trim(Summary).length < 1) {
+          $('#id_news').focus().get(0).setSelectionRange(0,0); // setting cursor at the begining
+        } else {
+          $('#id_news').focus();
+        }
         // $('#id_news').focus();
       });
     });

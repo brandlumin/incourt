@@ -56,6 +56,7 @@ function func_decideSubmit() {
     /* starting scheduling */
     previousPostTime = $('#pub').val(); // capture time from the field
     localStorage.setItem('previousPost-time', previousPostTime); // store it
+    $('#pub').attr('value', previousPostTime).val(previousPostTime).change();
     $('#SchBtn').attr('title', 'Its Easy. Come back with "desired time to start with" to start next time.'); // BS4 ToolTip
     $('#SchBtn').text('Stop Scheduling');
     clearInterval(notAutoTime);

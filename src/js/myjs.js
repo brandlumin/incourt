@@ -5,7 +5,14 @@ $.getScript( "http://localhost/incourt/global-vars.js");
 /*! DOCUMENT READY FUNCTION
 =========================================================== */
 $(function () {
+  /*!* CHANGING HEADER BUTTON TEXT ***/
   $('#header .headerbar-right ul.header-nav.header-nav-options li a').text('InCourt');
+
+
+  /*!* AUTO-SCHEDULING NEWS ITEMS ***/
+  func_blAutoSchedule();
+
+
   /*!* STARTUP PREE-HELPSCREEN ***/
   $('.page').addClass('container-fluid');
   $('.page.container-fluid #autoform').addClass('my-md-0');
@@ -13,6 +20,7 @@ $(function () {
   func_MakeHelpBtn(); // CREATE AND SHOW HELP BUTTON
   func_MakeDataCapture(); // CREATE DATA_CAPTURE_SCREEN
   func_ActiHelp(); // CALL HELP MODULE UPFRONT // **optional**
+
 
   /*!* STARTUP POST-HELPSCREEN ***/
   $('.attachmentType').val(function (AttTypeValue) {
@@ -102,11 +110,11 @@ $(window).resize(function() {
 function func_reposSubmit() {
   var windowWidth = window.innerWidth;
   if (windowWidth > 991.98) {
-    $('[bl=form_submit').appendTo('[panel=RIGHTPANEL] .card-body .pub-btn');
+    $('[bl=form_submit]').appendTo('[panel=RIGHTPANEL] .card-body .pub-btn');
     $('[panel=RIGHTPANEL] .card-body .pub-btn').show();
     $('[panel=RIGHTPANEL] .card-body .pub-btn ~ br').show();
   } else {
-    $('[bl=form_submit').appendTo('[panel=LEFTPANEL] .card-head.style-info');
+    $('[bl=form_submit]').appendTo('[panel=LEFTPANEL] .card-head.style-info');
     $('[panel=RIGHTPANEL] .card-body .pub-btn ~ br').hide();
     $('[panel=RIGHTPANEL] .card-body .pub-btn').hide();
   }
@@ -126,11 +134,11 @@ function func_MakeHelpBtn() {
 =========================================================== */
 function func_ActiHelp() {
   Summary =     (($('[name=url]')[1].value.trim() != '')  ? $('[name=url]')[1].value + '\n'  : '\n') +
-                    ((window.innerWidth < 992) ? '\n':'')+
+                    '\n'+
                 (($('#title').val().trim() != '')         ? $('#title').val()        + '\n'  : '') +
-                    ((window.innerWidth < 992) ? '\n':'')+
+                    '\n'+
                 (($('#description').val().trim() != '')   ? $('#description').val()  : '') +
-                    ((window.innerWidth < 992) ? '\n':'')+
+                    '\n'+
                 /* To REMOVE '#' from the blank capture to ENABLE hashtags pull heading */
                 // (($('#token-input-topic').val().trim() != '')   ? '\n# '+$('#token-input-topic').val() : '\n# ');
                 /* To KEEP '#' from the blank capture to DISABLE hashtags pull heading */

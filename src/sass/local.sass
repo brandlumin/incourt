@@ -1,7 +1,113 @@
+@import 'src/import/_bootstrap-min.scss'
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700');
-@import "../import/bootstrap-min"
 @import 'colors'
 
 /*! **********************************************
  *                  LOCAL CSS
  * ******************************************** */
+
+/**
+ *      Classes and placeholders to be extended
+ */
+%BXshadowL-Up0
+  box-shadow: 0 .1em .25em transparentize($black-clr, 0)
+%BXshadowL-Up1
+  box-shadow: 0 .1em .5em transparentize($black-clr, 0.1)
+%BXshadowL-Up2
+  box-shadow: 0 .1em .75em transparentize($black-clr, 0.15)
+%BXshadowL-Up3
+  box-shadow: 0 .1em 1em transparentize($black-clr, 0.2)
+
+%TXshadowL-Up0
+  text-shadow: 0 0em .1em transparentize($black-clr, 0)
+%TXshadowL-Up1
+  text-shadow: 0 .1em .15em transparentize($black-clr, 0.5)
+%TXshadowL-Up2
+  text-shadow: 0 .15em .25em transparentize($black-clr, 0)
+%TXshadowL-Up3
+  text-shadow: 0 .2em 1em transparentize($black-clr, 0)
+
+/**
+ *      the stylesheet
+ */
+html,
+body
+  background: darkslategrey
+  font: normal 400 15px/1.5 'Roboto', sans-serif
+  div,span,p,input,textarea,a,button
+    transition: all 300ms ease-in-out
+
+body
+  div,
+  span,
+  p,
+  input,
+  textarea,
+  a,
+  button
+    font: normal 400 15px/1.5 'Roboto', sans-serif
+    &:focus,
+    &:hover,
+    &:active,
+    &:focus-within
+      outline: none
+  [class *= "btn"],
+  [class ^= "form"]
+      outline: none
+      box-shadow: none !important
+  .blNavigation
+    @extend %BXshadowL-Up1
+    color: $white-clr
+    background: $blue-clr
+    border-bottom: 3px solid #426e86
+    // deploying flex-widths
+    > div
+      width: 50%
+      > div
+        width: 50%
+    .leftNav
+      .blLogo
+        img
+          max-height: 3em
+    .rightNav
+  section.form
+
+    .header_div
+      @extend %BXshadowL-Up2
+      background: $green1-clr
+      .header_div-header
+        background: $green1-clr
+        h4
+          @extend %TXshadowL-Up0
+          color: $yellow-clr
+          margin-bottom: 0
+          @media (max-width: 991.98px)
+            line-height: 44px
+        #news_count
+          > div
+            font-size: 1em
+            span
+              font-size: .85em
+            @media (min-width: 992px)
+              line-height: 27px
+          #news_count_head
+          #news_count_desc
+      form
+        margin: 0
+        .HelpDiv
+          background: #f5f5f5aa
+          width: 100%
+          resize: none
+          border: none
+          color: transparentize($black-clr, .1)
+          border: 2px solid #f5f5f500
+          &:focus-within
+            @extend %BXshadowL-Up3
+            border: 2px solid white
+            background: #e9e9ff
+            color: $black-clr
+
+    .action_set-buttons
+      @extend %BXshadowL-Up2
+      background: $green1-clr
+      border-radius: 0 0 .5em .5em

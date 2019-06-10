@@ -11,6 +11,7 @@ $(function () {
 function func_blAutoSchedule(argument) {
   /* Setting localStorage: Part 1: setting time from localStorage */
   if (localStorage.getItem("previousPost-time") !== null) {
+    // if AUTOSCHEDULING is ACTIVE
     previousPostTime1 = parseInt(localStorage.getItem('previousPost-time').match(/^(\d+)/)[1]);
     previousPostTime2 = parseInt(localStorage.getItem('previousPost-time').match(/(\d+)$/)[1]);
     previousPostTime2 += 30; //adding 30 minutes
@@ -27,7 +28,9 @@ function func_blAutoSchedule(argument) {
     newTime = previousPostTime1+':'+previousPostTime2;
     $('#pub').attr('value', newTime).val(newTime).change();
     $('[name="pub_time"]').val(newTime).change();
+    $('form').attr('onsubmit', 'func_blOnSubmit()'); // setting OnSubmit() on the master form
   } else {
+    // if AUTOSCHEDULING is DISABLED
     func_alert('Auto-Scheduling Disabled.',1500,'#FFE6F6EE');
     notAutoTime = setInterval(function(){$('#SchBtn').toggleClass('btn-info');$('#SchBtn').toggleClass('btn-warning');$('#SchBtn').toggleClass('text-white');},1800);
   }
@@ -39,7 +42,6 @@ function func_blAutoSchedule(argument) {
     } else {
       $('#SchBtn').attr('title', 'Its Easy. Come back with "desired time to start with" to start next time.'); // BS4 ToolTip
     }
-  $('form').attr('onsubmit', 'func_blOnSubmit()'); // setting OnSubmit() on the master form
 }
 
 /* func_decideSubmit() - runs upun scheduling button-click
@@ -54,14 +56,16 @@ function func_decideSubmit() {
     $('#SchBtn').text('Stop Scheduling');
     clearInterval(notAutoTime);
     $('#SchBtn').removeAttr('class').delay(300).addClass('btn btn-info btn-sm text-white');
+    $('form').attr('onsubmit', 'func_blOnSubmit()'); // setting OnSubmit() on the master form
   } else {
     /* stopping scheduling */
     $('#SchBtn').attr('title', 'Its Easy. Enter your "desired time to start with" before clicking the button.'); // BS4 ToolTip
     localStorage.removeItem("previousPost-time");
     $('#SchBtn').text('Start Scheduling');
     notAutoTime = setInterval(function(){$('#SchBtn').toggleClass('btn-info');$('#SchBtn').toggleClass('btn-warning');$('#SchBtn').toggleClass('text-white');},1800);
+    $('form').removeAttr('onsubmit'); // setting OnSubmit() on the master form
   }
-  func_alert('<p class="my-0 text-center"><strong>Remember:</strong><br/>You may consider a Page Refresh to ensure effectiveness.</p>',2500); // Advisory
+  func_alert('<p class="my-0 text-center"><strong>Note:</strong><br/>Please consider a Page Refresh to ensure effectiveness.</p>',2500); // Advisory
 }
 
 /* func_blOnSubmit() - runs when form gets submitted
@@ -69,8 +73,8 @@ function func_decideSubmit() {
 function func_blOnSubmit() {
   /* Part 2: setting time in localStorage */
   if ($('#SchBtn').text() == 'Stop Scheduling') {
-    previousPostTime = $('#pub').val(); // capture time from the field
-    localStorage.setItem('previousPost-time', previousPostTime); // store it
+    previousPostTime = $('#pub').val(); // capture post-time from the field
+    localStorage.setItem('previousPost-time', previousPostTime); // store captured post-time
   }
 }
 

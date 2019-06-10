@@ -9,10 +9,6 @@ $(function () {
   $('#header .headerbar-right ul.header-nav.header-nav-options li a').text('InCourt');
 
 
-  /*!* AUTO-SCHEDULING NEWS ITEMS ***/
-  func_blAutoSchedule();
-
-
   /*!* STARTUP PREE-HELPSCREEN ***/
   $('.page').addClass('container-fluid');
   $('.page.container-fluid #autoform').addClass('my-md-0');
@@ -36,7 +32,7 @@ $(function () {
   /*!* TITLE BUTTON, CAT-SELECT and TAG-SUBMIT ***/
   func_TitleCBtn(); // CREATE THE BUTTON AND ENABLE TITLE CASE CONVERSION
   func_InitialCatSelect(); // CATEGORY SECTION
-  Func_TagSubmit(); // SUBMIT BY PRESSING 'Ctrl+Enter' IN TAGS
+  func_TagSubmit(); // SUBMIT BY PRESSING 'Ctrl+Enter' IN TAGS
 
 
   /*!* SETTING ON.CHANGE EVENTS ***/
@@ -89,18 +85,11 @@ $(function () {
 });
 
 
-
-
 /*! WINDOW RESIZE FUNCTION
 =========================================================== */
 $(window).resize(function() {
   func_reposSubmit();
 });
-
-
-
-
-
 
 
 /*! FUNCTIONS
@@ -170,8 +159,8 @@ function func_MakeDataCapture() {
       if ((e.keyCode == 10 || e.keyCode == 13) && e.ctrlKey)
         func_DataCaptureSubmit('populate'); // CTRL+ENTER BUTTON TO POPULATE
       if(e.which==27) func_DataCaptureSubmit(this); // ESCAPE BUTTON TO CANCEL
-      if (e.keyCode == 65 && e.altKey) Func_AbbreviateNews(); // ALT+A BUTTON TO CALL ABBREVIATE FUNCTION
-      if (e.keyCode == 85 && e.altKey) if (NeedToUndo) Func_PushUndo(); // ALT+U BUTTON TO CALL UNDO FUNCTION
+      if (e.keyCode == 65 && e.altKey) func_AbbreviateNews(); // ALT+A BUTTON TO CALL ABBREVIATE FUNCTION
+      if (e.keyCode == 85 && e.altKey) if (NeedToUndo) func_PushUndo(); // ALT+U BUTTON TO CALL UNDO FUNCTION
     });
   $('<div/>', {
       id    : 'WD_Box',
@@ -227,7 +216,7 @@ function func_MakeDataCapture() {
   $('<a/>',{
     class   : 'btn btn-warning',
     id      : 'abbreviate',
-    onClick : 'Func_AbbreviateNews()'
+    onClick : 'func_AbbreviateNews()'
   })
     .html('[Alt+A]<span class="d-none d-lg-inline"> Abbreviate</span>')
     .appendTo(e).css('text-transform', 'initial'); // ABBREVIATE BUTTON
@@ -264,7 +253,7 @@ function func_Populate() {
   if ($('#id_news').val().split(/\n/).filter(Boolean).length <3) {func_alert("<strong>Tired, eh!... or irritated!!</strong><br/>Take a sip of your coffee and try again.<br/>You just missed to write the news peroperly, that's all!", 3900, erMsgColor);return false;}
 
   /* BEGIN if Qualifies */
-  var news = Func_AbbreviateNews(); // -- FETCH VALUE
+  var news = func_AbbreviateNews(); // -- FETCH VALUE
   NewsDetail = [];
   NewsDetail[0] = news.NewsURLNotToDoRet;
   NewsDetail[1] = news.NewsTitleToDoRet;
@@ -276,13 +265,13 @@ function func_Populate() {
     NewsDetail[0] = ((/^https?/i).test(NewsDetail[0])) ? NewsDetail[0] : 'http://'+NewsDetail[0];
   $('input#regular1').val(NewsDetail[0]).change(); // POPULATE URL
   titlestr = (function () { // CONVERT TITLE INTO Title Case
-      str = Func_RegexReplace(NewsDetail[1].replace(/(?:^|\s)\w/g, function(match) {
+      str = func_RegexReplace(NewsDetail[1].replace(/(?:^|\s)\w/g, function(match) {
                     return match.toUpperCase();
                 }));
       return str;
     });
   $('input#title').val(titlestr).change(); // POPULATE TITLE
-  $('textarea#description').val(Func_RegexReplace(NewsDetail[2], 'vardesc')).change(); // POPULATE DESCRIPTION
+  $('textarea#description').val(func_RegexReplace(NewsDetail[2], 'vardesc')).change(); // POPULATE DESCRIPTION
   /*!* RUN PROPRIETORY FUNCTION for META and HINTS ***/
   $('#meta_title').val($('#title').val().replace(/([~!@#$%^&*()_+=`{}\[\]\|\\:;'"<>,.\/? ])+/g, '-').toLowerCase()).change(); // HIDDEN: META TITLE
   $("#title_tag").val($("#title").val()).change(); // HIDDEN: META TITLE_TAG
@@ -383,7 +372,7 @@ function func_TitleConvert() {
   str = $('#title').val().replace(/(?:^|\s)\w/g, function(match) {
     return match.toUpperCase();
   });
-  $('#title').val(Func_TrimAndCrisp(str)).change();
+  $('#title').val(func_TrimAndCrisp(str)).change();
 }
 
 /* function func_InitialCatSelect() - Category AUTO Setup
@@ -478,13 +467,13 @@ function func_PubSelError() {
 /* function func_Sequencify() - Sequencing FIELDS
 =========================================================== */
 function func_Sequencify() {
-    Func_SeqInputGroups(); // IDENTIFY INPUT GROUPS AND SEQUENTIALIZE GROUPS
-    Func_RePosition(); // RELPOSITION INPUT GROUP
+    func_SeqInputGroups(); // IDENTIFY INPUT GROUPS AND SEQUENTIALIZE GROUPS
+    func_RePosition(); // RELPOSITION INPUT GROUP
 }
 
-/* function Func_SeqInputGroups() - ATTACH IDENTIFIER 'SEQ'
+/* function func_SeqInputGroups() - ATTACH IDENTIFIER 'SEQ'
 =========================================================== */
-function Func_SeqInputGroups(e) {
+function func_SeqInputGroups(e) {
   /*!* ADDING LEFTPANEL AND RIGHTPANEL ***/
   $('.page .col-md-8').attr('panel', 'LEFTPANEL').removeClass('col-md-8').addClass('col-lg-8 col-xl-9');
   $('.page .col-md-4').attr('panel', 'RIGHTPANEL').removeClass('col-md-4').addClass('col-lg-4 col-xl-3');
@@ -502,8 +491,8 @@ function Func_SeqInputGroups(e) {
   $('[panel="LEFTPANEL"] .card-body > .form-group:nth-of-type(7) + DIV + DIV').attr('seq', 'ATTACH_9');  // ATTACHMENT 9
   $('[panel="LEFTPANEL"] .card-body > .form-group:nth-of-type(10)').attr('seq', 'NEWSDESCRIPTION');  // NEWSDESCRIPTION
       $('[SEQ="NEWSDESCRIPTION"] textarea').attr('placeholder', 'NEWS DETAIL');  // NEWSDESCRIPTION
-  Func_ClubAttach(); // CLUB ATTACHMENTS INTO ONE
-    function Func_ClubAttach(e) { // ATTACH IDENTIFIER 'SEQ'
+  func_ClubAttach(); // CLUB ATTACHMENTS INTO ONE
+    function func_ClubAttach(e) { // ATTACH IDENTIFIER 'SEQ'
       $('<div/>', { // CREATE DIV.ATTACHMENT TO BODY
           seq: 'ATTACHMENT'
       }).appendTo('body');
@@ -517,9 +506,9 @@ function Func_SeqInputGroups(e) {
     }
 }
 
-/* function Func_RePosition() - REPOSITION ON THE BASIS OF 'SEQ'
+/* function func_RePosition() - REPOSITION ON THE BASIS OF 'SEQ'
 =========================================================== */
-function Func_RePosition(e) {
+function func_RePosition(e) {
   $('input[name="_token"]').after( $('[seq="URL"]') );
   $('[seq="TITLE"]').after( $('[seq="NEWSDESCRIPTION"]') );
   $('[seq="NEWSDESCRIPTION"]').after( $('[seq="ATTACHMENT"]') );
@@ -527,9 +516,9 @@ function Func_RePosition(e) {
   $('#topic + label').html('Topic(s)');
 }
 
-/* function Func_TagSubmit() - Submit by pressing 'Ctrl+Enter'
+/* function func_TagSubmit() - Submit by pressing 'Ctrl+Enter'
 =========================================================== */
-function Func_TagSubmit(e) {
+function func_TagSubmit(e) {
   $('#token-input-topic').keydown(function(e){
       if ((e.keyCode == 10 || e.keyCode == 13) && e.ctrlKey) setTimeout( function () {
         func_alert('Saving News',1300);

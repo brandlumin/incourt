@@ -1,23 +1,13 @@
-function fetchHash(recArray,recEl,recHash) {
-  // create hashPattern
-  var hashPattern = /#([-|\w]+)/gmi;
-  // run IF hashPattern.test(recArray[recEl]) is true
-  if (hashPattern.test(recArray[recEl])) {
-    tempHash = recArray[recEl].match(hashPattern);
-    tempHash = Func_TrimAndCrisp(tempHash.join(',').replace(/#\s?/g,'').replace(/\s?,\s?/gm,', ').replace(/[_]/gm,' '));
-    if (recHash.replace(/#\s?/g,'').length > 0) tempHash = ', '+tempHash;
-    recHash = (recHash+tempHash).replace(/,[\s]*$/gm,'');
-    if (!(/^#/).test(recHash)) recHash = '# '+recHash;
-    recArray[recEl] = recArray[recEl].replace(/#/g,'').replace(/_/g,' ');
-  }  // ENDIF
-  return {
-    recArrayRet : recArray,
-    recElRet    : recEl,
-    recHashRet  : recHash
-  };
-}
+/**
+ *      DOCUMENT READY FOR AUTOSCHEDULING NEWS ITEMS
+ */
+$(function () {
+  /*!* AUTO-SCHEDULING NEWS ITEMS ***/
+  func_blAutoSchedule();
+});
 
-
+/* func_blAutoSchedule() - acts if scheduling enabled
+=========================================================== */
 function func_blAutoSchedule(argument) {
   /* Setting localStorage: Part 1: setting time from localStorage */
   if (localStorage.getItem("previousPost-time") !== null) {
@@ -41,7 +31,7 @@ function func_blAutoSchedule(argument) {
     func_alert('Auto-Scheduling Disabled.',1500,'#FFE6F6EE');
     notAutoTime = setInterval(function(){$('#SchBtn').toggleClass('btn-info');$('#SchBtn').toggleClass('btn-warning');$('#SchBtn').toggleClass('text-white');},1800);
   }
-  /* Setting localStorage: Part 2: setting time in localStorage upon form submit */
+  /* Setting localStorage: Part 2: BUTTON creation, setting tooltips etc. */
     SchBtnTxt = (localStorage.getItem("previousPost-time") === null)?'Start Scheduling':'Stop Scheduling'; // Button Text Variable
     $('<a/>',{id: 'SchBtn',class: 'btn btn-info btn-sm text-white',text: SchBtnTxt}).css({'height': 'auto','transition': 'all 600ms ease-in-out','text-transform': 'none','margin-left': 'calc((100% - 120px)/2)'}).attr({'onClick': 'func_decideSubmit();','data-toggle': 'tooltip','data-placement': 'right','title': ''}).insertAfter('#pub+label'); // Create button
     if ($('#SchBtn').text() == 'Start Scheduling') { // set tooltip as needed
@@ -51,6 +41,9 @@ function func_blAutoSchedule(argument) {
     }
   $('form').attr('onsubmit', 'func_blOnSubmit()'); // setting OnSubmit() on the master form
 }
+
+/* func_decideSubmit() - runs upun scheduling button-click
+=========================================================== */
 function func_decideSubmit() {
   if ($('#SchBtn').text() == 'Start Scheduling') {
     /* starting scheduling */
@@ -71,7 +64,8 @@ function func_decideSubmit() {
   func_alert('<p class="my-0 text-center"><strong>Remember:</strong><br/>You may consider a Page Refresh to ensure effectiveness.</p>',2500); // Advisory
 }
 
-
+/* func_blOnSubmit() - runs when form gets submitted
+=========================================================== */
 function func_blOnSubmit() {
   /* Part 2: setting time in localStorage */
   if ($('#SchBtn').text() == 'Stop Scheduling') {

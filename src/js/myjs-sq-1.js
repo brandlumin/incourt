@@ -5,7 +5,7 @@ var ObjAllPublication = {};
 $('[name=publisher_id] option').each(function() {
   /* capturing Publishers into Object */
     // ObjAllPublication[$(this).html()] = $(this).val(); // SYNTAX
-  ObjAllPublication[$(this).html().toLowerCase().replace(/(\s)+/g, "").replace(/^(https?:?\/?\/?)+/g, "").replace(/^(w{3}\.)+/g, "").replace(/(\.[a-z]+\/?)$/g, "")] = $(this).val(); // removing spaces and making lowercase
+    ObjAllPublication[$(this).html().toLowerCase().replace(/(\s)+/g, "").replace(/^(https?:?\/?\/?)+/g, "").replace(/^(w{3}\.)+/g, "").replace(/(\.[a-z]+\/?)$/g, "")] = $(this).val(); // removing spaces and making lowercase
 });
 
 /*! PUBLISHER FUNCTIONS
@@ -44,9 +44,9 @@ function func_AutoSelectPublisher() {
 
 /*! ABBREVIATE FUNCTIONS
 =========================================================== */
-/* Func_AbbreviateNews() - Starts Abbreviation, Manages Undo
+/* func_AbbreviateNews() - Starts Abbreviation, Manages Undo
 =========================================================== */
-function Func_AbbreviateNews() {
+function func_AbbreviateNews() {
 
   /* setting vars to be returned */
   // NewsURLNotToDo = NewsTitleToDo = NewsDscToDo = HashText = '';
@@ -60,9 +60,9 @@ function Func_AbbreviateNews() {
   $('#id_news ~ a.btn-danger').remove();
 
   /* call regex function to replace abbreviations of the variable */
-  Func_RegEx(HelpMeText);
+  func_RegEx(HelpMeText);
   /* Upon returning, check if Undo needed, and create it accordingly */
-  if (NeedToUndo) Func_CreateUndo();
+  if (NeedToUndo) func_CreateUndo();
 
   $('#id_news').focus();
 
@@ -74,9 +74,9 @@ function Func_AbbreviateNews() {
   };
 }
 
-/* Func_RegEx() - receives TEXTAREA as HelpMeText, calls RegexReplace, and returns
+/* func_RegEx() - receives TEXTAREA as HelpMeText, calls RegexReplace, and returns
 =========================================================== */
-function Func_RegEx(HelpMeText) {
+function func_RegEx(HelpMeText) {
   /* creating array of received value */
   ToBeReplaced = HelpMeText.split(/\n/);
   ToBeReplaced = ToBeReplaced.filter(Boolean); // removing blanks
@@ -109,29 +109,28 @@ function Func_RegEx(HelpMeText) {
   /* deleting excess elements*/
   ToBeReplaced.splice(3);
 
-
   /* fetching hash from between-the-news */
-    var tempValidate1 = fetchHash(ToBeReplaced,1,HashText);
+    var tempValidate1 = func_fetchHash(ToBeReplaced,1,HashText);
     HashText          = tempValidate1.recHashRet;
     ToBeReplaced[1]   = tempValidate1.recArrayRet[tempValidate1.recElRet];
 
-    var tempValidate2 = fetchHash(ToBeReplaced,2,HashText);
+    var tempValidate2 = func_fetchHash(ToBeReplaced,2,HashText);
     HashText          = tempValidate2.recHashRet;
     ToBeReplaced[2]   = tempValidate2.recArrayRet[tempValidate2.recElRet];
 
     HashText = HashText.replace(/(,\s,)/gm,','); // remove by replacing ', ,' by ','
 
   /* making NEWS values nicer */
-  NewsURLNotToDo = Func_TrimAndCrisp(ToBeReplaced[0]);
-  NewsTitleHash  = NewsTitleToDo  = Func_TrimAndCrisp(ToBeReplaced[1]);
-  NewsDscToDo    = Func_TrimAndCrisp(ToBeReplaced[2]);
+  NewsURLNotToDo = func_TrimAndCrisp(ToBeReplaced[0]);
+  NewsTitleHash  = NewsTitleToDo  = func_TrimAndCrisp(ToBeReplaced[1]);
+  NewsDscToDo    = func_TrimAndCrisp(ToBeReplaced[2]);
 
   /* add protocol 'http://' if does not exist in the URL */
   NewsURLNotToDo = (NewsURLNotToDo.match('^(https?)(?::\/\/)','gi')) ? NewsURLNotToDo : 'http://'+NewsURLNotToDo;
 
   /* doing ABBREVIATIONS and capturing results for title and news */
-  NewsTitleToDo = Func_RegexReplace(NewsTitleToDo, 'vartitle');
-  NewsDscToDo   = Func_RegexReplace(NewsDscToDo, 'vardesc');
+  NewsTitleToDo = func_RegexReplace(NewsTitleToDo, 'vartitle');
+  NewsDscToDo   = func_RegexReplace(NewsDscToDo, 'vardesc');
 
   /* populating abbreviations in the textarea */
   NewsTitleHash = NewsTitleHash
@@ -174,9 +173,9 @@ function Func_RegEx(HelpMeText) {
   });
 }
 
-/* Func_RegexReplace() - Gets DataToRegEx, sets up the RegEx and returns
+/* func_RegexReplace() - Gets DataToRegEx, sets up the RegEx and returns
 =========================================================== */
-function Func_RegexReplace(DataToRegEx, ReceivedField) {
+function func_RegexReplace(DataToRegEx, ReceivedField) {
   for (i = 1; i < GlobalNewsArray.length; i++) { // i=1 to omit header
     ReplaceThis = GlobalNewsArray[i][0]; // long name
     ReplaceWith = GlobalNewsArray[i][1]; // short name
@@ -203,34 +202,55 @@ function Func_RegexReplace(DataToRegEx, ReceivedField) {
   return DataToRegEx; // sending the value back
 }
 
-/* Func_TrimAndCrisp(ToTrimAndCrisp) - trims the received text and returns
+/* func_TrimAndCrisp(ToTrimAndCrisp) - trims the received text and returns
 =========================================================== */
-function Func_TrimAndCrisp(ToTrimAndCrisp) {
+function func_TrimAndCrisp(ToTrimAndCrisp) {
   if ( ToTrimAndCrisp  && typeof ToTrimAndCrisp !== 'undefined' ) {
     TrimmedAndCrisped = $.trim(ToTrimAndCrisp.replace(/\s{2,}/gm, ' '));
     return TrimmedAndCrisped;
   }
 }
 
-/* Func_CreateUndo() - Creates Undo Button
+/* func_CreateUndo() - Creates Undo Button
 =========================================================== */
-function Func_CreateUndo() {
+function func_CreateUndo() {
   $('#id_news ~ a:last-of-type()').after(
     $('<a/>',{
       class: 'btn btn-danger float-right',
-      onClick: 'Func_PushUndo(this);'
+      onClick: 'func_PushUndo(this);'
     })
     .html('[Alt+U]<span class="d-none d-md-inline"> Undo</span>')
     .css('text-transform', 'initial')
   );
 }
 
-/* Func_PushUndo() - removes Undo Button
+/* func_PushUndo() - removes Undo Button
 =========================================================== */
-function Func_PushUndo() {
+function func_PushUndo() {
   $('#id_news').val(UndoText);
   $('#id_news ~ a.btn-danger').remove();
   $('#id_news').focus();
+}
+
+/* func_fetchHash() - fetches hashtags from news-details
+=========================================================== */
+function func_fetchHash(recArray,recEl,recHash) {
+  // create hashPattern
+  var hashPattern = /#([-|\w]+)/gmi;
+  // run IF hashPattern.test(recArray[recEl]) is true
+  if (hashPattern.test(recArray[recEl])) {
+    tempHash = recArray[recEl].match(hashPattern);
+    tempHash = func_TrimAndCrisp(tempHash.join(',').replace(/#\s?/g,'').replace(/\s?,\s?/gm,', ').replace(/[_]/gm,' '));
+    if (recHash.replace(/#\s?/g,'').length > 0) tempHash = ', '+tempHash;
+    recHash = (recHash+tempHash).replace(/,[\s]*$/gm,'');
+    if (!(/^#/).test(recHash)) recHash = '# '+recHash;
+    recArray[recEl] = recArray[recEl].replace(/#/g,'').replace(/_/g,' ');
+  }  // ENDIF
+  return {
+    recArrayRet : recArray,
+    recElRet    : recEl,
+    recHashRet  : recHash
+  };
 }
 
 /*! LIBRARY: GALLERY functions

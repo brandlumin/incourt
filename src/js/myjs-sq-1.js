@@ -99,7 +99,7 @@ function func_RegEx(HelpMeText) {
       /* To replace comma by a period at the end of the paragraph if does not exist */
       ToBeReplaced[i] = ((/,$/).test(ToBeReplaced[i])) ? ToBeReplaced[i].replace(/,$/,'') : ToBeReplaced[i];
       /* To add a period at the end of the paragraph if does not exist */
-      if (!(/\.$/).test(ToBeReplaced[i])) ToBeReplaced[i] +='.';
+      if (!(/[\.\?\"]$/).test(ToBeReplaced[i])) ToBeReplaced[i] +='.';
     }
   for (i = 3; i < ToBeReplaced.length; i++) {
     if (typeof ToBeReplaced[i] === 'undefined' || ToBeReplaced[i] == '') {} else {

@@ -38,9 +38,9 @@ function func_blAutoSchedule(argument) {
     SchBtnTxt = (localStorage.getItem("previousPost-time") === null)?'Start Scheduling':'Stop Scheduling'; // Button Text Variable
     $('<a/>',{id: 'SchBtn',class: 'btn btn-info btn-sm text-white',text: SchBtnTxt}).css({'height': 'auto','transition': 'all 600ms ease-in-out','text-transform': 'none','margin-left': 'calc((100% - 120px)/2)'}).attr({'onClick': 'func_decideSubmit();','data-toggle': 'tooltip','data-placement': 'right','title': ''}).insertAfter('#pub+label'); // Create button
     if ($('#SchBtn').text() == 'Start Scheduling') { // set tooltip as needed
-      $('#SchBtn').attr('title', 'Its Easy. Enter your "desired time to start with" before clicking the button.'); // BS4 ToolTip
+      $('#SchBtn').attr('title', 'Enter your "desired time to start with" before clicking the button. But the page will reload to make it effective.'); // BS4 ToolTip
     } else {
-      $('#SchBtn').attr('title', 'Its Easy. Come back with "desired time to start with" to start next time.'); // BS4 ToolTip
+      $('#SchBtn').attr('title', 'Come back with "desired time to start with" to start next time. But the page will reload to make it effective.'); // BS4 ToolTip
     }
 }
 
@@ -52,20 +52,21 @@ function func_decideSubmit() {
     previousPostTime = $('#pub').val(); // capture time from the field
     localStorage.setItem('previousPost-time', previousPostTime); // store it
     $('#pub').attr('value', previousPostTime).val(previousPostTime).change();
-    $('#SchBtn').attr('title', 'Its Easy. Come back with "desired time to start with" to start next time.'); // BS4 ToolTip
+    $('#SchBtn').attr('title', 'Come back with "desired time to start with" to start next time. But the page will reload to make it effective.'); // BS4 ToolTip
     $('#SchBtn').text('Stop Scheduling');
     clearInterval(notAutoTime);
     $('#SchBtn').removeAttr('class').delay(300).addClass('btn btn-info btn-sm text-white');
     $('form').attr('onsubmit', 'func_blOnSubmit()'); // setting OnSubmit() on the master form
   } else {
     /* stopping scheduling */
-    $('#SchBtn').attr('title', 'Its Easy. Enter your "desired time to start with" before clicking the button.'); // BS4 ToolTip
+    $('#SchBtn').attr('title', 'Enter your "desired time to start with" before clicking the button. But the page will reload to make it effective.'); // BS4 ToolTip
     localStorage.removeItem("previousPost-time");
     $('#SchBtn').text('Start Scheduling');
     notAutoTime = setInterval(function(){$('#SchBtn').toggleClass('btn-info');$('#SchBtn').toggleClass('btn-warning');$('#SchBtn').toggleClass('text-white');},1800);
     $('form').removeAttr('onsubmit'); // setting OnSubmit() on the master form
   }
-  func_alert('<p class="my-0 text-center"><strong>Note:</strong><br/>Please consider a Page Refresh to ensure effectiveness.</p>',2500); // Advisory
+  // func_alert('<p class="my-0 text-center"><strong>Note:</strong><br/>Please consider a Page Refresh to ensure effectiveness.</p>',2500); // Advisory
+  window.location.reload(); // to make changes effective
 }
 
 /* func_blOnSubmit() - runs when form gets submitted

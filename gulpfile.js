@@ -22,7 +22,7 @@ var autoprefixer = require('autoprefixer'),
 // JS SECTION // ---------------------------------------
 gulp.task('myvars', function () {
   return gulp.src('src/js/global-vars.js')
-    .pipe(uglify())
+    // .pipe(uglify())
     .pipe(stripJS({safe: true,
                   ignore: /url\([\w\s:\/=\-\+;,]*\)/g}))
     .pipe(gulp.dest('./'));

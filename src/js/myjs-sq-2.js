@@ -49,9 +49,9 @@ function func_blAutoSchedule(argument) {
     SchBtnTxt = (localStorage.getItem("previousPost-time") === null)?'Start Scheduling':'Stop Scheduling'; // Button Text Variable
     $('<a/>',{id: 'SchBtn',class: 'btn btn-sm',text: SchBtnTxt}).css({'height': 'auto','transition': 'all 600ms ease-in-out','text-transform': 'none','margin-left': 'calc((100% - 120px)/2)'}).attr({'onClick': 'func_decideSubmit();','data-toggle': 'tooltip','data-placement': 'right','title': ''}).insertAfter('#pub+label'); // Create button
     if ($('#SchBtn').text() == 'Start Scheduling') { // set tooltip as needed
-      $('#SchBtn').attr('title', 'Enter your "desired time to start with" before clicking the button. The page will reload to make it effective.'); // BS4 ToolTip
+      $('#SchBtn').attr('title', 'Enter the time to start scheduling BEFORE clicking this button. The page will reload immediately to start scheduling effective.').addClass('btn-info'); // BS4 ToolTip
     } else {
-      $('#SchBtn').attr('title', 'Come back with "desired time to start with" to start next time. The page will reload to make it effective.'); // BS4 ToolTip
+      $('#SchBtn').attr('title', ' The page will reload immediately to stop scheduling.'); // BS4 ToolTip
     }
 }
 
@@ -61,7 +61,7 @@ function func_decideSubmit() {
   if ($('#SchBtn').text() == 'Start Scheduling') {
     /* starting scheduling */
     $('#SchBtn').text('Starting .............');
-    func_blOnSubmit();
+    func_calcStartTimeToSet();
   } else {
     /* stopping scheduling */
     $('#SchBtn').text('Stopping ...........');
@@ -70,11 +70,40 @@ function func_decideSubmit() {
   window.location.reload(); // to make changes effective
 }
 
+/* func_calcStartTimeToSet() - runs upun scheduling button-click
+=========================================================== */
+function func_calcStartTimeToSet() {
+  // timeReceived = $('#pub').val();
+  postHour = parseInt($('#pub').val().replace(/[^:\d]/g,'0').match(/^(\d+)/)[1]);
+  postMinutes = parseInt($('#pub').val().replace(/[^:\d]/g,'0').match(/(\d+)$/)[1]);
+
+  postMinutes -= 30; //reducing 30 minutes interval
+  newPostTimeCF = (postMinutes < 0) ? 1 : 0; // carry-forward '1' to hour if minutes >= 60
+
+  postMinutes = (postMinutes == 0) ? 0  // if minutes == 0
+                                    : (postMinutes < 0) ? // if minutes < 0
+                                      postMinutes + 60 : postMinutes; // if minutes < 0
+
+  postHour = (newPostTimeCF == 1) ? postHour - newPostTimeCF // if carryFwded
+                                  : postHour;
+
+  postHour = (postHour == 0) ? 0  // if Hours == 24
+                              : (postHour < 0) ? // if Hours > 24
+                                postHour + 24 : postHour; // if Hours < 24
+
+  postHour = (postHour < 10) ? '0'+postHour // preceeding '0'
+                             : String(postHour); // & makes string
+  postMinutes = (postMinutes < 10) ? '0'+postMinutes // preceeding '0'
+                             : String(postMinutes); // & makes string
+
+  localStorage.setItem('previousPost-time', (postHour+':'+postMinutes)); // store captured post-time
+}
+
 /* func_blOnSubmit() - runs when form gets submitted
 =========================================================== */
 function func_blOnSubmit() {
   /* Part 2: setting time in localStorage */
-  previousPostTime = $('#pub').val().replace(/[\D]/g,"0").replace(/(.{2})(.)(.{2})/,"$1:$3"); // capture post-time from the field
+  previousPostTime = $('#pub').val().replace(/[^:\d]/g,'0').replace(/(.{2})(.)(.{2})/,'$1:$3'); // capture post-time from the field .replace(/[^:\d]/g,'0')
   localStorage.setItem('previousPost-time', previousPostTime); // store captured post-time
 }
 

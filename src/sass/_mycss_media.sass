@@ -29,10 +29,13 @@
               text-shadow: none
 
     .ImageGallery.customModal
+      background: rgba(0,0,0,.9)
       .pp-container
         .pp-cell
+          padding: 1em 0
           > div
             background-color: #777 !important
+            max-width: calc(100% - 2em) !important
             span.custom-close
               color: #f99
               float: right
@@ -50,7 +53,11 @@
             .img-container
               padding-left: 0 !important
               padding-right: 0 !important
+              max-width: 95% !important
               .gallery
+                height: 82vH !important
+                margin-left: 0
+                margin-right: 0px
                 .img
                   &:first-of-type,
                   &:nth-of-type(3n+1)         // left of row
@@ -70,9 +77,9 @@
                         transform: scale(1.5)
                         background-color: white
                         z-index: 10 !important
-                        box-shadow: 0 2px 2em .1em rgba(0,0,0,1) !important
+                        box-shadow: 0 0 .5em rgba(0,0,0,.85) !important
                     img.img-responsive
-                      border: 3px solid white !important
+                      border: 3px solid #aaa !important
                       &:hover
 
     [bl="form_submit"]

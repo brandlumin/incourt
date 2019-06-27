@@ -159,7 +159,13 @@ GlobalNewsArray     = [
   ["Voter Verified Paper Audit Trail","VVPAT"],
   ["Central Pollution Control Board","CPCB"],
   ["State Pollution Control Board","SPCB"],
-  ["--------------- anything you need to add ---------------","short-form"],
+  ["Chief Justice","CJ"],
+  ["Customs,? Excise (and|&) Service Tax Appellate Tribunal(\\s\\(CESTAT\\))?","CESTAT"],
+  ["Central Administrative Tribunal(\\s\\(CAT\\))?","CAT"],
+  ["Foreign Contributions Regulation Act(\\s\\(FCRA\\))?","FCRA"],
+  ["(has|have)\\s(up)?held","$2held"],
+  ["([NB]SE[\\s\\.\\d-]+%)",""],
+  ["--------------- anything you need to add ---------------","SHORT-FORM"],
 
 
 

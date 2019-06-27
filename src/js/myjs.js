@@ -127,7 +127,6 @@ function func_ActiHelp() {
                 (($('#title').val().trim() != '')         ? $('#title').val()        + '\n'  : '') +
                     '\n'+
                 (($('#description').val().trim() != '')   ? $('#description').val()  : '') +
-                    '\n'+
                 /* To REMOVE '#' from the blank capture to ENABLE hashtags pull heading */
                 // (($('#token-input-topic').val().trim() != '')   ? '\n# '+$('#token-input-topic').val() : '\n# ');
                 /* To KEEP '#' from the blank capture to DISABLE hashtags pull heading */
@@ -291,7 +290,7 @@ function func_Populate() {
   }
   func_BL_CountDesc();
   /*!* Push HashTexh ***/
-  $('#token-input-topic').val(NewsDetail[3].trim().replace(/[\W]$/,'').replace(/\s{0,}(,)\s{0,}/g,'$1'));
+  $('#token-input-topic').val(NewsDetail[3].trim().replace(/[\W]$/,'').replace(/\s{0,}(,)\s{0,}/g,'$1')).change();
   /*!* CHOOSE PUBLISHER BASED ON ENTERED URL ***/
   func_AutoSelectPublisher();
 }

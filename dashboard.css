@@ -510,7 +510,8 @@ div.page {
           box-shadow: 0 .25em .7em #00000077;
   border: 7px solid white;
   position: fixed;
-  top: 30%;
+  top: 0;
+  top: 75%;
   left: calc(50% + .5px);
   -webkit-transform: translateX(calc(-50% - 1px));
           transform: translateX(calc(-50% - 1px)); }
@@ -519,8 +520,7 @@ div.page {
       padding: 1rem 2rem;
       padding-right: 4rem;
       font-size: .9em;
-      border: 5px solid white;
-      top: 75%; } }
+      border: 5px solid white; } }
   #base > .alert.alert-success:hover {
     -webkit-box-shadow: 0 .1em .3em #00000077;
             box-shadow: 0 .1em .3em #00000077; }

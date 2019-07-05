@@ -39,7 +39,7 @@ GlobalNewsArray     = [
   ["full form","short"],
   ["^(:|\\.|,|\\))[\\s{0,}]?",""],         // beginning correction: no/multiple white-spaces before and after colon, comma, period, closing bracket
   ["\\s{1,}(:|\\.|,|\\))[\\s{0,}]?","$1 "],   // no/multiple white-spaces before and after colon, comma, period, closing bracket
-  ["(\\d{2})\\.(\\d{2})\\.(\\d{4})","$1-$2-$3"],   // no/multiple white-spaces before and after colon, comma, period, closing bracket
+  ["(\\d{2})\\.(\\d{2})\\.(\\d{4})","$1-$2-$3"],   // making dates separated by dash instead of period 
 
 
 
@@ -177,16 +177,17 @@ GlobalNewsArray     = [
   [",{2,}\\s{1,}?",", "],                      // multiple commas into one
   ["\\s*([\\(\\[\\{])\\s*"," $1"],             // corrects space before bracket starts
   ["\\s*([\\)\\]\\}])\\s*","$1 "],             // corrects space after  bracket closes
-  ["(?:\\s?)(\\([&a-zA-Z]+\\))",""],           // removes following abbr if contains chars or '&'
-  ["(,\\s)?\\bon\\s\\w+day,?\\s?",""],         // removing 'on weekdays' --> third alternate with comma
+  ["(?:\\s?)(\\([&A-Z]+\\))",""],              // removes following abbr if contains chars or '&'
+  ["(,\\s)?\\bon\\s\\w+day,?\\s?",""],         // removing 'on weekdays'
   ["\\s[a-zA-Z]+day",""],                      // removing all weekdays, today, yesterday
 
-  // ["\\s\\[read[a-zA-Z|\\s]+]",""],          // removing [READ ORDER]
-  // [",\\sread[a-zA-Z|\\s]+",""],             // removing ', read xyz'
   ["(,?\\s\\[?read[a-zA-Z|\\s]+\\]?)$",""],    // removing the last put ,/[ read...
 
   ["([\\:,\\?\\.])(?!\\s)([a-zA-Z])","$1 $2"], // adding space after comma, ? and period, if absent
-  ["\\b([A-Z])[\\s]([A-Z])\\b","$1$2"], // removing space between two uppercase Chars, if present
+  ["\\b([A-Z])[\\s]([A-Z])\\b","$1$2"],        // removing space between two uppercase Chars, if present
 
+  ["(\\d)\\s+(\\()","$1$2"],
+  ["\\)\\s+\\(",")("],
+  ["\\s+\\.","."]
 
 ];

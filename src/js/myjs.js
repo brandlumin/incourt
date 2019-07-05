@@ -126,11 +126,11 @@ function func_ActiHelp() {
                     '\n'+
                 (($('#title').val().trim() != '')         ? $('#title').val()        + '\n'  : '') +
                     '\n'+
-                (($('#description').val().trim() != '')   ? $('#description').val()  : '') +
+                (($('#description').val().trim() != '')   ? $('#description').val()  + '\n'  : '') +
                 /* To REMOVE '#' from the blank capture to ENABLE hashtags pull heading */
-                // (($('#token-input-topic').val().trim() != '')   ? '\n# '+$('#token-input-topic').val() : '\n# ');
+                  // (($('#token-input-topic').val().trim() != '')   ? '\n# '+$('#token-input-topic').val() : '\n# ');
                 /* To KEEP '#' from the blank capture to DISABLE hashtags pull heading */
-                (($('#token-input-topic').val().trim() != '')   ? '\n# '+$('#token-input-topic').val() : '');
+                  (($('#token-input-topic').val().trim() != '')   ? '\n# '+$('#token-input-topic').val().replace(/,/g,', ') : '');
   $('#id_news').val(Summary).change();
   $('.HelpDiv').fadeOut('fast', function() {
     $('.WordData_Container').fadeIn( function () {

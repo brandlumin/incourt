@@ -189,6 +189,6 @@ GlobalNewsArray     = [
   ["(\\d)\\s+(\\()","$1$2"],                   // remove spaces between number and starting bracket
   ["\\)\\s+\\(",")("],                         // remove spaces between closing starting bracket
   ["\\s+(\\.)","."],                           // remove spaces before period
-  ["(\\ba\\b)\\s+([hs]c\\b)","an $2"]
+  ["(\\ba\\b)\\s+([hs]c\\b)","an $2"]          // convert a into an before HC|SC
 
 ];

@@ -5,7 +5,7 @@ var ObjAllPublication = {};
 $('[name=publisher_id] option').each(function() {
   /* capturing Publishers into Object */
     // ObjAllPublication[$(this).html()] = $(this).val(); // SYNTAX
-    ObjAllPublication[$(this).html().toLowerCase().replace(/(\s)+/g, "").replace(/^(https?:?\/?\/?)+/g, "").replace(/^(w{3}\.)+/g, "").replace(/(\.[a-z]+\/?)$/g, "")] = $(this).val(); // removing spaces and making lowercase
+    ObjAllPublication[$(this).html().toLowerCase().replace(/([\s_-])+/g, "").replace(/^(https?:?\/?\/?)+/g, "").replace(/^(w{3}\.)+/g, "").replace(/(\.[.]+\/?)$/g, "")] = $(this).val(); // removing spaces and making lowercase
 });
 
 /*! PUBLISHER FUNCTIONS
@@ -17,22 +17,17 @@ function func_AutoSelectPublisher() {
     x = $('[name=url]')[1].value;
     $('input#regular1').val('http://'+x).change();
   }
-  var PublisherSiteName = $('<a/>').addClass('tempPubFilter').prop('href', $('[name=url]')[1].value).prop('hostname'); $('a.tempPubFilter').remove(); // remove this anchor.tempPubFilter shit
-  var RegexPattern = /^(?:www\.)?(\w*)\.(\w*)/;
-  PublisherSiteName = PublisherSiteName.match(RegexPattern)[1] ; // Capture PublisherSiteName FINAL
-  if (PublisherSiteName == 'dnaindia') PublisherSiteName = 'dna';
+  var PublisherSiteName = $('<a/>').addClass('tempPubFilter').prop('href', $('[name=url]')[1].value).prop('hostname'); // creating </a> to capture URL Domain name in PublisherSiteName
+    $('a.tempPubFilter').remove(); // remove this anchor.tempPubFilter shit after capturing
+  var RegexPattern = /^(?:www\.)?(.*)\.(\w*)/;
+  PublisherSiteName = (PublisherSiteName.match(RegexPattern)[1]).replace(/([_-])+/g, '') ; // Capture PublisherSiteName FINAL
+  if (PublisherSiteName == 'dnaindia') PublisherSiteName = 'dna'; //exception for short input than the actual key in the objected
   $.each(ObjAllPublication, function(index, el) {
     // console.log(index.toUpperCase(), 'v/s', PublisherSiteName);
-    shortPublisherSiteName = PublisherSiteName.substring(0,8);
-    if (index.match(PublisherSiteName,'/gi')) {
-      $('[name=publisher_id]').val(el).change(); // setting Publisher in console
-      func_alert('<span class="h5">Publisher: </span>&nbsp;'+index, 1000, '#d6f481');
-      return !(index.match(PublisherSiteName,'/gi'));
-    } else if (index.match(shortPublisherSiteName,'/gi')) {
-      /* reverse_check: get first eight chars from PublisherSiteName and match */
-      $('[name=publisher_id]').val(el).change(); // setting Publisher in console
-      func_alert('<span class="h5">Publisher: </span>&nbsp;'+index, 1000, '#d6f481');
-      return !(index.match(shortPublisherSiteName,'/gi'));
+    if (index.match(PublisherSiteName)) {
+      $('[name=publisher_id]').val(el).change(); // setting Publisher 
+      func_alert('<span class="h5">Publisher: </span>&nbsp;'+index, 600, '#d6f481');
+      return !(index.match(PublisherSiteName)); // returning false
     } else {
       /* if NOTHING MATCHES, setting default value */
       $('[name=publisher_id]').val('').change();

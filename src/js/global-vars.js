@@ -136,7 +136,7 @@ GlobalNewsArray     = [
   ["right to information","RTI"],
   ["scheduled caste","SC"],
   ["scheduled tribe","ST"],
-  ["securities and exchanges? board of india","SEBI"],
+  ["securities (and|&) exchanges? board of india(\\s\\(sebi\\))?","SEBI"],
   ["securities appellate tribunal","SAT"],
   ["smuggling and foreign exchange manipulators act","SAFEMA"],
   ["supreme court","SC"],
@@ -186,8 +186,9 @@ GlobalNewsArray     = [
   ["([\\:,\\?\\.])(?!\\s)([a-zA-Z])","$1 $2"], // adding space after comma, ? and period, if absent
   ["\\b([A-Z])[\\s]([A-Z])\\b","$1$2"],        // removing space between two uppercase Chars, if present
 
-  ["(\\d)\\s+(\\()","$1$2"],
-  ["\\)\\s+\\(",")("],
-  ["\\s+\\.","."]
+  ["(\\d)\\s+(\\()","$1$2"],                   // remove spaces between number and starting bracket
+  ["\\)\\s+\\(",")("],                         // remove spaces between closing starting bracket
+  ["\\s+(\\.)","."],                           // remove spaces before period
+  ["(\\ba\\b)\\s+([hs]c\\b)","an $2"]
 
 ];

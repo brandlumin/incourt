@@ -151,8 +151,8 @@ gulp.task('default', gulp.series(
                                  'localjs',
                                  'myvars',
                                   gulp.parallel(
-                                                'serve',
-                                                'watch'
+                                                'watch',
+                                                'serve'
                                                 )
                                 )
 );

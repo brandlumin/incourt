@@ -22,7 +22,8 @@ function func_AutoSelectPublisher() {
   var RegexPattern = /^(?:www\.)?(.*)\.(\w*)/;
   PublisherSiteName = (PublisherSiteName.match(RegexPattern)[1]).replace(/([_-])+/g, '') ; // Capture PublisherSiteName FINAL
   if (PublisherSiteName.match(/\./g)) PublisherSiteName = PublisherSiteName.match(/^(.*)\./)[1]; // checking if the captured domain is a 'sub.domain', and fetches site if (subdomain).
-  if (PublisherSiteName == 'dnaindia') PublisherSiteName = 'dna'; //exception for short input than the actual key in the objected
+  if (PublisherSiteName == 'dnaindia') PublisherSiteName = 'dna'; //exception: short input
+  if (PublisherSiteName == 'tribuneindia') PublisherSiteName = 'thetribune'; //exception: short input
   $.each(ObjAllPublication, function(index, el) {
     // console.log(index.toUpperCase(), 'v/s', PublisherSiteName);
     if (index.match(PublisherSiteName)) {

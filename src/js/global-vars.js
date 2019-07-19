@@ -89,8 +89,7 @@ GlobalNewsArray     = [
   ["director general of police","DGP"],
   ["drug technical advisory board","DTAB"],
   ["economically weaker section","EWS"],
-  ["election commission of india","EC"],
-  ["election commission","EC"],
+  ["\\belection commission( of india)?","EC"],
   ["electronic voting machine","EVM"],
   ["enforcement directorate","ED"],
   ["fixed drug combination","FDC"],
@@ -165,6 +164,8 @@ GlobalNewsArray     = [
   ["Foreign Contributions Regulation Act(\\s\\(FCRA\\))?","FCRA"],
   ["(has|have)\\s(up)?held","$2held"],
   ["([NB]SE[\\s\\.\\d-]+%)",""],
+  ["Uttar Pradesh","UP"],
+  ["Madhya Pradesh","MP"],
   ["--------------- anything you need to add ---------------","SHORT-FORM"],
 
 

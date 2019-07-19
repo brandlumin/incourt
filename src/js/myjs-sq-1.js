@@ -5,7 +5,7 @@ var ObjAllPublication = {};
 $('[name=publisher_id] option').each(function() {
   /* capturing Publishers into Object */
     // ObjAllPublication[$(this).html()] = $(this).val(); // SYNTAX
-    ObjAllPublication[$(this).html().toLowerCase().replace(/([\s_-])+/g, "").replace(/^(https?:?\/?\/?)+/g, "").replace(/^(w{3}\.)+/g, "").replace(/(\.[.]+\/?)$/g, "")] = $(this).val(); // removing spaces and making lowercase
+    ObjAllPublication[$(this).html().toLowerCase().replace(/([\s_-])+/g, "").replace(/^(https?:?\/?\/?)+/, "").replace(/^(w{3}\.)+/, "").replace(/(\.[.]+\/?)$/, "").replace(/^(the)/, "")] = $(this).val(); // removing spaces and making lowercase
 });
 
 /*! PUBLISHER FUNCTIONS
@@ -19,14 +19,15 @@ function func_AutoSelectPublisher() {
   }
   var PublisherSiteName = $('<a/>').addClass('tempPubFilter').prop('href', $('[name=url]')[1].value).prop('hostname'); // creating </a> to capture URL Domain name in PublisherSiteName
     $('a.tempPubFilter').remove(); // remove this anchor.tempPubFilter shit after capturing
-  var RegexPattern = /^(?:www\.)?(.*)\.(\w*)/;
-  PublisherSiteName = (PublisherSiteName.match(RegexPattern)[1]).replace(/([_-])+/g, '') ; // Capture PublisherSiteName FINAL
+  var RegexPattern = /^(?:www\.)?(.*)\.(.*)/;
+  PublisherSiteName = (PublisherSiteName.match(RegexPattern)[1]).replace(/([_-])+/g, '').replace(/^(the)/, "") ; // Capture PublisherSiteName FINAL
   if (PublisherSiteName.match(/\./g)) PublisherSiteName = PublisherSiteName.match(/^(.*)\./)[1]; // checking if the captured domain is a 'sub.domain', and fetches site if (subdomain).
   if (PublisherSiteName == 'dnaindia') PublisherSiteName = 'dna'; //exception: short input
   if (PublisherSiteName == 'tribuneindia') PublisherSiteName = 'thetribune'; //exception: short input
+  if (PublisherSiteName == 'telegraphindia') PublisherSiteName = 'telegraph'; //exception: short input
   $.each(ObjAllPublication, function(index, el) {
     // console.log(index.toUpperCase(), 'v/s', PublisherSiteName);
-    if (index.match(PublisherSiteName)) {
+    if (index.match('^'+PublisherSiteName+'$')) {
       $('[name=publisher_id]').val(el).change(); // setting Publisher 
       func_alert('<span class="h5">Publisher: </span>&nbsp;'+index, 600, '#d6f481');
       return !(index.match(PublisherSiteName)); // returning false
@@ -118,7 +119,7 @@ function func_RegEx(HelpMeText) {
     HashText = HashText.replace(/(,\s,)/gm,','); // remove by replacing ', ,' by ','
 
   /* making NEWS values nicer */
-  NewsURLNotToDo = func_TrimAndCrisp(ToBeReplaced[0]);
+  NewsURLNotToDo = func_TrimAndCrisp(ToBeReplaced[0]).replace(/(\?.*)$/,'');
   NewsTitleHash  = NewsTitleToDo  = func_TrimAndCrisp(ToBeReplaced[1]);
   NewsDscToDo    = func_TrimAndCrisp(ToBeReplaced[2]);
 
@@ -131,7 +132,7 @@ function func_RegEx(HelpMeText) {
 
   /* populating abbreviations in the textarea */
   NewsTitleHash = NewsTitleHash
-                  .replace(/\s?\/?\:/g,',')
+                  .replace(/\s?\/?[\:\;]/g,',')
                   .replace(/(,?\s\[?Read[a-zA-Z\s]+\]?)$/gi,'');
   HashText = (HashText.trim().length >0) ?
               HashText :

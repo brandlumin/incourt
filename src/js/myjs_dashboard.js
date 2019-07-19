@@ -9,7 +9,11 @@ $('a[title="Edit Post"]').click(func_CaptureNewsTime); // Creates timestamp in l
 document.addEventListener("visibilitychange", function() {
     if (document.hidden) {
     } else {
-      location.reload();
+      if ( (document.referrer.match(/edit/)) || (location.href.match(/#/)) ) {
+        setTimeout( function () {location.href = "http://beta.incourt.in/contributor/#";}, 1000); // delayed forward
+      } else {
+        window.location.reload();
+      }
     }
 });
 
@@ -24,19 +28,20 @@ $(window).keydown(function(e){
 /* Setting Alt+E to Add Post */
 $(window).keydown(function(e){
   if(e.which==65  && e.altKey) {
-    var urlthis = $('table tbody tr:first-child td:first-of-type').text().trim();
-    func_alert('Proceeding to Edit /Alter the first news from the top.',600);
-    window.location.href = "http://beta.incourt.in/contributor/edit/post/"+urlthis;
+    $('table tbody tr:first-child td:nth-of-type(9) a[title="Edit Post"]')[0].click();
+    func_alert('<b>ALTERING</b> the top-most news.',600);
   }
 });
 
 
 
-if ( document.referrer.match(/edit/) ) {
+if ( (document.referrer.match(/edit/)) || (location.href.match(/#/)) ) {
   /* EDIT mode. Auto-proceeding is DISABLED. */
   $(document).prop('title', ' Edit News -- InCourt'); // setting PAGE TITLE
+  console.log('Editing News');
 } else {
   $(document).prop('title', ' Dashboard -- InCourt'); // setting PAGE TITLE
+  console.log('Adding News');
   /* ADD NEWS mode. Auto-proceeding is ENABLED. */
   var blMsg = '<p style="margin-bottom: .5rem">Auto Action <b style="font-weight:700">@ 2</b> secs.</p>' ;
   blMsg += '<p style="margin-bottom: 0">"alt+C" => Add News</p>';

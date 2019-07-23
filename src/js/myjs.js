@@ -58,8 +58,11 @@ $(function () {
       } // ENABLES ALT+H BUTTON TO CALL HELP MODULE
 
     });
-  $('.time-mask#pub[name="pub_time"]').keydown(function(e){
+  $('.time-mask#pub[name="pub_time"], #title').keydown(function(e){
       if ((e.keyCode == 10 || e.keyCode == 13) && e.ctrlKey) setTimeout( function () {
+
+        $('#token-input-topic').focus().delay(300);
+        $('#title').focus();
         $('#token-input-topic').closest('form').submit();
       }, 300); // SUBMIT THE FORM from TIME FIELD
     });

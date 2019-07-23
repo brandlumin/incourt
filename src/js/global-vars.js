@@ -37,8 +37,8 @@ var NeedToUndo      = false;
 var GlobalNewsArray = [];
 GlobalNewsArray     = [
   ["full form","short"],
-  ["^(:|\\.|,|\\))[\\s{0,}]?",""],         // beginning correction: no/multiple white-spaces before and after colon, comma, period, closing bracket
-  ["\\s{1,}(:|\\.|,|\\))[\\s{0,}]?","$1 "],   // no/multiple white-spaces before and after colon, comma, period, closing bracket
+  ["^(:|\\.|,|\\))\\s*",""],         // beginning correction: no/multiple white-spaces before and after colon, comma, period, closing bracket
+  ["\\s+(:|\\.|,|\\))\\s*","$1 "],   // no/multiple white-spaces before and after colon, comma, period, closing bracket
   ["(\\d{2})\\.(\\d{2})\\.(\\d{4})","$1-$2-$3"],   // making dates separated by dash instead of period 
 
 
@@ -176,20 +176,21 @@ GlobalNewsArray     = [
   ["(^(?:\\w+)\\s?(?:\\w+)?:\\s)",""],         // remove reporting city
   ["\\.{2,}","\."],                            // multiple periods (dots) into one
   [",{2,}\\s{1,}?",", "],                      // multiple commas into one
-  ["\\s*([\\(\\[\\{])\\s*"," $1"],             // corrects space before bracket starts
-  ["\\s*([\\)\\]\\}])\\s*","$1 "],             // corrects space after  bracket closes
+  ["\\s*([\\(\\[\\{])\\s*"," $1"],             // add/corrects space before bracket starts
+  ["\\s*([\\)\\]\\}])\\s*","$1 "],             // add/corrects space after  bracket closes
   ["(?:\\s?)(\\([&A-Z]+\\))",""],              // removes following abbr if contains chars or '&'
   ["(,\\s)?\\bon\\s\\w+day,?\\s?",""],         // removing 'on weekdays'
   ["\\s[a-zA-Z]+day",""],                      // removing all weekdays, today, yesterday
-
   ["(,?\\s\\[?read[a-zA-Z|\\s]+\\]?)$",""],    // removing the last put ,/[ read...
-
   ["([\\:,\\?\\.])(?!\\s)([a-zA-Z])","$1 $2"], // adding space after comma, ? and period, if absent
   ["\\b([A-Z])[\\s]([A-Z])\\b","$1$2"],        // removing space between two uppercase Chars, if present
-
   ["(\\d)\\s+(\\()","$1$2"],                   // remove spaces between number and starting bracket
   ["\\)\\s+\\(",")("],                         // remove spaces between closing starting bracket
   ["\\s+(\\.)","."],                           // remove spaces before period
-  ["(\\ba\\b)\\s+([hs]c\\b)","an $2"]          // convert a into an before HC|SC
+
+  ["(\\))\\s*(\\W)","$1$2"],                   // trying to remove spaces between ')' and non-words
+
+  ["(\\ba\\b)\\s+([hs]c\\b)","an $2"],         // convert a into an before HC|SC
+  ["(?:in the) HC of (\\w+(\\sPradesh)?)","in the $1 HC"],
 
 ];

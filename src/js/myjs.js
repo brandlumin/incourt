@@ -59,17 +59,33 @@ $(function () {
 
     });
   $('.time-mask#pub[name="pub_time"], #title').keydown(function(e){
-      if ((e.keyCode == 10 || e.keyCode == 13) && e.ctrlKey) setTimeout( function () {
+    if ((e.keyCode == 10 || e.keyCode == 13) && e.ctrlKey) setTimeout( function () {
 
-        $('#token-input-topic').focus().delay(300);
-        $('#title').focus();
-        $('#token-input-topic').closest('form').submit();
-      }, 300); // SUBMIT THE FORM from TIME FIELD
-    });
+      $('#token-input-topic').focus().delay(300);
+      $('#title').focus();
+      $('#token-input-topic').closest('form').submit();
+    }, 300); // SUBMIT THE FORM from TIME FIELD
+  });
 
 
   /*!* RE-SETTING GALLERY DISPLAY ROW ***/
   $(".gallery_opner").click(function (){
+
+    if ($(window).innerWidth() < 1024) { // check viewport & set the heading class accordingly
+        $('.ImageGallery.customModal .pp-cell > div h2').removeAttr('class').addClass('h5 text-white');
+    } else {
+        $('.ImageGallery.customModal .pp-cell > div h2').removeAttr('class').addClass('h4');
+    }
+    $(window).resize(function() {
+      if ( $('.ImageGallery').is(':visible') ) { // run only if Gallery visible/ open
+        if ( $(window).innerWidth() < 1024 ) { // check viewport & set the heading class accordingly
+            $('.ImageGallery.customModal .pp-cell > div h2').removeAttr('class').addClass('h5 text-white');
+        } else {
+            $('.ImageGallery.customModal .pp-cell > div h2').removeAttr('class').addClass('h4');
+        }
+      }
+    });
+
     func_alert('Hang on!<br/><strong>Shit</strong> is being spread.');
     // func_alert('Hang on!<br/><strong>Taj Mahal is in making...</strong>');
     // func_alert('Face-lifting gallery.');
@@ -89,6 +105,11 @@ $(function () {
   $('#draft_button').remove();
   func_reposSubmit();
 });
+
+
+
+
+
 
 
 /*! WINDOW RESIZE FUNCTION

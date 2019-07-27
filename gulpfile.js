@@ -43,6 +43,12 @@ gulp.task('workflowjs', function () {
     // .pipe(sourcemaps.write())
     .pipe(gulp.dest('./'))
     .pipe(livereload());
+  gulp.src('src/js/myjs_edit.js')
+    .pipe(uglify())
+    .pipe(stripJS({safe: true,
+                  ignore: /url\([\w\s:\/=\-\+;,]*\)/g}))
+    .pipe(gulp.dest('./'))
+    .pipe(livereload());
   return gulp.src('src/js/myjs_dashboard.js')
     .pipe(uglify())
     .pipe(stripJS({safe: true,

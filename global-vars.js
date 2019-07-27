@@ -191,6 +191,6 @@ GlobalNewsArray     = [
   ["(\\))\\s*(\\W)","$1$2"],                   
 
   ["(\\ba\\b)\\s+([hs]c\\b)","an $2"],         
-  ["(?:in the) HC of (\\w+(\\sPradesh)?)","in the $1 HC"],
+  ["HC of (\\w+(\\sPradesh)?)","$1 HC"],
 
 ];

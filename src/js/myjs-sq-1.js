@@ -254,10 +254,12 @@ function func_fetchHash(recArray,recEl,recHash) {
 /*! LIBRARY: GALLERY functions
 =========================================================== */
 function func_BetterGallery() {
+
   /* pp-cell height */
   $('.ImageGallery.customModal .pp-cell > div').css('max-width', '90%');
   /* searchbox removal by over-writing the heading */
-    $('.ImageGallery.customModal .pp-cell > div h2').text('Select Image From Gallery:').addClass('h3');
+    $('.ImageGallery.customModal h2 input.search_post_images').css('margin', '0');
+    // heading class change Code was originally here.
   /* adding .container */
   $('.ImageGallery.customModal .pp-cell > div .img-container').addClass('container');
   /* adding .row and setting height to 70vH */

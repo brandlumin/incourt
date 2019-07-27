@@ -71,7 +71,7 @@ if ( (document.referrer.match(/edit/)) || (location.href.match(/#/)) ) {
 
 function timerIncrement() {
   idleTime += 1;
-  if ((idleTime == 3)) { // 4 (x2) seconds
+  if ((idleTime == 1)) { // 4 (x2) seconds
     func_alert('Proceeding to Add Post');
     window.location.href = "http://beta.incourt.in/contributor/add/post";
   }

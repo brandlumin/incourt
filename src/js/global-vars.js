@@ -191,6 +191,6 @@ GlobalNewsArray     = [
   ["(\\))\\s*(\\W)","$1$2"],                   // trying to remove spaces between ')' and non-words
 
   ["(\\ba\\b)\\s+([hs]c\\b)","an $2"],         // convert a into an before HC|SC
-  ["(?:in the) HC of (\\w+(\\sPradesh)?)","in the $1 HC"],
+  ["HC of (\\w+(\\sPradesh)?)","$1 HC"],
 
 ];

@@ -72,30 +72,30 @@ $(function () {
   $(".gallery_opner").click(function (){
 
     if ($(window).innerWidth() < 1024) { // check viewport & set the heading class accordingly
-        $('.ImageGallery.customModal .pp-cell > div h2').removeAttr('class').addClass('h5 text-white');
+        $('.ImageGallery.customModal .pp-cell > div h2').removeAttr('class').addClass('h5').css('line-height', '35px').find('span > input').css('margin', '0');// text-white'); // GALLERY-SEARCH
     } else {
-        $('.ImageGallery.customModal .pp-cell > div h2').removeAttr('class').addClass('h4');
+        $('.ImageGallery.customModal .pp-cell > div h2').removeAttr('class').addClass('h4').css('line-height', '35px').find('span > input').css('margin', '0');// // GALLERY-SEARCH
     }
     $(window).resize(function() {
       if ( $('.ImageGallery').is(':visible') ) { // run only if Gallery visible/ open
         if ( $(window).innerWidth() < 1024 ) { // check viewport & set the heading class accordingly
-            $('.ImageGallery.customModal .pp-cell > div h2').removeAttr('class').addClass('h5 text-white');
+            $('.ImageGallery.customModal .pp-cell > div h2').removeAttr('class').addClass('h5').css('line-height', '35px').find('span > input').css('margin', '0');// text-white'); // GALLERY-SEARCH
         } else {
-            $('.ImageGallery.customModal .pp-cell > div h2').removeAttr('class').addClass('h4');
+            $('.ImageGallery.customModal .pp-cell > div h2').removeAttr('class').addClass('h4').css('line-height', '35px').find('span > input').css('margin', '0');// // GALLERY-SEARCH
         }
       }
     });
 
-    func_alert('Hang on!<br/><strong>Shit</strong> is being spread.');
-    // func_alert('Hang on!<br/><strong>Taj Mahal is in making...</strong>');
-    // func_alert('Face-lifting gallery.');
+    // func_alert('Hang on!<br/><strong>Shit</strong> is being spread.');
+    // func_alert('Please wait. Serious face-liftinghere..');
     if (!IsGalleryManaged) { // setup the gallery if not done already
-      setTimeout(function () {
-        func_BetterGallery();
-      },1);
+      /* setTimeout(function () {
+        func_BetterGallery();  
+      },1); */ // GALLERY-SEARCH
     } else {
-       $('.ImageGallery .img-container .gallery').css('display', '');
+       // $('.ImageGallery .img-container .gallery').css('display', '');  // GALLERY-SEARCH
     }
+    $('input.search_post_images').focus();
   });
 
 
@@ -266,7 +266,8 @@ function func_DataCaptureSubmit(e) {
   $('.WordData_Box').fadeOut(300, function () {
     $('.WordData_Container').fadeOut(100, function () {
       $('.HelpDiv').fadeIn(100, function () {
-        $('#title').focus();
+        // $('#title').focus();
+        $('#token-input-topic').focus();
       });
     });
   });

@@ -8692,7 +8692,7 @@ body .WordData_Container {
     body .WordData_Container .WordData_Box .hide {
       display: none; }
 
-body .ImageGallery.customModal img.img-responsive {
+body .ImageGallery.customModal-XXX img.img-responsive {
   max-height: 30vH; }
 
 /*! HEADER */
@@ -8897,54 +8897,54 @@ body .ImageGallery.customModal img.img-responsive {
         text-shadow: none; }
         body .WordData_Container .WordData_Box form a span {
           text-shadow: none; }
-    body .ImageGallery.customModal {
+    body .ImageGallery.customModal-XXX {
       background: rgba(0, 0, 0, 0.9); }
-      body .ImageGallery.customModal .pp-container .pp-cell {
+      body .ImageGallery.customModal-XXX .pp-container .pp-cell {
         padding: 1em 0; }
-        body .ImageGallery.customModal .pp-container .pp-cell > div {
+        body .ImageGallery.customModal-XXX .pp-container .pp-cell > div {
           background-color: #777 !important;
           max-width: calc(100% - 2em) !important; }
-          body .ImageGallery.customModal .pp-container .pp-cell > div span.custom-close {
+          body .ImageGallery.customModal-XXX .pp-container .pp-cell > div span.custom-close {
             color: #f99;
             float: right;
             padding: .5em;
             padding-right: .75em;
             font-size: 2em;
             text-shadow: 0 1.5px 2px #00000077; }
-            body .ImageGallery.customModal .pp-container .pp-cell > div span.custom-close:hover {
+            body .ImageGallery.customModal-XXX .pp-container .pp-cell > div span.custom-close:hover {
               color: #f00;
               text-shadow: 0 .5px .5px #000000aa; }
-          body .ImageGallery.customModal .pp-container .pp-cell > div h2.h3 {
+          body .ImageGallery.customModal-XXX .pp-container .pp-cell > div h2 {
             color: white;
             font-size: 1.5em;
             text-shadow: 0 1.5px 2px #00000077; }
-          body .ImageGallery.customModal .pp-container .pp-cell > div .img-container {
+          body .ImageGallery.customModal-XXX .pp-container .pp-cell > div .img-container {
             padding-left: 0 !important;
             padding-right: 0 !important;
             max-width: 95% !important; }
-            body .ImageGallery.customModal .pp-container .pp-cell > div .img-container .gallery {
+            body .ImageGallery.customModal-XXX .pp-container .pp-cell > div .img-container .gallery {
               height: 82vH !important;
               margin-left: 0;
               margin-right: 0px; }
-              body .ImageGallery.customModal .pp-container .pp-cell > div .img-container .gallery .img:first-of-type img, body .ImageGallery.customModal .pp-container .pp-cell > div .img-container .gallery .img:nth-of-type(3n+1) img {
+              body .ImageGallery.customModal-XXX .pp-container .pp-cell > div .img-container .gallery .img:first-of-type img, body .ImageGallery.customModal-XXX .pp-container .pp-cell > div .img-container .gallery .img:nth-of-type(3n+1) img {
                 -webkit-transform-origin: left;
                         transform-origin: left; }
-              body .ImageGallery.customModal .pp-container .pp-cell > div .img-container .gallery .img:nth-of-type(3n+2) img {
+              body .ImageGallery.customModal-XXX .pp-container .pp-cell > div .img-container .gallery .img:nth-of-type(3n+2) img {
                 -webkit-transform-origin: center;
                         transform-origin: center; }
-              body .ImageGallery.customModal .pp-container .pp-cell > div .img-container .gallery .img:nth-of-type(3n) img {
+              body .ImageGallery.customModal-XXX .pp-container .pp-cell > div .img-container .gallery .img:nth-of-type(3n) img {
                 -webkit-transform-origin: right;
                         transform-origin: right; }
-              body .ImageGallery.customModal .pp-container .pp-cell > div .img-container .gallery .img:hover {
+              body .ImageGallery.customModal-XXX .pp-container .pp-cell > div .img-container .gallery .img:hover {
                 z-index: 10 !important; }
-              body .ImageGallery.customModal .pp-container .pp-cell > div .img-container .gallery .img a:hover img {
+              body .ImageGallery.customModal-XXX .pp-container .pp-cell > div .img-container .gallery .img a:hover img {
                 -webkit-transform: scale(1.5);
                         transform: scale(1.5);
                 background-color: white;
                 z-index: 10 !important;
                 -webkit-box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.85) !important;
                         box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.85) !important; }
-              body .ImageGallery.customModal .pp-container .pp-cell > div .img-container .gallery .img a img.img-responsive {
+              body .ImageGallery.customModal-XXX .pp-container .pp-cell > div .img-container .gallery .img a img.img-responsive {
                 border: 3px solid #aaa !important; }
     body [bl="form_submit"] {
       margin: 0 0 0 calc(50% - ( 30px + 49px + 65px + 8px ) - 47px);

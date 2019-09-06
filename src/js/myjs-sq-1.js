@@ -29,12 +29,12 @@ function func_AutoSelectPublisher() {
     // console.log(index.toUpperCase(), 'v/s', PublisherSiteName);
     if (index.match('^'+PublisherSiteName+'$')) {
       $('[name=publisher_id]').val(el).change(); // setting Publisher 
-      func_alert('<span class="h5">Publisher: </span>&nbsp;'+index, 600, '#d6f481');
+      func_alert('<span class="h5">Publisher: </span>&nbsp;'+index,600,'#d6f481',false);
       return !(index.match(PublisherSiteName)); // returning false
     } else {
       /* if NOTHING MATCHES, setting default value */
       $('[name=publisher_id]').val('').change();
-      func_alert('<span class="h5">Publisher: Select Manually</span>', 2000, '#f4a081', '#fff');
+      func_alert('<span class="h5">Publisher: Select Manually</span>',2000,'#f4a081','#fff',false);
     }
   });
   func_PubSelError();
@@ -95,13 +95,18 @@ function func_RegEx(HelpMeText) {
   /* concatinating complete news-description block */
     for (i = 2; i < ToBeReplaced.length; i++) {
       /* To replace comma by a period at the end of the paragraph if does not exist */
-      ToBeReplaced[i] = ((/,$/).test(ToBeReplaced[i])) ? ToBeReplaced[i].replace(/,$/,'') : ToBeReplaced[i];
+      ToBeReplaced[i] = ToBeReplaced[i].replace(/([,`~!@#$%^&*(_=+{}\[\];<>\\\/|-])$/m,'');
       /* To add a period at the end of the paragraph if does not exist */
-      if (!(/[\.\?\"]$/).test(ToBeReplaced[i])) ToBeReplaced[i] +='.';
+      if (!(/([.?]+["”]?)$/m).test(ToBeReplaced[i])) ToBeReplaced[i]+='.';
     }
   for (i = 3; i < ToBeReplaced.length; i++) {
     if (typeof ToBeReplaced[i] === 'undefined' || ToBeReplaced[i] == '') {} else {
-      ToBeReplaced[2] += ' ' + ((!RegExp('\\.$','g').test(ToBeReplaced[i])) ? ToBeReplaced[i] +='.' : ToBeReplaced[i]);
+      ToBeReplaced[2] += ' ' + (// if notEndsWithDesiredPattern
+                               (!(/([.?]+["”]?)$/m).test(ToBeReplaced[i])) ? 
+                               // Do this
+                               ToBeReplaced[i] +='.'   : 
+                               // else do this
+                               ToBeReplaced[i]);
     }
   }
   /* deleting excess elements*/
@@ -119,7 +124,7 @@ function func_RegEx(HelpMeText) {
     HashText = HashText.replace(/(,\s,)/gm,','); // remove by replacing ', ,' by ','
 
   /* making NEWS values nicer */
-  NewsURLNotToDo = func_TrimAndCrisp(ToBeReplaced[0]).replace(/(\?.*)$/,'');
+  NewsURLNotToDo = func_TrimAndCrisp(ToBeReplaced[0]).replace(/(\?utm.*)$/,'');
   NewsTitleHash  = NewsTitleToDo  = func_TrimAndCrisp(ToBeReplaced[1]);
   NewsDscToDo    = func_TrimAndCrisp(ToBeReplaced[2]);
 
@@ -129,11 +134,17 @@ function func_RegEx(HelpMeText) {
   /* doing ABBREVIATIONS and capturing results for title and news */
   NewsTitleToDo = func_RegexReplace(NewsTitleToDo, 'vartitle');
   NewsDscToDo   = func_RegexReplace(NewsDscToDo, 'vardesc');
+    /* conditional 'bracket' correction when other replacements done */
+    NewsDscToDo   = NewsDscToDo
+                    .replace(/(?:\s?)(\([^CILVX0-9)]{2,}\))/gim,'') // REMOVE abbrs
+                    // .replace(/(?:\s?)(\([&A-Z]{2,}\))/gm,'') // REMOVE () if contains 'A-Z|&'
+                    .replace(/\b([A-Z])\b\.?[\s]?\b([A-Z])\b\.?/gm,'$1$2'); // REMOVE space between two uppercase Chars 
 
   /* populating abbreviations in the textarea */
   NewsTitleHash = NewsTitleHash
                   .replace(/\s?\/?[\:\;]/g,',')
-                  .replace(/(,?\s\[?Read[a-zA-Z\s]+\]?)$/gi,'');
+                  .replace(/(,?\s\[?Read[a-zA-Z\s]+\]?)$/g,'')
+                  .replace(/(government)$/gi,'Govt');
   HashText = (HashText.trim().length >0) ?
               HashText :
               '# '+NewsTitleHash; //.split(' ').join(', ');

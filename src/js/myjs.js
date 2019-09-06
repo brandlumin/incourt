@@ -49,7 +49,7 @@ $(function () {
 
 
   /*!* CREATING KEYBOARD SHORTCUT ***/
-  $(window).keydown(function(e){
+  $(document).keydown(function(e){
       if (e.keyCode > 47 && e.keyCode <= 59 && e.ctrlKey && e.shiftKey) func_SelectCategoryFromKeyboard(e.keyCode); // ENABLES CTRL+SHIFT+N BUTTON for CATEGORY SELECTION
       if (e.keyCode == 72 && e.altKey) {
         if ($('#news_count_head').length) $('#news_count_head').html('');
@@ -167,7 +167,6 @@ function func_ActiHelp() {
         } else {
           $('#id_news').focus();
         }
-        // $('#id_news').focus();
       });
     });
   });
@@ -283,7 +282,7 @@ function func_Populate() {
   var news = func_AbbreviateNews(); // -- FETCH VALUE
   NewsDetail = [];
   NewsDetail[0] = news.NewsURLNotToDoRet;
-  NewsDetail[1] = news.NewsTitleToDoRet;
+  NewsDetail[1] = news.NewsTitleToDoRet.replace(/\s?\/?[\:\;]/g,':');
   NewsDetail[2] = news.NewsDscToDoRet;
   NewsDetail[3] = (news.HashTextRet).replace(/#\s?/,'');
 
@@ -442,18 +441,26 @@ function func_SelectCategoryFromKeyboard(CatKeyPressed) {
     func_toggleCategory(SelCatChosen, 3, LastCatSeqValue);
   }
   function func_toggleCategory(CatToAdd, RangeStart, RangeEnd) {
-    console.log('RangeEnd: ', RangeEnd);
+    // console.log('RangeEnd: ', RangeEnd);                      // testing thing
     /* UnSet List */
     for (var i = RangeStart; i < RangeEnd+1; i++) {
       CatUnset = '#cat_'+i;                                   // creating CATEGORY ID to be selected into variable
-      $(CatUnset).prop('checked', false).change();            // List UnSet
+      // infoUnset = $(CatUnset).siblings('label').html();    // shows category's name unset by keyboard
+      $(CatUnset).prop('checked', false).change();            // --> original code
+      $(CatUnset+'+label').css('color', '');                  // List UnSet in above 3 lines
     }
+
     /* Set List */
     CatSet = '#cat_'+CatToAdd;
-    $(CatSet).prop('checked', true).change();                 // List Set
+    infoSet = $(CatSet).siblings('label').html();             // shows category's name set by keyboard
+    $(CatSet).prop('checked', true).change();                 // --> original code
+    $(CatSet+'+label').css('color', 'red');                   // List Set in above 3 lines
+
     if ( CatToAdd == 1 || CatToAdd == 2 ) {                   // Drop down: only for First two options
       $("#cat_select").val(CatToAdd).change();                // Drop down
     }
+    func_alert('Applied: <b>'+infoSet.replace(/[&].*$/,"")+'</b>',600,'','',false);//
+    // func_alert('UnSet: '+infoUnset.replace(/[&].*$/,"")+'<br/>'+'Set: '+infoSet.replace(/[&].*$/,"")); // to show unset and set categories
   }
   /* Validation */
   func_CatSelError();
@@ -561,10 +568,11 @@ function func_TagSubmit(e) {
 /* :: receives four parameters (msg,dur,background-color,
 /* :: and text-color)
 ****************************************************** */
-function func_alert(msg,dur,bgc,tc) {
-  if (typeof dur === "undefined") {dur=300;} // default; if not provided by caller
-  if (typeof bgc === "undefined") {bgc="#F5DA81";} // default; if not provided by caller
-  if (typeof tc  === "undefined") {tc="#000";} // default; if not provided by caller
+function func_alert(msg,dur,bgc,tc,ifWait) {
+  if (typeof dur === "undefined" || dur == '') {dur=300;} // default; if not provided by caller
+  if (typeof bgc === "undefined" || bgc == '') {bgc="#F5DA81";} // default; if not provided by caller
+  if (typeof tc  === "undefined" || tc == '') {tc="#000000";} // default; if not provided by caller
+  if (typeof ifWait  === "undefined") {ifWait=true;} // default; if not provided by caller
   if ($('#myalertwindow'.length)) {
     $('#myalertwindow').remove();
   }
@@ -587,16 +595,18 @@ function func_alert(msg,dur,bgc,tc) {
       "text-shadow"      : "0 0 .5px rgba(0, 0, 0, .25)",
       "z-index"          : "99000000",
   }).appendTo('body').html(msg);
-  box.mouseover(function() { // Pause on hover
-    $(this).stop(true, false);
-  });
-  box.mouseout(function() {  // fadeOut on hover
-    if ($(this).is(":visible") == true) {
-      $(this).fadeOut(300, function () {
-        box.remove();
-      });
-    }
-  });
+  if (ifWait) { // if wait is called [default], MOUSEOVER will freeze the window
+    box.mouseover(function() { // Pause on hover
+      $(this).stop(true, false);
+    });
+    box.mouseout(function() {  // fadeOut on hover
+      if ($(this).is(":visible") == true) {
+        $(this).fadeOut(300, function () {
+          box.remove();
+        });
+      }
+    });
+  }
   box.fadeIn(300)
     .delay(dur)
     .fadeOut(300, function () {

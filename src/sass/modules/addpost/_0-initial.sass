@@ -1,0 +1,41 @@
+/*! **********************************************************************
+ * ********* PAGE LAYOUT SETUP *******************************************
+ * *********************************************************************** */
+html,
+body
+  font: normal 400 15px/1.5 'Roboto', sans-serif
+
+body
+  background: darkslategrey
+  #content
+      padding-top: 1em
+
+  &:not(.menubar-visible) #menubar
+    left: -64px
+  &.menubar-visible #menubar
+    left: 0
+  #menubar
+    top: 0
+
+  .form-control,
+  input,
+  textarea,
+  select
+    height: auto
+    box-sizing: border-box
+    border: 1px solid darken(#ddd, 15%)
+    margin: 4px 0 0
+    font: normal 400 15px/1.5 'Roboto', sans-serif
+    letter-spacing: .1px
+    padding: .35em .5em
+    border-radius: .25em
+    transition: box-shadow 300ms ease-in
+    text-shadow: 0 0 .5px transparentize(black, .83)
+    box-shadow: inset 1px 1px 2px transparentize(black, .9), inset -1px -1px 2px transparentize(black, .9)
+
+  .form-control:focus,
+  input:focus:not([readonly]),
+  textarea:focus:not([readonly]),
+  select:focus:not([readonly]) // FOCUS
+    box-shadow: none
+    box-shadow: 0px 2px 4px transparentize(black, .85)

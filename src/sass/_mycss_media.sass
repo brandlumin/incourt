@@ -1,8 +1,8 @@
-@media (max-width: 767.98px)
+/*! HEADER */
+@import 'modules/dashboard/header_media'
+/*! REMAINING WEBSITE */
+@media (max-width: 991.98px)
   body
-    /*! HEADER */
-    header#header
-      display: none
     /*@ TEXTAREA */
     [SEQ="NEWSDESCRIPTION"]
       textarea
@@ -12,14 +12,90 @@
       .WordData_Box
         // width: 90%
         // height: 70%
-        transform: translate(-50%, -50%)
+        transform: translateX(-50%) translateY(calc(-50% - .5px)) // working hack
+        text-shadow: none
         form
           h4
+            text-shadow: none
           textarea
-            font: normal 17px/calc(17px * 1.7) 'Roboto', sans-serif
+            font: normal 16px/26px 'Roboto', sans-serif
             min-height: 60vH
             max-height: 70vH
             text-shadow: none
           a
             font: bold 13px/24px 'Roboto', sans-serif
+            text-shadow: none
             & span
+              text-shadow: none
+
+    .ImageGallery.customModal-XXX
+      background: rgba(0,0,0,.9)
+      .pp-container
+        .pp-cell
+          padding: 1em 0
+          > div
+            background-color: #777 !important
+            max-width: calc(100% - 2em) !important
+            span.custom-close
+              color: #f99
+              float: right
+              padding: .5em
+              padding-right: .75em
+              font-size: 2em
+              text-shadow: 0 1.5px 2px #00000077
+              &:hover
+                color: #f00
+                text-shadow: 0 .5px .5px #000000aa
+            h2
+              color: white
+              font-size: 1.5em
+              text-shadow: 0 1.5px 2px #00000077
+            .img-container
+              padding-left: 0 !important
+              padding-right: 0 !important
+              max-width: 95% !important
+              .gallery
+                height: 82vH !important
+                margin-left: 0
+                margin-right: 0px
+                .img
+                  &:first-of-type,
+                  &:nth-of-type(3n+1)         // left of row
+                    img
+                      transform-origin: left
+                  &:nth-of-type(3n+2)         // center of row
+                    img
+                      transform-origin: center
+                  &:nth-of-type(3n)           // right of row
+                    img
+                      transform-origin: right
+                  &:hover
+                    z-index: 10 !important
+                  a
+                    &:hover
+                      img
+                        transform: scale(1.5)
+                        background-color: white
+                        z-index: 10 !important
+                        box-shadow: 0 0 .5em rgba(0,0,0,.85) !important
+                    img.img-responsive
+                      border: 3px solid #aaa !important
+                      &:hover
+
+    [bl="form_submit"]
+      margin: 0 0 0 calc(50% - ( 30px + 49px + 65px + 8px ) - 47px )
+      top: -1px
+      border-radius: .25em
+      border: none
+      background-color: lighten(green, 10%)
+      padding: .25em 1.5em .15em
+      font: normal 500 14px/2.25 'Roboto', sans-serif
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33)
+      text-transform: none
+      text-shadow: none
+      &:hover
+        color: darkgreen
+        color: #555
+        background-color: lighten(green, 20%)
+        border: none
+        box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.38)

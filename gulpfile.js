@@ -22,10 +22,10 @@ var autoprefixer = require('autoprefixer'),
 // JS SECTION // ---------------------------------------
 gulp.task('myvars', function () {
   return gulp.src('src/js/global-vars.js')
+    // .pipe(uglify())
     .pipe(stripJS({safe: true,
                   ignore: /url\([\w\s:\/=\-\+;,]*\)/g}))
-    .pipe(gulp.dest('./'))
-    .pipe(livereload());
+    .pipe(gulp.dest('./'));
 });
 // ---------------------------------------------------------
 
@@ -34,10 +34,33 @@ gulp.task('myvars', function () {
 
 // JS SECTION // ---------------------------------------
 gulp.task('workflowjs', function () {
-  return gulp.src(['src/js/myjs.js','src/js/myjs-*.js'])
+  gulp.src(['src/import/jquery-3.3.1.min.js','src/js/myjs.js','src/js/myjs-*.js'])
     // .pipe(sourcemaps.init())
-    // .pipe(uglify())
+    .pipe(uglify())
     .pipe(concat('myjs.js'))
+    .pipe(stripJS({safe: true,
+                  ignore: /url\([\w\s:\/=\-\+;,]*\)/g}))
+    // .pipe(sourcemaps.write())
+    .pipe(gulp.dest('./'))
+    .pipe(livereload());
+  gulp.src('src/js/myjs_edit.js')
+    .pipe(uglify())
+    .pipe(stripJS({safe: true,
+                  ignore: /url\([\w\s:\/=\-\+;,]*\)/g}))
+    .pipe(gulp.dest('./'))
+    .pipe(livereload());
+  return gulp.src('src/js/myjs_dashboard.js')
+    .pipe(uglify())
+    .pipe(stripJS({safe: true,
+                  ignore: /url\([\w\s:\/=\-\+;,]*\)/g}))
+    .pipe(gulp.dest('./'))
+    .pipe(livereload());
+});
+gulp.task('localjs', function () {
+  return gulp.src(['src/import/jquery-3.3.1.min.js','src/js/local*.js'])
+    // .pipe(sourcemaps.init())
+    .pipe(uglify())
+    .pipe(concat('local.js'))
     .pipe(stripJS({safe: true,
                   ignore: /url\([\w\s:\/=\-\+;,]*\)/g}))
     // .pipe(sourcemaps.write())
@@ -55,7 +78,21 @@ gulp.task('workflowcss', function () {
     .pipe(sass.sync({
                   errLogToConsole: true,
                   precision: 10,
-                  outputStyle: 'nested'
+                  outputStyle: 'nested' //compressed'
+                  }).on('error', sass.logError))
+    .pipe(postcss([ autoprefixer({browsers: ['> 0.01% in IN', 'iOS 4'], grid: true}) ]))
+    .pipe(stripCSS({preserve: /^!|@|#/}))
+    // .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest('./'))
+    .pipe(livereload());
+});
+gulp.task('localcss', function () {
+  return gulp.src('src/sass/local.sass')
+    // .pipe(sourcemaps.init())
+    .pipe(sass.sync({
+                  errLogToConsole: true,
+                  precision: 10,
+                  outputStyle: 'nested' //compressed'
                   }).on('error', sass.logError))
     .pipe(postcss([ autoprefixer({browsers: ['> 0.01% in IN', 'iOS 4'], grid: true}) ]))
     .pipe(stripCSS({preserve: /^!|@|#/}))
@@ -73,7 +110,7 @@ gulp.task('dashcss', function () {
     .pipe(sass.sync({
                   errLogToConsole: true,
                   precision: 10,
-                  outputStyle: 'nested'
+                  outputStyle: 'nested' //compressed'
                   }).on('error', sass.logError))
     .pipe(postcss([ autoprefixer({browsers: ['> 0.01% in IN', 'iOS 4'], grid: true}) ]))
     .pipe(stripCSS({preserve: /^!|@|#/}))
@@ -96,14 +133,13 @@ gulp.task('serve', function(){ // This just displayes upon run and triggers the 
 
 // WATCH SECTION // ----------------------------------------
 gulp.task('watch:sass', function () {
-  // restore the following line by replacing the next one, afterwards
-  // gulp.watch(['src/sass/mycss.sass','src/sass/_mycss*.sass'], gulp.series('workflowcss'));
-  gulp.watch(['src/sass/mycss.sass','src/sass/_mycss*.sass','src/sass/modules/addpost/**/*.sass'  ], gulp.series('workflowcss'));
-  gulp.watch(['src/sass/dashboard.sass','src/sass/modules/dashboard/**/*.sass'], gulp.series('dashcss'));
+  gulp.watch(['src/sass/**/my*.sass','src/sass/**/_my*.sass','src/sass/**/dash*.sass','src/sass/modules/**/*.sass'], gulp.series('workflowcss','dashcss'));
+  gulp.watch(['src/sass/local*.sass','src/sass/_colors.sass'], gulp.series('localcss'));
 });
 
 gulp.task('watch:js', function () {
   gulp.watch('src/js/myjs*.js', gulp.series('workflowjs'));
+  gulp.watch('src/js/local*.js', gulp.series('localjs'));
 });
 
 gulp.task('watch:vars', function () {
@@ -111,7 +147,7 @@ gulp.task('watch:vars', function () {
 });
 
 gulp.task('watch:frontend', function () {
-  gulp.watch(['**/*.html', '**/*.csv']).on('change', livereload.reload);
+  gulp.watch('**/*.html').on('change', livereload.reload);
 });
 gulp.task('watch', gulp.parallel('watch:sass','watch:js','watch:frontend','watch:vars'));
 // ---------------------------------------------------------
@@ -121,12 +157,14 @@ gulp.task('watch', gulp.parallel('watch:sass','watch:js','watch:frontend','watch
 // REQUIRE SECTION // --------------------------------------
 gulp.task('default', gulp.series(
                                  'workflowcss',
+                                 'localcss',
                                  'dashcss',
                                  'workflowjs',
+                                 'localjs',
                                  'myvars',
                                   gulp.parallel(
-                                                'serve',
-                                                'watch'
+                                                'watch',
+                                                'serve'
                                                 )
                                 )
 );

@@ -1,0 +1,53 @@
+body
+  #menubar
+
+    &:before
+      box-shadow: .15em 0 .5em transparentize($black-clr, 0.5)
+
+    &.menubar-inverse
+      color: $white-clr
+      &:before
+        background-color: $green1-clr
+
+    .nano-content
+      // padding: 0 1em
+
+      .menubar-scroll-panel
+        ul.gui-controls
+          &,
+          & > li
+            > a
+              &:hover
+                border-radius: .25em
+                background-color: transparentize($orange-clr, .5)
+                span.title
+                  text-shadow: 0px 0px .5px transparentize($white-clr, .5)
+            &,                      // MAIN-MENU
+            & > a
+              font: normal 500 1em/1.07 'Roboto', sans-serif
+              span.title
+                color: $white-clr
+                font-style: normal
+                text-shadow: 0px 0px .5px transparentize($black-clr, .5)
+            &.active.expanded
+              background-color: transparentize($white-clr, .5)
+            & > ul
+              & > li                // SUB-MENU
+                padding-bottom: .75em
+                a
+                  &:before
+                    border-bottom: 1px dashed rgba(255, 255, 255, 1)
+                  &:hover,
+                  &:focus
+                    background-color: transparentize($orange-clr, .5) !important
+                    & .title
+                      text-shadow: initial
+                  font: normal 400 .9rem/1.07rem 'Roboto', sans-serif
+                  span.title
+                    color: transparentize($black-clr, .1)
+                    text-shadow: 0px 0px .5px transparentize($black-clr, .75)
+                &:before
+                  border-left: 1px dashed rgba(255, 255, 255, 1)
+
+
+@import 'modules/sidemenu/sidemenu_media'
